@@ -433,17 +433,24 @@ multi-cycle behaviour, which strengthens the paper's central argument.
 
 ## 5. Numerical validation of the enhanced closure
 
-Maximum deviation between the normalised SFT response P̂(T) and the reduced
-prediction TQ(T)/Q(1) over the scan T ∈ [0.2, 2.5]
-(from `theory_agreement_v2.csv`, regenerated with this revision):
+The reference nonlinear parameters of this revision are
+
+> b_TQ = 0.15, b_LQ = 2.4° (per unit T²), b_I = 0.35, λ_R = 20°,
+> with `lq_reference = "belt"`
+
+(the draft's Eq. (57) listed b_TQ = 0.35 and b_LQ = 4.0; the manuscript
+should be updated to the current values). Maximum deviation between the
+normalised SFT response P̂(T) and the reduced prediction TQ(T)/Q(1) over the
+scan T ∈ [0.2, 2.5] (from `theory_agreement_v2.csv`, regenerated with this
+revision):
 
 | Case | max abs. deviation | max rel. deviation | Nature of the test |
 |------|-------------------:|-------------------:|--------------------|
 | linear | < 10⁻¹⁴ | < 10⁻¹⁴ | exact by linearity |
-| tilt | 0.020 | 1.9 % | non-trivial: geometric linearisation (Section 3.2) |
-| latitude | 0.051 | 11.6 % (at T = 2.5) | non-trivial in belt mode: envelope-average closure (Section 3.3) |
+| tilt | 0.030 | 2.0 % (at T = 2.5) | non-trivial: geometric linearisation (Section 3.2) |
+| latitude | 0.066 | 7.0 % (at T = 2.5) | non-trivial in belt mode: envelope-average closure (Section 3.3) |
 | inflow | < 10⁻¹⁴ | < 10⁻¹⁴ | trivial: factor injected on both sides |
-| combined | 0.013 | 10.0 % (at T = 2.5) | product closure plus the above |
+| combined | 0.013 | 5.0 % (at T = 2.5) | product closure plus the above |
 
 Interpretation:
 
@@ -455,14 +462,14 @@ Interpretation:
   by (Δλ₀/ℓ)², where ℓ is the smallest latitudinal scale of the yield
   function (here the ring width and the yield curvature, tens of degrees),
   consistent with the linearisation argument of Section 3.2.
-* The **latitude** deviation is below 2 % for T ≤ 1.2 and below 3.5 % for
-  T ≤ 1.6 (the observed range of solar cycle variability), rising to
-  5 % absolute (12 % relative) only at T = 2.5, deep in the over-quenched
-  tail where the response itself is small. The deviation is systematically
-  *positive* (SFT above theory): the true time weighting favours late-cycle
-  emergence — where the belt sits at lower latitude and the instantaneous
-  penalty is weaker — relative to the plain envelope weighting, a positive
-  covariance the second-cumulant closure neglects.
+* The **latitude** deviation is below 1.3 % for T ≤ 1.4 and below 3 % for
+  T ≤ 1.8 (comfortably covering the observed range of solar cycle
+  variability), rising to 6.6 % absolute (7 % relative) only at T = 2.5.
+  The deviation is systematically *positive* (SFT above theory): the true
+  time weighting favours late-cycle emergence — where the belt sits at lower
+  latitude and the instantaneous penalty is weaker — relative to the plain
+  envelope weighting, a positive covariance the second-cumulant closure
+  neglects.
 * A systematic refinement exists within the same closed form: replace the
   envelope moments (t_max, σ_t) by the *yield-weighted* mean and standard
   deviation of the emergence-time distribution, both measurable once from
@@ -470,8 +477,8 @@ Interpretation:
   unchanged; only the two moments are updated.
 * The **combined** case is *more* accurate than the latitude case in absolute
   terms (≤ 0.013) because the tilt and latitude residuals have opposite sign
-  and partially cancel; its relative deviation at T = 2.5 reflects the near
-  total suppression of the response there.
+  and partially cancel; its larger relative deviation at T = 2.5 reflects the
+  strong suppression of the response there.
 
 ## 6. Suggested wording changes for the manuscript
 

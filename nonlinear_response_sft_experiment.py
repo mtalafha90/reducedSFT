@@ -143,8 +143,8 @@ class SFTParams:
     source_amp: float = 1.0
 
     # Nonlinear parameters for the reference run
-    b_TQ: float = 0.35
-    b_LQ: float = 4.0      # degrees per T^2 in the reduced closure
+    b_TQ: float = 0.15
+    b_LQ: float = 2.4      # degrees per T^2 in the reduced closure
     b_I: float = 0.35
 
     # Latitude-effectivity scale for reduced theory [deg]
