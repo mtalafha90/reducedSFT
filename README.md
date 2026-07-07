@@ -63,7 +63,7 @@ Runtime is a few minutes. All outputs are written to
 | `tau` | ∞ | no explicit radial decay |
 | `b_TQ` | 0.15 | tilt-quenching strength |
 | `b_LQ` | 2.4° per unit T² | latitude-quenching strength |
-| `b_I` | 0.35 | inflow-quenching strength |
+| `b_I` | 0.2 | inflow-quenching strength, calibrated to the 10–25 % dipole reduction by inflows found by Talafha, Petrovay and Opitz (2025, SoPh 300, 57) |
 | `λ_R` | 20° | dipole (dynamo) effectivity range |
 | `λ̄₀` | 22.09° | belt latitude at cycle maximum (derived) |
 | `ε` | 0.0144 | envelope variance correction (derived) |
@@ -101,7 +101,7 @@ point).
 
 - With the reference parameters, the reduced form reproduces the SFT
   response to within 2 % (tilt), 1.3 % for `T ≤ 1.4` and 7 % at `T = 2.5`
-  (latitude), and 0.013 absolute (combined). The linear and inflow cases
+  (latitude), and 0.016 absolute (combined). The linear and inflow cases
   agree to round-off, as linearity demands.
 - The latitude and inflow factors validate the *linearity* of the transport;
   the tilt and (in belt mode) latitude cases are the non-trivial tests of

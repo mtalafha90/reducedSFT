@@ -435,11 +435,15 @@ multi-cycle behaviour, which strengthens the paper's central argument.
 
 The reference nonlinear parameters of this revision are
 
-> b_TQ = 0.15, b_LQ = 2.4° (per unit T²), b_I = 0.35, λ_R = 20°,
+> b_TQ = 0.15, b_LQ = 2.4° (per unit T²), b_I = 0.2, λ_R = 20°,
 > with `lq_reference = "belt"`
 
-(the draft's Eq. (57) listed b_TQ = 0.35 and b_LQ = 4.0; the manuscript
-should be updated to the current values). Maximum deviation between the
+(the draft's Eq. (57) listed b_TQ = 0.35, b_LQ = 4.0 and b_I = 0.35; the
+manuscript should be updated to the current values). The inflow strength
+b_I = 0.2 is calibrated against Talafha, Petrovay and Opitz (2025, SoPh
+300, 57): inflows there lower the net dipole contribution by 10–25 %, and
+b_I = f/(1−f) with f ≈ 0.17 (the centre of that range) gives 0.2; the
+admissible range 0.11–0.33 corresponds to f = 10–25 %. Maximum deviation between the
 normalised SFT response P̂(T) and the reduced prediction TQ(T)/Q(1) over the
 scan T ∈ [0.2, 2.5] (from `theory_agreement_v2.csv`, regenerated with this
 revision):
@@ -450,7 +454,7 @@ revision):
 | tilt | 0.030 | 2.0 % (at T = 2.5) | non-trivial: geometric linearisation (Section 3.2) |
 | latitude | 0.066 | 7.0 % (at T = 2.5) | non-trivial in belt mode: envelope-average closure (Section 3.3) |
 | inflow | < 10⁻¹⁴ | < 10⁻¹⁴ | trivial: factor injected on both sides |
-| combined | 0.013 | 5.0 % (at T = 2.5) | product closure plus the above |
+| combined | 0.016 | 5.0 % (at T = 2.5) | product closure plus the above |
 
 Interpretation:
 
@@ -476,7 +480,7 @@ Interpretation:
   the linear reference run. The Gaussian-average formula for λ̄₀ and ε is
   unchanged; only the two moments are updated.
 * The **combined** case is *more* accurate than the latitude case in absolute
-  terms (≤ 0.013) because the tilt and latitude residuals have opposite sign
+  terms (≤ 0.016) because the tilt and latitude residuals have opposite sign
   and partially cancel; its larger relative deviation at T = 2.5 reflects the
   strong suppression of the response there.
 
@@ -514,6 +518,8 @@ emergence latitude and its "dynamo effectivity range" λ_R (Petrovay, Nagy
 and Yeates 2020; Talafha et al. 2022, where the relative roles of latitude
 and tilt quenching as a function of λ_R are quantified); converging inflows
 as a transport feedback (Cameron and Schüssler 2012; Martin-Belda and
-Cameron 2017); and amplitude modulation through iterated cycle maps,
+Cameron 2017; Talafha, Petrovay and Opitz 2025, SoPh 300, 57 — the source
+of the b_I calibration used here); and amplitude modulation through
+iterated cycle maps,
 including period doubling, in reduced dynamo models (Durney 2000;
 Charbonneau 2020, and references therein).

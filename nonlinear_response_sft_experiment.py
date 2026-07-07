@@ -142,10 +142,13 @@ class SFTParams:
     # Source normalization. Arbitrary because this is a normalized experiment.
     source_amp: float = 1.0
 
-    # Nonlinear parameters for the reference run
+    # Nonlinear parameters for the reference run.
+    # b_I = 0.2 corresponds to inflows removing ~17 per cent of the dipole
+    # contribution of an average (T = 1) cycle, the centre of the 10-25 per
+    # cent range found by Talafha, Petrovay and Opitz (2025, SoPh 300, 57).
     b_TQ: float = 0.15
     b_LQ: float = 2.4      # degrees per T^2 in the reduced closure
-    b_I: float = 0.35
+    b_I: float = 0.2
 
     # Latitude-effectivity scale for reduced theory [deg]
     lambda_R_deg: float = 20.0
