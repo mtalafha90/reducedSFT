@@ -2,5 +2,5 @@ case,max_abs_deviation,max_rel_deviation
 linear,7.549517e-15,4.718448e-15
 tilt,2.983858e-02,2.010861e-02
 latitude,6.623407e-02,6.960744e-02
-inflow,3.552714e-15,5.003405e-15
-combined,1.282960e-02,5.022580e-02
+inflow,2.886580e-15,2.469819e-15
+combined,1.561109e-02,5.022580e-02
