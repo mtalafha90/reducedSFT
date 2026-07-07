@@ -3,6 +3,36 @@
 """
 Controlled nonlinear response experiments for a reduced Babcock--Leighton/SFT theory.
 
+Version 2.1 (theory review) modifications
+-----------------------------------------
+This version implements the corrections and enhancements from the theory
+review (see docs/theory_review_and_enhancement.md):
+
+1. Belt-consistent latitude quenching. The efficiency factor Q_LQ now follows
+   the instantaneous emergence latitude lambda0(t) of the drifting activity
+   belt (lq_reference = "belt", the new default). The reduced-theory factor
+   is the closed-form envelope-weighted average, with effective latitude
+   lambda_bar_0 = lambda0(t_max) and a small variance correction. The old
+   static behaviour is available with lq_reference = "static".
+
+2. Analytic stability map. The fixed point T* of the reduced cycle map is
+   found by bisection on the strictly decreasing function ln[D0 Q(T)], and
+   the multiplier M'(T*) = 1 + T* dlnQ/dT(T*) is evaluated analytically
+   instead of by finite differences on a coarse grid. The period-doubling
+   boundary M'(T*) = -1 is overlaid on the classification map.
+
+3. Face-evaluated advection velocities. The advective flux at cell faces now
+   samples the flow profile at the face latitudes exactly, instead of
+   linearly interpolating cell-centre velocities.
+
+4. Quantitative theory-agreement report. The maximum absolute and relative
+   deviations between the normalised SFT response and the reduced-theory
+   prediction are written to theory_agreement_v2.csv.
+
+5. Bug fixes: np.trapz (removed in NumPy 2.0) replaced by np.trapezoid with
+   a fallback; the results CSV is now written with line breaks; the return
+   annotation of run_sft_case corrected.
+
 Version 2 modifications
 -----------------------
 This version implements the corrections suggested after the first run:
@@ -56,8 +86,13 @@ import os
 from dataclasses import dataclass
 from typing import Dict, Tuple, List
 
+import math
+
 import numpy as np
 import matplotlib.pyplot as plt
+
+# NumPy 2.0 removed np.trapz in favour of np.trapezoid. Support both.
+_trapezoid = getattr(np, "trapezoid", getattr(np, "trapz", None))
 
 
 # ============================================================
@@ -135,6 +170,15 @@ class SFTParams:
     # The default is "efficiency" because it tests the reduced theory cleanly.
     latitude_quenching_mode: str = "efficiency"
 
+    # Reference latitude for the latitude-quenching factor.
+    # "belt": the efficiency factor follows the instantaneous emergence
+    #         latitude lambda0(t) of the drifting activity belt, and the
+    #         reduced theory uses the closed-form envelope-weighted average
+    #         (recommended; physically consistent with the "shift" mode).
+    # "static": the factor is referenced to the fixed base latitude
+    #         base_lat_deg, reproducing the original v2 runs.
+    lq_reference: str = "belt"
+
     # Inflow implementation.
     # "efficiency" multiplies the source by Q_I(T), giving a clean reduced-model
     # validation analogous to latitude quenching.
@@ -164,6 +208,8 @@ def make_grid(p: SFTParams) -> Dict[str, np.ndarray | float]:
 
     lat = np.arcsin(np.clip(mu, -1.0, 1.0))
     lat_deg = np.rad2deg(lat)
+    lat_faces = np.arcsin(np.clip(mu_faces, -1.0, 1.0))
+    lat_faces_deg = np.rad2deg(lat_faces)
     coslat = np.sqrt(np.maximum(1.0 - mu**2, 0.0))
     cos_faces = np.sqrt(np.maximum(1.0 - mu_faces**2, 0.0))
 
@@ -201,6 +247,8 @@ def make_grid(p: SFTParams) -> Dict[str, np.ndarray | float]:
         "dmu": dmu,
         "lat": lat,
         "lat_deg": lat_deg,
+        "lat_faces": lat_faces,
+        "lat_faces_deg": lat_faces_deg,
         "coslat": coslat,
         "cos_faces": cos_faces,
         "t_yr": t_yr,
@@ -307,17 +355,17 @@ def sft_rhs_mu(
     tau = float(grid["tau"])
     dmu = float(grid["dmu"])
 
-    mu = grid["mu"]
     mu_faces = grid["mu_faces"]
-    lat = grid["lat"]
-    lat_deg = grid["lat_deg"]
+    lat_faces = grid["lat_faces"]
+    lat_faces_deg = grid["lat_faces_deg"]
     cos_faces = grid["cos_faces"]
 
-    u = meridional_flow(lat, u0)
+    # Evaluate the flow directly at the cell faces, so the discrete flux
+    # u B sqrt(1 - mu^2) is an exact sample of the stated flux form rather
+    # than an interpolation of cell-centre velocities.
+    u_faces = meridional_flow(lat_faces, u0)
     if use_inflow:
-        u = u + activity_inflow(lat_deg, t, T, p)
-
-    u_faces = np.interp(mu_faces, mu, u, left=0.0, right=0.0)
+        u_faces = u_faces + activity_inflow(lat_faces_deg, t, T, p)
 
     B_up = np.zeros_like(mu_faces)
     for j in range(1, len(mu_faces) - 1):
@@ -381,12 +429,29 @@ def tilt_factor(T: float, p: SFTParams, tilt_quenching: bool) -> float:
     return 1.0 / (1.0 + p.b_TQ * T**2)
 
 
-def q_latitude_efficiency(T: float, p: SFTParams) -> float:
-    """Reduced latitude-quenching efficiency factor Q_LQ(T)."""
-    lam0 = p.base_lat_deg
+def q_latitude_efficiency(T: float, p: SFTParams, t: float | None = None) -> float:
+    """Latitude-quenching efficiency factor applied to the source.
+
+    The factor uses the identity
+
+        exp(-[(lam0 + delta)^2 - lam0^2] / (2 lamR^2))
+            = exp(-[2 lam0 delta + delta^2] / (2 lamR^2)),
+
+    with delta = b_LQ T^2 the poleward shift of the effective emergence
+    latitude in stronger cycles.
+
+    In "belt" mode (recommended) lam0 is the instantaneous emergence latitude
+    lambda0(t) of the drifting activity belt, so the quenching penalty is
+    physically consistent with the "shift" implementation. In "static" mode
+    lam0 is the fixed base latitude, reproducing the original v2 behaviour.
+    """
+    if p.lq_reference == "belt" and t is not None:
+        lam0 = activity_belt_latitude(t, T, p, latitude_quenching=False)
+    else:
+        lam0 = p.base_lat_deg
     lamR = p.lambda_R_deg
-    lamT = lam0 + p.b_LQ * T**2
-    return float(np.exp(-((lamT**2 - lam0**2) / (2.0 * lamR**2))))
+    delta = p.b_LQ * T**2
+    return float(np.exp(-((2.0 * lam0 * delta + delta**2) / (2.0 * lamR**2))))
 
 
 def bipolar_ring_source(
@@ -435,7 +500,7 @@ def bipolar_ring_source(
     amp = p.source_amp * T * env
 
     if latitude_quenching and p.latitude_quenching_mode == "efficiency":
-        amp *= q_latitude_efficiency(T, p)
+        amp *= q_latitude_efficiency(T, p, t=t)
 
     # For the clean response-theory validation, inflow quenching can be treated
     # as a transport-efficiency factor Q_I(T). The explicit physical inflow mode
@@ -468,12 +533,54 @@ def Q_I(T: np.ndarray | float, p: SFTParams) -> np.ndarray | float:
     return 1.0 / (1.0 + p.b_I * T**2)
 
 
+def lq_lambda_eff(p: SFTParams) -> float:
+    """Activity-weighted mean emergence latitude lambda_bar_0.
+
+    For the linear belt drift lambda0(t) = lambda_base + lambda_drift (1 - t/P)
+    weighted by the Gaussian cycle envelope centred on t_max, the weighted mean
+    latitude is simply the belt latitude at cycle maximum:
+
+        lambda_bar_0 = lambda_base + lambda_drift (1 - t_max / P).
+    """
+    return p.base_lat_deg + p.lat_drift_deg * (1.0 - p.source_peak_time_yr / p.cycle_years)
+
+
+def lq_eps(p: SFTParams) -> float:
+    """Variance correction of the envelope-averaged latitude quenching.
+
+    epsilon = (lambda_drift sigma_t / (lambda_R P))^2 arises from averaging
+    exp(gamma t) against the Gaussian envelope (second cumulant). It is small
+    for the reference parameters (about 0.014).
+    """
+    return (p.lat_drift_deg * p.source_time_width_yr / (p.lambda_R_deg * p.cycle_years)) ** 2
+
+
 def Q_LQ(T: np.ndarray | float, p: SFTParams) -> np.ndarray | float:
+    """Reduced latitude-quenching efficiency factor.
+
+    "belt" mode: closed-form envelope-weighted average of the instantaneous
+    factor exp(-[2 lambda0(t) delta + delta^2]/(2 lamR^2)) over the Gaussian
+    cycle envelope. Because the exponent is linear in t, the Gaussian average
+    is exact and yields the same algebraic form with lambda0 replaced by the
+    belt latitude at cycle maximum, lambda_bar_0, and delta^2 reduced by the
+    variance correction (1 - epsilon):
+
+        Q_LQ(T) = exp(-[2 lambda_bar_0 delta + (1 - epsilon) delta^2]
+                      / (2 lambda_R^2)),      delta = b_LQ T^2.
+
+    "static" mode: the original form referenced to the fixed base latitude,
+    i.e. lambda_bar_0 -> lambda_0 and epsilon -> 0.
+    """
     T = np.asarray(T, dtype=float)
-    lam0 = p.base_lat_deg
     lamR = p.lambda_R_deg
-    lamT = lam0 + p.b_LQ * T**2
-    return np.exp(-((lamT**2 - lam0**2) / (2.0 * lamR**2)))
+    delta = p.b_LQ * T**2
+    if p.lq_reference == "belt":
+        lam0 = lq_lambda_eff(p)
+        eps = lq_eps(p)
+    else:
+        lam0 = p.base_lat_deg
+        eps = 0.0
+    return np.exp(-((2.0 * lam0 * delta + (1.0 - eps) * delta**2) / (2.0 * lamR**2)))
 
 
 def Q_theory(T: np.ndarray | float, p: SFTParams, case: str) -> np.ndarray | float:
@@ -520,9 +627,11 @@ def axial_dipole(B: np.ndarray, mu: np.ndarray) -> float:
 
         D = 3/2 int_{-1}^{1} B(mu) mu dmu.
 
-    The normalization is suitable for comparison between runs.
+    This is exactly the axial dipole coefficient g_10 of the azimuthally
+    averaged radial field, so the normalization is suitable for comparison
+    between runs.
     """
-    return 1.5 * np.trapz(B * mu, mu)
+    return 1.5 * _trapezoid(B * mu, mu)
 
 
 def nonlinear_response(T_values: np.ndarray, P_values: np.ndarray) -> np.ndarray:
@@ -542,7 +651,7 @@ def normalize_at_Tref(T: np.ndarray, Y: np.ndarray, T_ref: float = 1.0) -> np.nd
 # 7. Simulation driver
 # ============================================================
 
-def run_sft_case(T: float, case: str, p: SFTParams) -> Tuple[float, float, float, np.ndarray]:
+def run_sft_case(T: float, case: str, p: SFTParams) -> Tuple[float, float, float, float, np.ndarray]:
     """Run one SFT experiment for a given T and nonlinearity case."""
     grid = make_grid(p)
     mu = grid["mu"]
@@ -618,6 +727,8 @@ def check_explicit_stability(p: SFTParams) -> None:
     eta = float(grid["eta"])
     R = p.R_sun
     dt_lim = 0.45 * dmu**2 * R**2 / eta
+    u0 = float(grid["u0"])
+    courant_adv = u0 * dt / (R * dmu)
 
     print("Numerical setup check")
     print(f"  nmu        = {p.nmu}")
@@ -625,6 +736,7 @@ def check_explicit_stability(p: SFTParams) -> None:
     print(f"  dt         = {dt/86400.0:.4f} days")
     print(f"  explicit diffusion limit would be ~{dt_lim/86400.0:.4f} days")
     print("  diffusion  = implicit")
+    print(f"  advective Courant number u0 dt/(R dmu) = {courant_adv:.3f}")
 
 
 
@@ -799,7 +911,9 @@ def plot_results(results: Dict[str, Dict[str, np.ndarray]], p: SFTParams, outdir
     # --------------------------------------------------------
     # Figure 7: effective dynamo gain
     # --------------------------------------------------------
-    D0 = 1.8
+    # Same illustrative linear gain as the stability map, for internal
+    # consistency between Figures 7 and 9-11.
+    D0 = 3.0
     plt.figure(figsize=(8, 5))
     for case in cases:
         Deff = D0 * Q_theory(Tfine, p, case)
@@ -838,7 +952,7 @@ def plot_results(results: Dict[str, Dict[str, np.ndarray]], p: SFTParams, outdir
     # --------------------------------------------------------
     table_path = os.path.join(outdir, "nonlinear_response_results_v2.csv")
     with open(table_path, "w", encoding="utf-8") as f:
-        f.write("case,T,P_signed_main,D_signed,P_abs_dipole,P_polar,P_hat,R_NL,R_hat")
+        f.write("case,T,P_signed_main,D_signed,P_abs_dipole,P_polar,P_hat,R_NL,R_hat\n")
         for case in cases:
             for Ti, Pi, Di, Pai, Ppi, Phi, Ri, Rhi in zip(
                 results[case]["T"],
@@ -850,41 +964,124 @@ def plot_results(results: Dict[str, Dict[str, np.ndarray]], p: SFTParams, outdir
                 results[case]["R_NL"],
                 results[case]["R_hat"],
             ):
-                f.write(f"{case},{Ti:.6f},{Pi:.10e},{Di:.10e},{Pai:.10e},{Ppi:.10e},{Phi:.10e},{Ri:.10e},{Rhi:.10e}")
+                f.write(f"{case},{Ti:.6f},{Pi:.10e},{Di:.10e},{Pai:.10e},{Ppi:.10e},{Phi:.10e},{Ri:.10e},{Rhi:.10e}\n")
 
     print(f"\nSaved figures and table to: {outdir}")
+
+
+def report_theory_agreement(results: Dict[str, Dict[str, np.ndarray]], p: SFTParams, outdir: str) -> None:
+    """Quantify the agreement between the SFT scan and the reduced theory.
+
+    For each case the maximum absolute and maximum relative deviation between
+    the normalised SFT response P_hat(T) and the reduced-theory prediction
+    T Q(T) / [T_ref Q(T_ref)] are reported. The relative deviation is only
+    evaluated where the theoretical curve is not vanishingly small.
+
+    In "belt" mode this is a non-trivial test for the latitude-quenching
+    cases: the SFT run applies the instantaneous factor Q_LQ(t, T) inside the
+    time integral, while the theory uses its closed-form envelope average, so
+    residual deviations measure the quality of the closure rather than a
+    factor injected identically on both sides.
+    """
+    os.makedirs(outdir, exist_ok=True)
+    cases = ["linear", "tilt", "latitude", "inflow", "combined"]
+
+    table_path = os.path.join(outdir, "theory_agreement_v2.csv")
+    print("\nReduced-theory agreement (normalised response):")
+    with open(table_path, "w", encoding="utf-8") as f:
+        f.write("case,max_abs_deviation,max_rel_deviation\n")
+        for case in cases:
+            T = results[case]["T"]
+            Phat = results[case]["P_hat"]
+            Phat_th = theory_normalized(T, p, case)
+            dev = np.abs(Phat - Phat_th)
+            mask = np.abs(Phat_th) > 0.05
+            rel = float(np.max(dev[mask] / np.abs(Phat_th[mask]))) if np.any(mask) else np.nan
+            f.write(f"{case},{np.max(dev):.6e},{rel:.6e}\n")
+            print(f"  {case:10s} max |dP_hat| = {np.max(dev):.4f}   max relative = {rel:.4f}")
 
 
 # ============================================================
 # 9. Stability map from reduced theory
 # ============================================================
 
-def reduced_Q_full(
-    T: np.ndarray,
+def reduced_lnQ(
+    T: float,
     b_TQ: float,
     b_LQ: float,
     b_I: float,
     lambda0: float,
     lambdaR: float,
-) -> np.ndarray:
-    """Full Q(T) for arbitrary nonlinear parameters."""
-    QTQ = 1.0 / (1.0 + b_TQ * T**2)
-    QI = 1.0 / (1.0 + b_I * T**2)
-    lamT = lambda0 + b_LQ * T**2
-    QLQ = np.exp(-((lamT**2 - lambda0**2) / (2.0 * lambdaR**2)))
-    return QTQ * QI * QLQ
+    eps: float = 0.0,
+) -> float:
+    """ln Q(T) for arbitrary nonlinear parameters.
+
+    lambda0 is the reference latitude of the latitude-quenching factor
+    (lambda_bar_0 in "belt" mode, base_lat_deg in "static" mode) and eps is
+    the envelope variance correction (0 in "static" mode).
+
+    Each term is strictly decreasing in T for T > 0, so ln[D0 Q(T)] has at
+    most one root: the fixed point of the reduced cycle map exists and is
+    unique whenever D0 > 1.
+    """
+    delta = b_LQ * T**2
+    return (
+        -math.log1p(b_TQ * T**2)
+        - math.log1p(b_I * T**2)
+        - (2.0 * lambda0 * delta + (1.0 - eps) * delta**2) / (2.0 * lambdaR**2)
+    )
+
+
+def reduced_dlnQ_dT(
+    T: float,
+    b_TQ: float,
+    b_LQ: float,
+    b_I: float,
+    lambda0: float,
+    lambdaR: float,
+    eps: float = 0.0,
+) -> float:
+    """Analytic derivative d ln Q / dT of the reduced efficiency factor.
+
+    Used to evaluate the fixed-point multiplier
+
+        M'(T*) = 1 + T* dlnQ/dT(T*)
+
+    exactly, instead of by finite differences on a coarse grid.
+    """
+    delta = b_LQ * T**2
+    term_TQ = -2.0 * b_TQ * T / (1.0 + b_TQ * T**2)
+    term_I = -2.0 * b_I * T / (1.0 + b_I * T**2)
+    term_LQ = -2.0 * b_LQ * T * (lambda0 + (1.0 - eps) * delta) / lambdaR**2
+    return term_TQ + term_I + term_LQ
 
 
 def make_stability_map(p: SFTParams, outdir: str) -> None:
     """
     Reduced-theory stability map in the (b_TQ, b_LQ) plane.
 
-    Classification:
-        0: no nonzero fixed point found in the scanned T interval
-        1: stable fixed point, |M'| < 1
-        2: unstable/modulated, |M'| >= 1
+    The fixed point T* of the map T_{n+1} = D0 T_n Q(T_n) satisfies
+    ln D0 + ln Q(T*) = 0. Because ln Q(T) is strictly decreasing, the root is
+    unique when D0 > 1 and is found by bisection to machine-level accuracy.
+    The multiplier
 
-    The scan is intentionally broad to show the qualitative structure.
+        M'(T*) = 1 + T* dlnQ/dT(T*) = 1 - q*,
+
+    with q* = -dlnQ/dlnT|_{T*} the quenching stiffness, is evaluated
+    analytically. Since q* > 0 whenever any quenching is active, M' < 1
+    always holds; instability occurs only through period doubling, M' <= -1,
+    i.e. q* >= 2.
+
+    Classification:
+        0: no nonzero fixed point inside the scanned interval (with D0 > 1
+           this requires T* beyond the upper scan limit; D0 <= 1 would be
+           subcritical everywhere)
+        1: stable fixed point, |M'| < 1
+        2: unstable/modulated, |M'| >= 1 (period doubling)
+
+    The analytic period-doubling boundary M'(T*) = -1 is overlaid on the
+    classification map. The scan is intentionally broad to show the
+    qualitative structure.
     """
     os.makedirs(outdir, exist_ok=True)
 
@@ -892,7 +1089,16 @@ def make_stability_map(p: SFTParams, outdir: str) -> None:
     bI_fixed = 0.8
     bTQ_vals = np.linspace(0.0, 5.0, 180)
     bLQ_vals = np.linspace(0.0, 20.0, 180)
-    Tgrid = np.linspace(0.02, 6.0, 4000)
+    T_lo_init, T_hi_init = 1.0e-4, 6.0
+
+    if p.lq_reference == "belt":
+        lam0_eff = lq_lambda_eff(p)
+        eps = lq_eps(p)
+    else:
+        lam0_eff = p.base_lat_deg
+        eps = 0.0
+
+    lnD0 = math.log(D0)
 
     state = np.zeros((len(bLQ_vals), len(bTQ_vals)))
     Tstar_map = np.full_like(state, np.nan, dtype=float)
@@ -900,30 +1106,28 @@ def make_stability_map(p: SFTParams, outdir: str) -> None:
 
     for i, bLQ in enumerate(bLQ_vals):
         for j, bTQ in enumerate(bTQ_vals):
-            Q = reduced_Q_full(
-                Tgrid,
-                b_TQ=bTQ,
-                b_LQ=bLQ,
-                b_I=bI_fixed,
-                lambda0=p.base_lat_deg,
-                lambdaR=p.lambda_R_deg,
-            )
-            Deff = D0 * Q
-            y = Deff - 1.0
 
-            # Need a crossing from above to below for finite saturation.
-            crossing = np.where((y[:-1] >= 0.0) & (y[1:] <= 0.0))[0]
+            def h(T: float) -> float:
+                return lnD0 + reduced_lnQ(T, bTQ, bLQ, bI_fixed, lam0_eff, p.lambda_R_deg, eps)
 
-            if len(crossing) == 0:
+            T_lo, T_hi = T_lo_init, T_hi_init
+            if h(T_lo) <= 0.0 or h(T_hi) >= 0.0:
+                # Subcritical (D0 Q <= 1 already at T -> 0), or the fixed
+                # point lies beyond the scanned amplitude range.
                 state[i, j] = 0
                 continue
 
-            k = crossing[0]
-            Tstar = Tgrid[k]
+            for _ in range(60):
+                T_mid = 0.5 * (T_lo + T_hi)
+                if h(T_mid) > 0.0:
+                    T_lo = T_mid
+                else:
+                    T_hi = T_mid
+            Tstar = 0.5 * (T_lo + T_hi)
 
-            M = D0 * Tgrid * Q
-            dM = np.gradient(M, Tgrid, edge_order=2)
-            Mprime = dM[k]
+            Mprime = 1.0 + Tstar * reduced_dlnQ_dT(
+                Tstar, bTQ, bLQ, bI_fixed, lam0_eff, p.lambda_R_deg, eps
+            )
 
             Tstar_map[i, j] = Tstar
             Mprime_map[i, j] = Mprime
@@ -948,6 +1152,10 @@ def make_stability_map(p: SFTParams, outdir: str) -> None:
     cbar = plt.colorbar()
     cbar.set_ticks([0, 1, 2])
     cbar.set_ticklabels(["No fixed point", "Stable", "Unstable/modulated"])
+    # Analytic period-doubling boundary M'(T*) = -1.
+    BTQ, BLQ = np.meshgrid(bTQ_vals, bLQ_vals)
+    plt.contour(BTQ, BLQ, Mprime_map, levels=[-1.0], colors="white",
+                linewidths=1.5, linestyles="--")
     plt.tight_layout()
     plt.savefig(os.path.join(outdir, "fig9_stability_map_classification.png"), dpi=200)
     plt.close()
@@ -1010,6 +1218,7 @@ if __name__ == "__main__":
 
     results = run_experiment(params, T_values)
     plot_results(results, params, outdir)
+    report_theory_agreement(results, params, outdir)
     make_stability_map(params, outdir)
 
     print("\nDone.")
@@ -1027,4 +1236,5 @@ if __name__ == "__main__":
     print("  fig10_Tstar_map.png")
     print("  fig11_Mprime_map.png")
     print("  nonlinear_response_results_v2.csv")
+    print("  theory_agreement_v2.csv")
     print("  stability_map_v2.csv")
