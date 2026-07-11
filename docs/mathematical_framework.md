@@ -99,6 +99,13 @@ remains well described (Section 3) because the envelope suppresses those
 early times, but this is a structural limitation of Gaussian-factor
 closures worth stating in the manuscript.
 
+**Point yield versus pair yield.** The 29.2° above is the *point-source*
+effectivity range. The quantity governing latitude quenching of bipolar
+pairs is the **pair yield**, which is much narrower (λ_R,pair ≈ 10.5°,
+Gaussian fit over 5°–22°) and crosses zero at λ_rev ≈ 25° — see
+`physical_validation.md` for the measurement and its consequences for the
+physical (shift-mode) latitude quenching.
+
 ## 3. Exact source-side reduction and the closure ladder
 
 For the latitude case the source is the linear source multiplied by the
