@@ -1,0 +1,12 @@
+quantity,value
+stepper_validation_rel_diff,5.306097e-14
+r_first_period,0.986012
+r_asymptotic,0.999986
+r_eigenvalue,0.999986
+D0_existence_with_memory,1.986012
+D0_period_doubling_memoryless,2.804668
+D0_period_doubling_memory,3.347419
+one_step_err_memoryless_stable,0.970141
+one_step_err_memory_stable,0.013416
+one_step_err_memoryless_modulated,0.644799
+one_step_err_memory_modulated,0.014876

@@ -179,6 +179,13 @@ document, this closes the loop: the single-cycle response function measured
 in the controlled experiments determines quantitatively where the
 multi-cycle system sits relative to the onset of modulation.
 
+**Caveat (memory).** These map results assume memoryless cycle-to-cycle
+coupling. Genuine multi-cycle SFT simulations with dynamo feedback show
+that for τ = ∞ the remnant polar field survives almost entirely between
+cycles (r ≈ 0.99), shifting the fixed point, the existence threshold, and
+the period-doubling boundary; see `multicycle_validation.md` for the
+memory-corrected map and its validation.
+
 ## 5. What is now derived versus prescribed
 
 | Quantity | Status |
