@@ -881,6 +881,10 @@ approach to the fixed point, $\mathcal{R}(T_*)=0$ marks the super-stable
 fixed point, and the period-doubling threshold translates into a
 measurable condition on the response curve.
 
+Beyond the boundary~(\ref{eq:period_doubling}) the iterated map undergoes
+a period-doubling cascade into chaotic modulation, with the cascade onset
+at the analytic boundary (Figure~\ref{fig:app_bifurcation}).
+
 In the numerical implementation, $T_*$ is found by bisection on the
 strictly monotonic $\ln[D_0Q(T)]$ and $\mathcal{M}'(T_*)$ is evaluated
 from the analytic derivative
@@ -1115,8 +1119,9 @@ amplitudes in the combined nonlinear case.}
 Figures~\ref{fig:stability_map}\,--\,\ref{fig:mprime_map} classify the
 reduced cycle map in the $(b_{\rm TQ},b_{\rm LQ})$ plane at $D_0=3$: the
 stability classification with the analytic period-doubling boundary
-$\mathcal{M}'(T_*)=-1$ overlaid, the saturated amplitude $T_*$, and the
-multiplier $\mathcal{M}'(T_*)$. The structure follows the analytic results
+$\mathcal{M}'(T_*)=-1$ overlaid (Figure~\ref{fig:stability_map}), the
+saturated amplitude $T_*$ (Figure~\ref{fig:tstar_map}), and the
+multiplier $\mathcal{M}'(T_*)$ (Figure~\ref{fig:mprime_map}). The structure follows the analytic results
 of Section~\ref{subsec:cycle_map_stability}: instability is entered far
 more readily by increasing the Gaussian latitude-quenching strength, whose
 stiffness is unbounded, than the algebraic tilt-quenching strength, which
@@ -1185,8 +1190,9 @@ against the stored SFT scan (Figure~\ref{fig:closure_ladder} and
 Table~\ref{tab:ladder}). The default envelope closure's entire residual is
 the covariance between the instantaneous quenching factor and the
 time-dependence of the dipole yield: the true weighting $\omega(t)$ peaks
-at $\bar{t}_\omega=6.5$~yr, two years \emph{after} cycle maximum, because
-early-cycle flux emerges at high latitudes where its yield is small.
+at $\bar{t}_\omega=6.5$~yr, two years \emph{after} cycle maximum
+(Figure~\ref{fig:yield_weights}), because early-cycle flux emerges at high
+latitudes where its yield is small.
 Replacing the envelope moments $(t_{\rm max},\sigma_t)$ in
 Equations~(\ref{eq:lq_lambda_eff})\,--\,(\ref{eq:lq_epsilon}) by the
 yield-weighted moments $(\bar{t}_\omega,\sigma_\omega)=(6.52,1.48)$~yr --
@@ -1220,14 +1226,26 @@ closure, and the static closure of the earlier formulation.}
 \label{fig:closure_ladder}
 \end{figure}
 
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{figF3_yield_weights.png}
+\caption{Effective emergence-time weighting of the final dipole: the
+yield weight $\omega(t)$ (kernel $\times$ source) compared with the
+source envelope $s_1(t)$ alone. The weighting peaks two years after cycle
+maximum and is slightly negative for emergence in the first two years,
+when the belt sits above the sign-change latitude of the pair yield
+(Section~\ref{sec:physical_validation}).}
+\label{fig:yield_weights}
+\end{figure}
+
 \subsection{Effectivity ranges of the transport model}
 \label{subsec:effectivity_ranges}
 
 The kernel also measures the dynamo effectivity range of the transport
-model directly. The yield of a point source at latitude $\lambda$,
-relative to the dipole it deposits, is approximately Gaussian with width
-$29.2^\circ$ at the reference parameters (converged already within the
-11-yr window). The physically relevant quantity for bipolar regions,
+model directly (Figures~\ref{fig:app_kernel} and~\ref{fig:app_point_yield}).
+The yield of a point source at latitude $\lambda$, relative to the dipole
+it deposits, is approximately Gaussian with width $29.2^\circ$ at the
+reference parameters (converged already within the 11-yr window). The physically relevant quantity for bipolar regions,
 however, is the yield of the \emph{ring pair}, which is much narrower --
 $\lambda_R^{\rm pair}=10.5^\circ$ -- and changes sign at
 $\lambda_{\rm rev}\approx25^\circ$: pairs emerging poleward of this
@@ -1329,19 +1347,30 @@ closure.}
 \subsection{Physical converging inflows}
 
 Explicit converging inflows modify the transport operator, so no kernel
-prediction exists -- the hardest test for a source-side factor. At the
-reference inflow amplitude ($2~{\rm m~s^{-1}}$ at $T=1$, scaling as
-$T^2$), the effective algebraic strength at the calibration point is
-$b_{\rm eff}(T{=}1)=0.40$, with a leading-order fit $b_{\rm I}\simeq0.42$
-over $T\le1.2$; the algebraic form is adequate for weak-to-moderate
-cycles, but $b_{\rm eff}$ grows with $T$ (full-scan fit $1.5$): the
-physical nonlinearity is super-quadratic, and the constant-$b$ Pad\'e form
+prediction exists -- the hardest test for a source-side factor
+(Figure~\ref{fig:inflow_validation}). At the reference inflow amplitude
+($2~{\rm m~s^{-1}}$ at $T=1$, scaling as $T^2$), the effective algebraic
+strength at the calibration point is $b_{\rm eff}(T{=}1)=0.40$, with a
+leading-order fit $b_{\rm I}\simeq0.42$ over $T\le1.2$; the algebraic
+form is adequate for weak-to-moderate cycles, but $b_{\rm eff}$ grows
+with $T$ (full-scan fit $1.5$; Figure~\ref{fig:app_beff}): the physical
+nonlinearity is super-quadratic, and the constant-$b$ Pad\'e form
 under-predicts the suppression of strong cycles. At $5~{\rm m~s^{-1}}$ the
 dipole reverses sign at $T=1.40$ -- over-quenching to reversal, again
 outside the domain of positive closures. A useful cross-calibration
 follows: the value $b_{\rm I}=0.2$ adopted from \citet{Talafha2025}
 corresponds to inflow amplitudes of roughly $1~{\rm m~s^{-1}}$ at cycle
 maximum in this model's convention.
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{figV4_inflow_validation.png}
+\caption{Physical converging inflows versus the algebraic closure, in
+units of the linear yield $a$: SFT scans at inflow amplitudes of $2$ and
+$5~{\rm m~s^{-1}}$, with leading-order algebraic fits. The stronger
+inflow reverses the dipole sign at $T=1.40$.}
+\label{fig:inflow_validation}
+\end{figure}
 
 \section{Multi-Cycle Coupling and the Memory-Corrected Map}
 \label{sec:multicycle}
@@ -1390,13 +1419,27 @@ Long multi-cycle SFT simulations with genuine feedback
 stepper that reproduces the reference solver to $5\times10^{-14}$ and a
 kernel-exact $Q(T)$ so that memory is the only difference between SFT and
 map, confirm the corrected map quantitatively
-(Figure~\ref{fig:bifurcation_comparison}): the one-step prediction error
-falls from $97$~per~cent (memoryless) to $1.3$\,--\,$1.5$~per~cent; the
-simulated attractor bifurcates to period two exactly at the corrected
-analytic boundary $D_0=3.35$ (memoryless prediction: $2.80$) and follows
-the corrected map through the subsequent cascade, including the phase of
-the even--odd amplitude alternation and grand-minimum-like excursions in
-the chaotic regime.
+(Figures~\ref{fig:time_series} and~\ref{fig:bifurcation_comparison}): the
+one-step prediction error falls from $97$~per~cent (memoryless) to
+$1.3$\,--\,$1.5$~per~cent; the simulated attractor bifurcates to period
+two exactly at the corrected analytic boundary $D_0=3.35$ (memoryless
+prediction: $2.80$) and follows the corrected map through the subsequent
+cascade, including the phase of the even--odd amplitude alternation and
+grand-minimum-like excursions in the chaotic regime. The measurement of
+the memory parameter and the displacement of the return map are shown in
+Figures~\ref{fig:app_memory} and~\ref{fig:app_return_map}.
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{figM2_time_series.png}
+\caption{Cycle-amplitude sequences of the multi-cycle SFT with dynamo
+feedback compared with the memory-corrected and memoryless maps, at a
+stable gain (top), just beyond the period-doubling boundary (middle), and
+in the chaotic regime (bottom). In the period-two regime the
+memory-corrected map tracks the simulation cycle by cycle, including the
+phase of the even--odd alternation.}
+\label{fig:time_series}
+\end{figure}
 
 The reduced theory thus requires two transport constants, $(a,r)$, both
 measurable from one linear run plus one source-free period. Because the
@@ -1428,7 +1471,17 @@ transport constants, so their behaviour can be mapped across the SFT
 parameter space -- the reduced-theory counterpart of full parameter-space
 optimisations \citep{PetrovayTalafha2019,Talafha2022}. Scanning
 $\eta\in[100,1000]~{\rm km^2~s^{-1}}$ and $u_0\in[5,25]~{\rm m~s^{-1}}$
-yields three regularities.
+(Figure~\ref{fig:constant_maps}) yields three regularities.
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{figP1_transport_constant_maps.png}
+\caption{Derived transport constants of the reduced theory over the
+$(\eta,u_0)$ plane at $\tau=\infty$: the pair-yield effectivity range
+$\lambda_R$, the sign-change latitude $\lambda_{\rm rev}$, the cycle
+memory $r$, and the linear dipole yield $a$.}
+\label{fig:constant_maps}
+\end{figure}
 
 First, the pair-yield effectivity range collapses onto the quadrature
 scaling law (Figure~\ref{fig:lambdaR_scaling})
@@ -1452,7 +1505,8 @@ entering in quadrature. Over the scanned plane $\lambda_R$ runs from
 $5.8^\circ$ to $22.7^\circ$, consistent with the values discussed by
 \citet{PetrovayNagyYeates2020} and \citet{Talafha2022}.
 
-Second, the sign-change latitude tracks the effectivity range,
+Second, the sign-change latitude tracks the effectivity range
+(Figure~\ref{fig:app_lambdarev}),
 %
 \begin{equation}
 \lambda_{\rm rev}
@@ -1480,7 +1534,8 @@ r(\tau)={\rm e}^{-P/\tau}r(\infty),
 %
 while the shape of the yield function in latitude -- hence $\lambda_R$ and
 $\lambda_{\rm rev}$ -- is invariant under $\tau$. These identities are
-verified numerically at $\tau=5$~yr to within $10^{-4}$\,--\,$10^{-2}$. No
+verified numerically at $\tau=5$~yr to within $10^{-4}$\,--\,$10^{-2}$
+(Figure~\ref{fig:app_taulaws}). No
 new scan is therefore needed for finite decay: the whole
 $\tau$-dependence of the reduced theory is carried by two closed-form
 factors applied to the $\tau=\infty$ constants.
@@ -1547,6 +1602,96 @@ transport model of this family is summarised by four cheaply measurable
 numbers $(a,\lambda_R,\lambda_{\rm rev},r)$.
 \end{enumerate}
 
+\appendix
+
+\section{Supplementary Figures}
+\label{sec:appendix_figures}
+
+This appendix collects supporting figures for results quoted in the main
+text. All figures, tables, and quoted numbers are regenerated by the
+scripts in the repository accompanying this paper.
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{figF1_kernel_evolution.png}
+\caption{Dipole-yield kernel $K(\mu,t)$ at different emergence times
+(Section~\ref{sec:kernel_framework}). Flux emerging early in the cycle
+has its yield profile fully relaxed by cycle end; late-cycle emergence
+retains a sharper profile.}
+\label{fig:app_kernel}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{figF2_intrinsic_effectivity_range.png}
+\caption{Point-source dipole yield versus emergence latitude at the 11-yr
+horizon and after a further 40~yr of source-free evolution, with Gaussian
+fits (Section~\ref{subsec:effectivity_ranges}). The two horizons
+coincide, showing that the kernel converges within the cycle window.}
+\label{fig:app_point_yield}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{figF5_bifurcation.png}
+\caption{Bifurcation diagrams of the memoryless reduced cycle map
+(Section~\ref{subsec:cycle_map_stability}): attractor versus gain $D_0$
+for the reference quenchings, with the analytic period-doubling boundary
+marked, and versus the latitude-quenching strength at fixed $D_0=3$.}
+\label{fig:app_bifurcation}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{figV5_binflow_effective.png}
+\caption{Constancy test of the algebraic inflow closure
+(Section~\ref{sec:physical_validation}): the effective strength
+$b_{\rm eff}(T)=(1/Q_{\rm I}-1)/T^2$ for physical inflows of $2$ and
+$5~{\rm m~s^{-1}}$, compared with the calibrated $b_{\rm I}=0.2$. The
+growth of $b_{\rm eff}$ with $T$ shows the super-quadratic character of
+the physical nonlinearity.}
+\label{fig:app_beff}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{figM1_memory_parameter.png}
+\caption{Measurement of the cycle memory (Section~\ref{sec:multicycle}):
+source-free survival of the dipole over successive 11-yr periods,
+compared with the dominant mode of the one-period propagator.}
+\label{fig:app_memory}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{figM4_return_map.png}
+\caption{Return map $(T_n,T_{n+1})$ of the multi-cycle SFT at a modulated
+gain (Section~\ref{sec:multicycle}). The simulated points fall on the
+memory-corrected curve $T[D_0Q-r]$, visibly displaced from the memoryless
+curve $D_0TQ$.}
+\label{fig:app_return_map}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{figP3_lambdarev_vs_lambdaR.png}
+\caption{Sign-change latitude of the pair yield against the effectivity
+range across the $(\eta,u_0)$ plane
+(Section~\ref{sec:parameter_space}), with the proportionality of
+Equation~(\ref{eq:lambda_rev_law}).}
+\label{fig:app_lambdarev}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{figP4_tau_laws.png}
+\caption{Verification of the analytic decay-time laws of
+Equation~(\ref{eq:tau_laws}): the memory parameter follows
+$r(\tau)={\rm e}^{-P/\tau}r(\infty)$, while the effectivity range is
+invariant under $\tau$.}
+\label{fig:app_taulaws}
+\end{figure}
+
 %\begin{acks}
 % TODO: acknowledgements and funding.
 %\end{acks}
@@ -1557,10 +1702,11 @@ numbers $(a,\lambda_R,\lambda_{\rm rev},r)$.
 %\begin{fundinginformation}
 %\end{fundinginformation}
 
-%\begin{dataavailability}
-%The code and data that reproduce all results are available in the
-%repository accompanying this paper.
-%\end{dataavailability}
+\begin{dataavailability}
+The code, documentation, and data that reproduce all results, tables, and
+figures in this paper are available in the repository
+\url{https://github.com/mtalafha90/reducedSFT}.
+\end{dataavailability}
 
 %\begin{conflict}
 %The authors declare no conflicts of interest.
