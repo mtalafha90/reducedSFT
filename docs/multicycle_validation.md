@@ -51,15 +51,18 @@ Measured three ways (Figure M1):
 | Survival after several periods | → 1.0000 |
 | Dominant eigenvalue of G_P | **1.0000** |
 
-With τ = ∞, the advection–diffusion balance admits a genuine **steady
-dipolar profile** (flux parked at the poles by the meridional flow, exactly
-balancing diffusion), so remnant dipole *never* decays — the eigenvalue is
-exactly 1, and the first-period value 0.986 only reflects the transient
-adjustment of the end-of-cycle profile towards that steady mode. The
-memoryless assumption is therefore not mildly violated but structurally
-wrong in this regime: **almost half of the dynamo gain is spent reversing
-the previous cycle's polar field** (existence requires D₀ > 1.99 rather
-than D₀ > 1).
+With τ = ∞, the meridional flow parks the remnant flux in polar caps whose
+dipole can decay only through **cross-equatorial diffusive annihilation**,
+which is exponentially slow in the magnetic Reynolds number
+R_m = u₀R⊙/η ≈ 16.7: at the reference parameters the dominant dipolar
+eigenvalue of G_P is unity to the precision quoted (the parameter-space
+scan, `parameter_space.md`, shows it falling to ≈ 0.76 only in the
+diffusion-dominated corner R_m ≈ 3.5). The first-period value 0.986
+reflects the transient adjustment of the end-of-cycle profile towards that
+slow mode. The memoryless assumption is therefore not mildly violated but
+structurally wrong in this regime: **almost half of the dynamo gain is
+spent reversing the previous cycle's polar field** (existence requires
+D₀ > 1.99 rather than D₀ > 1).
 
 This is the map-level manifestation of the known flux-accumulation
 behaviour of decay-free SFT models; with a finite decay term
