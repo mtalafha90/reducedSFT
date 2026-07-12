@@ -478,7 +478,12 @@ Interpretation:
   envelope moments (t_max, σ_t) by the *yield-weighted* mean and standard
   deviation of the emergence-time distribution, both measurable once from
   the linear reference run. The Gaussian-average formula for λ̄₀ and ε is
-  unchanged; only the two moments are updated.
+  unchanged; only the two moments are updated. **This refinement has now
+  been implemented and quantified** via the adjoint-kernel analysis (see
+  `docs/mathematical_framework.md`): with the yield-weighted moments
+  (t̄ = 6.52 yr, σ = 1.48 yr) the closure error drops from 6.6 × 10⁻² to
+  5.5 × 10⁻⁵, and the exact kernel-weighted average reproduces the SFT scan
+  identically.
 * The **combined** case is *more* accurate than the latitude case in absolute
   terms (≤ 0.016) because the tilt and latitude residuals have opposite sign
   and partially cancel; its larger relative deviation at T = 2.5 reflects the

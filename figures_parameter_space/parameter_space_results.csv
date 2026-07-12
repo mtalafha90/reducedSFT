@@ -1,0 +1,16 @@
+quantity,value
+scaling_coefficient_C,1.087185
+scaling_scatter,0.179305
+quadrature_C,1.008251
+quadrature_w0_deg,4.352493
+quadrature_scatter,0.025472
+lambda_rev_over_lambda_R_mean,2.327924
+lambda_rev_over_lambda_R_std,0.252435
+r_eig_min,0.762023
+r_eig_max,1.000000
+tau5_a_measured,3.382682e-02
+tau5_a_predicted,3.385666e-02
+tau5_r1_measured,0.107861
+tau5_r1_predicted,0.109113
+tau5_lamR_deg,10.7726
+tauinf_lamR_deg,10.7756

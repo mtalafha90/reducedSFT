@@ -1,0 +1,14 @@
+quantity,value
+duality_relative_difference,1.932684e-15
+a_linear_coefficient,7.8986343643e-02
+lambda_R_horizon11yr_deg,29.161482
+lambda_R_asymptotic_deg,29.161485
+lambda_R_estimate_deg,9.912824
+lambda_R_prescribed_deg,20.000000
+t_mean_yield_yr,6.519228
+t_std_yield_yr,1.484098
+D0_period_doubling_reference,2.917660
+closure_max_abs_dev_exact,3.852363e-11
+closure_max_abs_dev_yield_weighted,5.510879e-05
+closure_max_abs_dev_envelope,6.623407e-02
+closure_max_abs_dev_static,1.672264e-01
