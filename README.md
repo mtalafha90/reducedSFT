@@ -60,12 +60,27 @@ multi-cycle behaviour, with an analytic stability classification in the
 Python 3.10+ with NumPy (1.x or 2.x) and Matplotlib:
 
 ```bash
-pip install numpy matplotlib
+pip install -r requirements.txt
 python3 nonlinear_response_sft_experiment.py
 ```
 
 Runtime is a few minutes. All outputs are written to
 `figures_nonlinear_response_v2/`.
+
+## Tests
+
+The exact identities underlying the theory (adjoint duality, operator
+conservativity, stepper equivalence, the closed-form closures, the map
+algebra, the memory parameter, and the end-to-end latitude agreement) are
+pinned by a regression suite that runs in about ten seconds:
+
+```bash
+pip install pytest
+pytest -q tests/
+```
+
+The suite runs automatically on every push and pull request via GitHub
+Actions (`.github/workflows/ci.yml`).
 
 ## Reference parameters
 
