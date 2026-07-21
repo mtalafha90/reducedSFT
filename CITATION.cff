@@ -6,6 +6,7 @@ authors:
   - family-names: Talafha
     given-names: Mohammed H.
 repository-code: "https://github.com/mtalafha90/reducedSFT"
+license: MIT
 keywords:
   - solar cycle
   - surface flux transport
