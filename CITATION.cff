@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "reducedSFT: a reduced response theory for nonlinear axial-dipole modulation in Babcock-Leighton surface flux transport models"
+type: software
+authors:
+  - family-names: Talafha
+    given-names: Mohammed H.
+repository-code: "https://github.com/mtalafha90/reducedSFT"
+keywords:
+  - solar cycle
+  - surface flux transport
+  - Babcock-Leighton dynamo
+  - solar magnetic fields
+# TODO: add co-authors, ORCID identifiers, a version number, and (once
+# published) a preferred-citation entry for the Solar Physics paper.
