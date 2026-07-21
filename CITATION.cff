@@ -5,6 +5,10 @@ type: software
 authors:
   - family-names: Talafha
     given-names: Mohammed H.
+  - family-names: Petrovay
+    given-names: "Kristóf"
+  - family-names: Opitz
+    given-names: Andrea
 repository-code: "https://github.com/mtalafha90/reducedSFT"
 license: MIT
 keywords:
@@ -12,5 +16,5 @@ keywords:
   - surface flux transport
   - Babcock-Leighton dynamo
   - solar magnetic fields
-# TODO: add co-authors, ORCID identifiers, a version number, and (once
-# published) a preferred-citation entry for the Solar Physics paper.
+# TODO: add ORCID identifiers, a version number, and (once published) a
+# preferred-citation entry for the Solar Physics paper.
