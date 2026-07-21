@@ -174,3 +174,7 @@ point).
 
 See `docs/theory_review_and_enhancement.md` for derivations, the error
 budget of each closure, and the proposed manuscript revisions.
+
+## Licence
+
+MIT — see `LICENSE`.
