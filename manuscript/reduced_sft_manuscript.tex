@@ -29,9 +29,12 @@
 % Journal-name shorthands
 \newcommand{\aap}{{\it Astron. Astrophys.}}
 \newcommand{\apj}{{\it Astrophys. J.}}
+\newcommand{\apjl}{{\it Astrophys. J. Lett.}}
 \newcommand{\solphys}{{\it Sol. Phys.}}
 \newcommand{\lrsp}{{\it Living Rev. Sol. Phys.}}
 \newcommand{\jswsc}{{\it J. Space Weather Space Clim.}}
+\newcommand{\ssr}{{\it Space Sci. Rev.}}
+\newcommand{\prl}{{\it Phys. Rev. Lett.}}
 \chardef\us=`\_
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -94,18 +97,24 @@ Transport; Dynamo}
 In Babcock--Leighton models of the solar cycle, the polar field built up by
 the transport of active-region flux across the surface provides the
 poloidal seed of the next cycle
-\citep{Babcock1961,Leighton1964,Charbonneau2020}. The amplitude of the
+\citep{Babcock1961,Leighton1964,Yeates2023}. The amplitude of the
 axial dipole moment at cycle minimum is accordingly the best physical
 precursor of the next cycle's strength \citep{Petrovay2020}. For the cycle
 to be stable, the dipole production must be limited by nonlinear feedbacks,
 of which three observable candidates have been studied extensively:
 tilt quenching, the anticorrelation of active-region tilt angles with cycle
-amplitude \citep{DasiEspuig2010,Jiao2021}; latitude quenching, the poleward
-shift of the activity belts in stronger cycles combined with the strong
-latitude dependence of the dipole contribution of emerging flux
-\citep{Jiang2020,Talafha2022}; and converging surface inflows towards the
-activity belts, which reduce the cross-equatorial separation of polarities
-\citep{CameronSchussler2012,MartinBelda2017,Talafha2025}.
+amplitude, first demonstrated independently by \citet{Lemerle2017} and
+\citet{KarakMiesch2017} to stabilise Babcock--Leighton dynamos as
+indicated by observations, with direct magnetogram evidence for its form
+provided by \citet{Jha2020} \citep[see also][]{DasiEspuig2010,Jiao2021};
+latitude quenching, the poleward shift of the activity belts in stronger
+cycles combined with the strong latitude dependence of the dipole
+contribution of emerging flux \citep{Jiang2020,Talafha2022}, a shift that
+arises naturally from the nonlinearity of magnetic buoyancy in the rise of
+the stronger toroidal flux \citep{Biswas2022}; and converging surface
+inflows towards the activity belts, which reduce the cross-equatorial
+separation of polarities
+\citep{CameronSchussler2012,MartinBelda2017,Teweldebirhan2024,Talafha2025}.
 
 This paper asks a simple structural question: to what extent can the final
 axial-dipole response of a full SFT cycle be reduced to the algebraic form
@@ -456,7 +465,10 @@ and the effective polarity separation becomes
 %
 Physically, stronger cycles have smaller effective tilt separation and
 therefore produce a smaller axial-dipole contribution per unit source
-amplitude.
+amplitude. Direct magnetogram measurements of bipolar-region tilts show
+quenching of this kind \citep{Jha2020}, and Babcock--Leighton dynamo
+models demonstrate that it suffices to stabilise the cycle
+\citep{Lemerle2017,KarakMiesch2017}.
 
 By the antisymmetry of the ring pair, the dipole yield is an odd function
 of the separation, $g(\Delta\lambda)=c_1\Delta\lambda+c_3\Delta\lambda^3
@@ -478,7 +490,11 @@ measured to contribute at most $2$~per~cent over the amplitude scan.
 \label{subsec:lq_equation}
 
 The latitude-quenching factor follows the instantaneous emergence latitude
-of the drifting activity belt. The effective poleward displacement
+of the drifting activity belt. The physical origin of the poleward
+displacement of emergence in stronger cycles is the nonlinearity of
+magnetic buoyancy in the rise of the toroidal flux: stronger fields become
+buoyant earlier in the cycle, when the toroidal band lies at higher
+latitudes \citep{Biswas2022}. The effective poleward displacement
 associated with latitude quenching is
 %
 \begin{equation}
@@ -585,7 +601,7 @@ In the reference experiment, inflow-like suppression is represented by an
 efficiency factor,
 %
 \begin{equation}
-Q_{\rm I}(T)
+Q_{\rm IQ}(T)
 =
 \frac{1}{1+b_{\rm I}T^2}.
 \label{eq:QI}
@@ -628,9 +644,12 @@ u_{\rm inflow}(\lambda,t,T),
 \end{equation}
 %
 where $u_{\rm inflow}$ is an idealised converging flow toward the activity
-belts with an amplitude scaling as $T^2$. This mode is used for the
-physical validation in Section~\ref{sec:physical_validation}; the
-reference results use the efficiency-factor implementation.
+belts with an amplitude scaling as $T^2$
+\citep[for the nonlinear impact of observed inflows in three-dimensional
+Babcock--Leighton dynamo models, see][]{Teweldebirhan2024}. This mode is
+used for the physical validation in
+Section~\ref{sec:physical_validation}; the reference results use the
+efficiency-factor implementation.
 
 \subsection{Total nonlinear efficiency factor}
 \label{subsec:total_Q}
@@ -643,7 +662,7 @@ Q(T)=
 \begin{cases}
 Q_{\rm TQ}(T), & \mathrm{tilt\text{-}like},\\
 Q_{\rm LQ}(T), & \mathrm{latitude\text{-}like},\\
-Q_{\rm I}(T), & \mathrm{inflow\text{-}like};
+Q_{\rm IQ}(T), & \mathrm{inflow\text{-}like};
 \end{cases}
 \label{eq:individual_Q}
 \end{equation}
@@ -655,14 +674,14 @@ Q_{\rm comb}(T)
 =
 Q_{\rm TQ}(T)
 Q_{\rm LQ}(T)
-Q_{\rm I}(T).
+Q_{\rm IQ}(T).
 \label{eq:Qcombined}
 \end{equation}
 %
 The product form assumes the mechanisms act independently; in the
 controlled set-up this holds to leading order because they act on disjoint
 properties of the source ($Q_{\rm TQ}$ on the polarity separation,
-$Q_{\rm LQ}$ and $Q_{\rm I}$ on the amplitude), with interaction terms of
+$Q_{\rm LQ}$ and $Q_{\rm IQ}$ on the amplitude), with interaction terms of
 second order. The reduced response prediction is then
 Equation~(\ref{eq:main_reduced_response}).
 
@@ -1646,7 +1665,7 @@ marked, and versus the latitude-quenching strength at fixed $D_0=3$.}
 \includegraphics[width=\linewidth]{figV5_binflow_effective.png}
 \caption{Constancy test of the algebraic inflow closure
 (Section~\ref{sec:physical_validation}): the effective strength
-$b_{\rm eff}(T)=(1/Q_{\rm I}-1)/T^2$ for physical inflows of $2$ and
+$b_{\rm eff}(T)=(1/Q_{\rm IQ}-1)/T^2$ for physical inflows of $2$ and
 $5~{\rm m~s^{-1}}$, compared with the calibrated $b_{\rm I}=0.2$. The
 growth of $b_{\rm eff}$ with $T$ shows the super-quadratic character of
 the physical nonlinearity.}
@@ -1723,19 +1742,25 @@ Babcock, H.W.: 1961, The topology of the Sun's magnetic field and the
 Baumann, I., Schmitt, D., Sch\"ussler, M.: 2006, A necessary extension of
 the surface flux transport model. \aap\ {\bf 446}, 307.
 
+\bibitem[Biswas, Karak, and Cameron(2022)]{Biswas2022}
+Biswas, A., Karak, B.B., Cameron, R.: 2022, Toroidal flux loss due to
+flux emergence explains why solar cycles rise differently but decay in a
+similar way. \prl\ {\bf 129}, 241102.
+
 \bibitem[Cameron and Sch\"ussler(2012)]{CameronSchussler2012}
 Cameron, R.H., Sch\"ussler, M.: 2012, Are the strengths of solar cycles
 determined by converging flows towards the activity belts? \aap\
 {\bf 548}, A57.
 
-\bibitem[Charbonneau(2020)]{Charbonneau2020}
-Charbonneau, P.: 2020, Dynamo models of the solar cycle. \lrsp\ {\bf 17},
-4.
-
 \bibitem[Dasi-Espuig et al.(2010)]{DasiEspuig2010}
 Dasi-Espuig, M., Solanki, S.K., Krivova, N.A., Cameron, R.,
 Pe\~nuela, T.: 2010, Sunspot group tilt angles and the strength of the
 solar cycle. \aap\ {\bf 518}, A7.
+
+\bibitem[Jha et al.(2020)]{Jha2020}
+Jha, B.K., Karak, B.B., Mandal, S., Banerjee, D.: 2020, Magnetic field
+dependence of bipolar magnetic region tilts on the Sun: indication of
+tilt quenching. \apjl\ {\bf 889}, L19.
 
 \bibitem[Jiang(2020)]{Jiang2020}
 Jiang, J.: 2020, Nonlinear mechanisms that regulate the solar cycle
@@ -1745,9 +1770,19 @@ amplitude. \apj\ {\bf 900}, 19.
 Jiao, Q., Jiang, J., Wang, Z.-F.: 2021, Sunspot tilt angles revisited:
 dependence on the solar cycle strength. \aap\ {\bf 653}, A27.
 
+\bibitem[Karak and Miesch(2017)]{KarakMiesch2017}
+Karak, B.B., Miesch, M.: 2017, Solar cycle variability induced by tilt
+angle scatter in a Babcock--Leighton solar dynamo model. \apj\
+{\bf 847}, 69.
+
 \bibitem[Leighton(1964)]{Leighton1964}
 Leighton, R.B.: 1964, Transport of magnetic fields on the Sun. \apj\
 {\bf 140}, 1547.
+
+\bibitem[Lemerle and Charbonneau(2017)]{Lemerle2017}
+Lemerle, A., Charbonneau, P.: 2017, A coupled $2\times2$D
+Babcock--Leighton solar dynamo model. II. Reference dynamo solutions.
+\apj\ {\bf 834}, 133.
 
 \bibitem[Mart\'in-Belda and Cameron(2017)]{MartinBelda2017}
 Mart\'in-Belda, D., Cameron, R.H.: 2017, Inflows towards active regions
@@ -1780,6 +1815,15 @@ A92.
 Talafha, M.H., Petrovay, K., Opitz, A.: 2025, Effect of nonlinear surface
 inflows into activity belts on solar cycle modulation. \solphys\
 {\bf 300}, 57.
+
+\bibitem[Teweldebirhan, Miesch, and Gibson(2024)]{Teweldebirhan2024}
+Teweldebirhan, K., Miesch, M., Gibson, S.: 2024, Inflows towards bipolar
+magnetic active regions and their nonlinear impact on a three-dimensional
+Babcock--Leighton solar dynamo model. \solphys\ {\bf 299}, 42.
+
+\bibitem[Yeates et al.(2023)]{Yeates2023}
+Yeates, A.R., Cheung, M.C.M., Jiang, J., Petrovay, K., Wang, Y.-M.: 2023,
+Surface flux transport on the Sun. \ssr\ {\bf 219}, 31.
 
 \end{thebibliography}
 
