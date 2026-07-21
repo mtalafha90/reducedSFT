@@ -603,7 +603,7 @@ efficiency factor,
 \begin{equation}
 Q_{\rm IQ}(T)
 =
-\frac{1}{1+b_{\rm I}T^2}.
+\frac{1}{1+b_{\rm IQ}T^2}.
 \label{eq:QI}
 \end{equation}
 %
@@ -611,7 +611,7 @@ Physical inflows act on the transport operator rather than on the source,
 so Equation~(\ref{eq:QI}) is a closure resting on two assumptions: for
 weak inflows the perturbation of the final dipole is linear in the inflow
 amplitude, which scales with the magnetic activity, giving a leading-order
-multiplicative reduction $1-b_{\rm I}T^2+\mathcal{O}(T^4)$; and the
+multiplicative reduction $1-b_{\rm IQ}T^2+\mathcal{O}(T^4)$; and the
 algebraic form is the $[0/1]$ Pad\'e resummation of that series, which
 agrees with the perturbative result at small $T$ while remaining positive
 and monotonic for all $T$. The same argument motivates the algebraic form
@@ -621,10 +621,10 @@ The strength is calibrated against the SFT inflow study of
 \citet{Talafha2025}, who find that activity-dependent surface inflows
 lower the net contribution to the dipole moment by $10$\,--\,$25$~per
 cent. Setting the suppressed fraction at $T=1$ to the centre of this
-range, $b_{\rm I}=f/(1-f)$ with $f\simeq0.17$, gives
+range, $b_{\rm IQ}=f/(1-f)$ with $f\simeq0.17$, gives
 %
 \begin{equation}
-b_{\rm I}=0.2,
+b_{\rm IQ}=0.2,
 \label{eq:bI_value}
 \end{equation}
 %
@@ -913,7 +913,7 @@ from the analytic derivative
 =
 -\frac{2b_{\rm TQ}T}{1+b_{\rm TQ}T^2}
 -
-\frac{2b_{\rm I}T}{1+b_{\rm I}T^2}
+\frac{2b_{\rm IQ}T}{1+b_{\rm IQ}T^2}
 -
 \frac{
 2b_{\rm LQ}T
@@ -951,7 +951,7 @@ b_{\rm TQ}=0.15,
 \qquad
 b_{\rm LQ}=2.4^\circ,
 \qquad
-b_{\rm I}=0.2,
+b_{\rm IQ}=0.2,
 \qquad
 \lambda_R=20^\circ .
 \label{eq:nonlinear_reference_params}
@@ -1370,14 +1370,14 @@ prediction exists -- the hardest test for a source-side factor
 (Figure~\ref{fig:inflow_validation}). At the reference inflow amplitude
 ($2~{\rm m~s^{-1}}$ at $T=1$, scaling as $T^2$), the effective algebraic
 strength at the calibration point is $b_{\rm eff}(T{=}1)=0.40$, with a
-leading-order fit $b_{\rm I}\simeq0.42$ over $T\le1.2$; the algebraic
+leading-order fit $b_{\rm IQ}\simeq0.42$ over $T\le1.2$; the algebraic
 form is adequate for weak-to-moderate cycles, but $b_{\rm eff}$ grows
 with $T$ (full-scan fit $1.5$; Figure~\ref{fig:app_beff}): the physical
 nonlinearity is super-quadratic, and the constant-$b$ Pad\'e form
 under-predicts the suppression of strong cycles. At $5~{\rm m~s^{-1}}$ the
 dipole reverses sign at $T=1.40$ -- over-quenching to reversal, again
 outside the domain of positive closures. A useful cross-calibration
-follows: the value $b_{\rm I}=0.2$ adopted from \citet{Talafha2025}
+follows: the value $b_{\rm IQ}=0.2$ adopted from \citet{Talafha2025}
 corresponds to inflow amplitudes of roughly $1~{\rm m~s^{-1}}$ at cycle
 maximum in this model's convention.
 
@@ -1666,7 +1666,7 @@ marked, and versus the latitude-quenching strength at fixed $D_0=3$.}
 \caption{Constancy test of the algebraic inflow closure
 (Section~\ref{sec:physical_validation}): the effective strength
 $b_{\rm eff}(T)=(1/Q_{\rm IQ}-1)/T^2$ for physical inflows of $2$ and
-$5~{\rm m~s^{-1}}$, compared with the calibrated $b_{\rm I}=0.2$. The
+$5~{\rm m~s^{-1}}$, compared with the calibrated $b_{\rm IQ}=0.2$. The
 growth of $b_{\rm eff}$ with $T$ shows the super-quadratic character of
 the physical nonlinearity.}
 \label{fig:app_beff}

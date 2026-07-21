@@ -37,8 +37,8 @@ framework -- no tuned parameters.
     The SFT is run with inflow_mode = "physical" at 2 and 5 m/s. Inflows act
     on the transport operator, so no kernel prediction exists -- that is the
     point of the test: how well can a source-side algebraic factor
-    Q_I = 1/(1 + b_I T^2) absorb a transport-side nonlinearity? The
-    effective strength b_eff(T) = (1/Q_I - 1)/T^2 measures the quality of
+    Q_IQ = 1/(1 + b_IQ T^2) absorb a transport-side nonlinearity? The
+    effective strength b_eff(T) = (1/Q_IQ - 1)/T^2 measures the quality of
     the algebraic form (constant b_eff = perfect form).
 
 Outputs are saved to ./figures_validation/.
@@ -403,12 +403,12 @@ if __name__ == "__main__":
     plt.plot(T_VALUES, D_inf2 / a_lin, "o-", label=r"physical inflow 2 m s$^{-1}$: $D/a$")
     plt.plot(T_VALUES, D_inf5 / a_lin, "s-", label=r"physical inflow 5 m s$^{-1}$: $D/a$")
     plt.plot(T_VALUES, T_VALUES / (1.0 + b_lead2 * T_VALUES**2), "--",
-             label=fr"algebraic, leading-order fit $b_I = {b_lead2:.2f}$")
+             label=fr"algebraic, leading-order fit $b_{{\rm IQ}} = {b_lead2:.2f}$")
     plt.plot(T_VALUES, T_VALUES / (1.0 + b_lead5 * T_VALUES**2), ":",
-             label=fr"algebraic, leading-order fit $b_I = {b_lead5:.2f}$")
+             label=fr"algebraic, leading-order fit $b_{{\rm IQ}} = {b_lead5:.2f}$")
     plt.axhline(0.0, linewidth=1)
     plt.xlabel(r"Normalized cycle amplitude $T$")
-    plt.ylabel(r"$T\,Q_I(T)$ (dipole in units of $a$)")
+    plt.ylabel(r"$T\,Q_{\rm IQ}(T)$ (dipole in units of $a$)")
     plt.title("Physical converging inflows vs algebraic closure")
     plt.legend(fontsize=8)
     plt.tight_layout()
@@ -420,9 +420,9 @@ if __name__ == "__main__":
     plt.plot(T_VALUES, b_eff2, "o-", label=r"2 m s$^{-1}$")
     plt.plot(T_VALUES, b_eff5, "s-", label=r"5 m s$^{-1}$")
     plt.axhline(0.2, linestyle="--", linewidth=1.2,
-                label=r"calibrated $b_I = 0.2$ (Talafha et al. 2025)")
+                label=r"calibrated $b_{\rm IQ} = 0.2$ (Talafha et al. 2025)")
     plt.xlabel(r"Normalized cycle amplitude $T$")
-    plt.ylabel(r"$b_{\rm eff}(T) = (1/Q_I - 1)/T^2$")
+    plt.ylabel(r"$b_{\rm eff}(T) = (1/Q_{\rm IQ} - 1)/T^2$")
     plt.title("Constancy test of the algebraic inflow closure")
     plt.legend(fontsize=8)
     plt.tight_layout()
