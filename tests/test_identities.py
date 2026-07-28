@@ -46,6 +46,34 @@ def test_diffusion_matrix_symmetric(setup):
     assert np.max(np.abs(M - M.T)) == 0.0
 
 
+def test_polarity_pair_is_flux_balanced(setup):
+    # Each bipolar pair must carry equal and opposite flux, as a real
+    # bipolar region does. Equal PEAK amplitudes fail this by 2-4 per cent
+    # because the surface measure is dmu = cos(lambda) dlambda. The rings
+    # are compared directly, since the assembled source has overlapping
+    # tails from the opposite hemisphere.
+    p, grid, A, M = setup
+    lat = np.asarray(grid["lat_deg"])
+    lam_c, sep, wdt = 22.09, p.polarity_sep_deg, p.source_width_deg
+    NF = np.exp(-0.5 * ((lat - (lam_c + sep / 2.0)) / wdt) ** 2)
+    NL = np.exp(-0.5 * ((lat - (lam_c - sep / 2.0)) / wdt) ** 2)
+
+    # equal peaks: the poleward ring is short of flux by a few per cent
+    imbalance = (NL.mean() - NF.mean()) / (0.5 * (NL.mean() + NF.mean()))
+    assert 0.02 < imbalance < 0.05
+
+    # after normalising each ring by its own surface integral, exactly balanced
+    NFb, NLb = NF / NF.mean(), NL / NL.mean()
+    assert abs(NFb.mean() - NLb.mean()) / NFb.mean() < 1e-14
+
+
+def test_source_carries_no_net_flux(setup):
+    p, grid, A, M = setup
+    lat = np.asarray(grid["lat_deg"])
+    S = nre.bipolar_ring_source(lat, 4.5, 1.0, p, False, False, False)
+    assert abs(S.sum()) / np.abs(S).sum() < 1e-12
+
+
 def test_advection_conserves_flux(setup):
     # The explicit operator is in flux form with zero boundary fluxes,
     # so each column sums to zero: total signed flux is conserved.
@@ -76,7 +104,9 @@ def test_duality_and_linear_yield(setup):
     _, D_fwd, _, _, _ = nre.run_sft_case(1.0, "linear", p)
     assert abs(D_adj - D_fwd) / abs(D_fwd) < 1e-12
     # regression pin of the linear yield for the reference parameters
-    assert D_fwd == pytest.approx(7.8986343643e-02, rel=1e-8)
+    # (flux-balanced polarity rings; the earlier equal-peak source gave
+    # 7.8986343643e-02)
+    assert D_fwd == pytest.approx(1.6783556e-01, rel=1e-6)
 
 
 def test_fast_stepper_matches_solver(setup):
@@ -158,7 +188,7 @@ def test_memory_parameter_regression(setup):
     D1 = float(w @ B)
     B = mca.evolve_cycle(B, np.zeros(len(env)), Pstep, PMshape, dt)
     r1 = float(w @ B) / D1
-    assert r1 == pytest.approx(0.9860, abs=2e-3)
+    assert r1 == pytest.approx(0.9940, abs=2e-3)
 
 
 def test_latitude_case_matches_reduced_theory(setup):

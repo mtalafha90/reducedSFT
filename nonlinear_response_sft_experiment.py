@@ -173,6 +173,14 @@ class SFTParams:
     # The default is "efficiency" because it tests the reduced theory cleanly.
     latitude_quenching_mode: str = "efficiency"
 
+    # Polarity-flux balance of each bipolar ring pair.
+    # True (default): every ring is normalised by its own surface integral, so
+    # the two polarities of a pair carry equal and opposite flux, as a real
+    # bipolar region does. False reproduces the earlier equal-peak
+    # construction, in which the poleward ring carries 2-4 per cent less flux
+    # and the pair acquires a spurious net flux.
+    balanced_polarities: bool = True
+
     # Reference latitude for the latitude-quenching factor.
     # "belt": the efficiency factor follows the instantaneous emergence
     #         latitude lambda0(t) of the drifting activity belt, and the
@@ -497,6 +505,20 @@ def bipolar_ring_source(
     N_lead   = np.exp(-0.5 * ((lat_deg - (lat0 - sep / 2.0)) / width) ** 2)
     S_follow = np.exp(-0.5 * ((lat_deg - (-lat0 - sep / 2.0)) / width) ** 2)
     S_lead   = np.exp(-0.5 * ((lat_deg - (-lat0 + sep / 2.0)) / width) ** 2)
+
+    if p.balanced_polarities:
+        # Equal PEAK amplitudes do not give equal integrated flux, because the
+        # surface measure is dmu = cos(lambda) dlambda: the poleward ring
+        # carries a few per cent less flux than the equatorward one. A real
+        # bipolar region is flux balanced, so each ring is normalised by its
+        # own surface integral and the mean flux scale is restored, leaving
+        # the overall amplitude convention unchanged.
+        rings = (N_follow, N_lead, S_follow, S_lead)
+        phis = [float(np.mean(r)) for r in rings]  # uniform dmu: mean ∝ integral
+        scale = float(np.mean(phis))
+        N_follow, N_lead, S_follow, S_lead = (
+            scale * r / phi for r, phi in zip(rings, phis)
+        )
 
     source = (N_follow - N_lead) - (S_follow - S_lead)
 

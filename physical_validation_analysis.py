@@ -67,16 +67,24 @@ T_VALUES = np.array([0.2, 0.35, 0.5, 0.65, 0.8, 1.0, 1.2, 1.4,
 # 1. Source shapes and kernel predictions
 # ============================================================
 
-def ring_pair_shape(lat_deg: np.ndarray, lat_c: float, sep: float, width: float) -> np.ndarray:
+def ring_pair_shape(lat_deg: np.ndarray, lat_c: float, sep: float, width: float,
+                    balanced: bool = True) -> np.ndarray:
     """Monopole-free four-ring source shape centred at latitude lat_c.
 
     Identical construction to bipolar_ring_source, with explicit centre and
-    separation and unit amplitude.
+    separation and unit amplitude. With balanced=True each ring is normalised
+    by its own surface integral, so that the two polarities of a pair carry
+    equal and opposite flux.
     """
     NF = np.exp(-0.5 * ((lat_deg - (lat_c + sep / 2.0)) / width) ** 2)
     NL = np.exp(-0.5 * ((lat_deg - (lat_c - sep / 2.0)) / width) ** 2)
     SF = np.exp(-0.5 * ((lat_deg - (-lat_c - sep / 2.0)) / width) ** 2)
     SL = np.exp(-0.5 * ((lat_deg - (-lat_c + sep / 2.0)) / width) ** 2)
+    if balanced:
+        rings = (NF, NL, SF, SL)
+        phis = [float(np.mean(r)) for r in rings]
+        scale = float(np.mean(phis))
+        NF, NL, SF, SL = (scale * r / phi for r, phi in zip(rings, phis))
     s = (NF - NL) - (SF - SL)
     return s - s.mean()
 
@@ -114,12 +122,14 @@ def exact_kernel_prediction(p: nre.SFTParams, grid, K: np.ndarray, T: float,
 
 
 def pair_yield_function(p: nre.SFTParams, grid, K_asym: np.ndarray, w: np.ndarray,
-                        fit_lat_deg=(5.0, 22.0)):
+                        fit_lat_deg=(3.0, 27.0)):
     """Final-to-initial dipole yield of the ring-pair structure vs latitude.
 
-    Unlike the point yield, the pair yield changes sign at mid latitudes
-    (the sign-change latitude lambda_rev is returned), so the Gaussian fit
-    is restricted to the positive activity-belt range fit_lat_deg.
+    For flux-balanced polarity rings the yield is positive and decreases
+    monotonically, so no sign-change latitude exists; lam_rev is returned as
+    NaN unless a crossing is detected. The Gaussian fit is taken over
+    fit_lat_deg, chosen to span the emergence belt, because the yield is only
+    approximately Gaussian and a wider window biases the fitted width.
     """
     lat_deg = np.asarray(grid["lat_deg"])
     w_proj = w - w.mean()

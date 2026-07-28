@@ -86,7 +86,9 @@ def transport_constants(p: nre.SFTParams) -> dict:
     neg = np.where(f_pair <= 0)[0]
     lam_rev = float(centres[neg[0]]) if len(neg) else np.nan
 
-    hi_fit = 0.85 * lam_rev if np.isfinite(lam_rev) else 45.0
+    # Fit over the emergence belt. The balanced pair yield is only
+    # approximately Gaussian, so a wider window biases the fitted width.
+    hi_fit = min(27.0, 0.85 * lam_rev) if np.isfinite(lam_rev) else 27.0
     sel = (centres >= 3.0) & (centres <= hi_fit) & (f_pair > 0)
     if np.count_nonzero(sel) >= 4:
         slope, _ = np.polyfit(centres[sel] ** 2, np.log(f_pair[sel]), 1)
