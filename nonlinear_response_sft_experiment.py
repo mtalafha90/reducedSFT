@@ -816,7 +816,7 @@ def plot_results(results: Dict[str, Dict[str, np.ndarray]], p: SFTParams, outdir
         plt.plot(results[case]["T"], results[case]["P"], "o-", label=labels[case])
     plt.axhline(0.0, linewidth=1)
     plt.xlabel(r"Normalized cycle amplitude $T$")
-    plt.ylabel(r"Main response $P(T)=D(T)$")
+    plt.ylabel(r"Final signed axial dipole, $P(T)$")
     plt.title(r"Signed axial-dipole response")
     plt.legend(fontsize=8)
     plt.tight_layout()
