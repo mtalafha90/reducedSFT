@@ -4,8 +4,9 @@ scaling_scatter,0.172628
 quadrature_C,1.189298
 quadrature_w0_deg,3.469989
 quadrature_scatter,0.058344
-lambda_rev_over_lambda_R_mean,6.163212
-lambda_rev_over_lambda_R_std,1.606506
+quadrature_max_abs_residual,0.235737
+pair_yield_min_over_plane,-3.658816e-03
+negative_a_count,0
 r_eig_min,0.762023
 r_eig_max,1.000000
 tau5_a_measured,5.921832e-02

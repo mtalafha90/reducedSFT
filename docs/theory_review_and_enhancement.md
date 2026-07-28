@@ -28,6 +28,7 @@ as (3) or (25) refer to the draft manuscript.
 | 11 | Stability classification of the map | Enhanced with exact analytic results: existence and uniqueness of T\*, the quenching-stiffness criterion, and closed-form stability boundaries (Section 3.7) |
 | 12 | Link between the response function ℛ and map stability | New exact identity connecting Sections 1.13 and 1.14 of the draft (Section 3.8) |
 | 13 | Code defects | `np.trapz` removed in NumPy 2.0; results CSV written without line breaks; face velocities interpolated rather than evaluated; wrong return annotation — all fixed (Section 4) |
+| 14 | Polarity-flux balance of the bipolar source | **Physically incorrect**: rings of equal peak amplitude do not carry equal flux, because the surface measure is dμ = cos λ dλ. Each ring is now normalised by its own surface integral (Section 4) |
 
 ---
 
@@ -139,7 +140,7 @@ a \equiv A_s \int_0^{t_f}\!\!\int_{-1}^{1} K\,\hat{s}\; d\mu\, dt .
 $$
 
 Operationally, *a* is the slope of the linear run: in code units
-a = D_lin(T)/T = 7.899 × 10⁻² for the reference parameters, constant across
+a = D_lin(T)/T = 1.678 × 10⁻¹ for the reference parameters, constant across
 the entire amplitude scan (this is the constant column R_NL of the linear
 case in `nonlinear_response_results_v2.csv`).
 
@@ -286,15 +287,16 @@ physical model (shift mode plus explicit inflows) it would need re-testing.
 All Q factors are strictly positive, so P(T) = aTQ(T) has a fixed sign. The
 theory can represent an over-quenched *slope* — ℛ(T) = dP̂/dT < 0, which is
 the definition used in Eqs. (46)–(48) and is fully consistent — but it can
-never represent a *reversal* of the final dipole. The code history is
-instructive: the physical-inflow mode with u_inflow = 5 m s⁻¹ produced exactly
-such reversals, which is why the reference run uses 2 m s⁻¹ in that mode. The
-manuscript should state the domain of validity explicitly:
+never represent a *reversal* of the final dipole. With flux-balanced
+polarity rings no case examined here reverses sign: the pair yield is
+positive at every latitude, and the physical inflow leaves the dipole
+positive even at 5 m s⁻¹ (`docs/physical_validation.md`). The manuscript
+should nevertheless state the domain of validity explicitly:
 
 > The reduced form P = aTQ with Q > 0 is applicable while the nonlinear
 > feedbacks reduce the magnitude of the dipole without reversing its sign.
-> Sign-reversing regimes (observed for strong explicit inflows) are outside
-> the reduced theory's domain and would require a signed closure.
+> A sign-reversing regime would lie outside the reduced theory's domain and
+> would require a signed closure.
 
 ### 3.7 Stability of the reduced cycle map: exact results
 
@@ -430,6 +432,24 @@ multi-cycle behaviour, which strengthens the paper's central argument.
 8. **Diagnostics:** the setup check now also prints the advective Courant
    number u₀Δt/(R⊙Δμ) ≈ 0.13, documenting that the explicit upwind advection
    step is comfortably stable at Δt = 1 day.
+9. **Polarity-flux balance of the source.** The two polarities of each
+   bipolar pair were Gaussians of equal *peak* amplitude in latitude. Because
+   the surface measure is dμ = cos λ dλ, equal peaks do not carry equal
+   flux: over the emergence belt the poleward (following) ring is short by
+   2–4 %. The global source was still antisymmetric and monopole-free, but
+   each hemispheric pair was not individually balanced, unlike a real
+   bipolar region. Every ring is now normalised by its own surface integral,
+
+   > G̃ᵢ(μ) = Gᵢ(μ) / ∫ Gᵢ(μ) dμ,
+
+   and the pair is rescaled by the mean of the original ring fluxes, so only
+   the *relative* balance of the two polarities changes. The final dipole is
+   a small residual of large cancelling contributions, so this 2–4 % source
+   correction is not a small perturbation: it more than doubles the linear
+   yield a, widens the pair-yield effectivity range from 9.2° to 12.1°, and
+   removes a spurious sign change of the pair yield inside the emergence
+   belt. `polarity_balance_sensitivity.py` quantifies the whole comparison;
+   see §5 of `docs/physical_validation.md`.
 
 ## 5. Numerical validation of the enhanced closure
 
@@ -451,10 +471,10 @@ revision):
 | Case | max abs. deviation | max rel. deviation | Nature of the test |
 |------|-------------------:|-------------------:|--------------------|
 | linear | < 10⁻¹⁴ | < 10⁻¹⁴ | exact by linearity |
-| tilt | 0.030 | 2.0 % (at T = 2.5) | non-trivial: geometric linearisation (Section 3.2) |
-| latitude | 0.066 | 7.0 % (at T = 2.5) | non-trivial in belt mode: envelope-average closure (Section 3.3) |
+| tilt | 0.012 | 0.78 % (at T = 2.5) | non-trivial: geometric linearisation (Section 3.2) |
+| latitude | 0.028 | 2.96 % (at T = 2.5) | non-trivial in belt mode: envelope-average closure (Section 3.3) |
 | inflow | < 10⁻¹⁴ | < 10⁻¹⁴ | trivial: factor injected on both sides |
-| combined | 0.016 | 5.0 % (at T = 2.5) | product closure plus the above |
+| combined | 0.007 | 2.19 % (at T = 2.5) | product closure plus the above |
 
 Interpretation:
 
@@ -462,13 +482,13 @@ Interpretation:
   linearity of the transport, a time-independent source factor propagates
   multiplicatively into the final dipole. Their agreement validates the code,
   not the theory — the manuscript should say this plainly.
-* The **tilt** deviation is smooth and bounded by ≈ 2 %. Its magnitude is set
+* The **tilt** deviation is smooth and bounded by ≈ 0.8 %. Its magnitude is set
   by (Δλ₀/ℓ)², where ℓ is the smallest latitudinal scale of the yield
   function (here the ring width and the yield curvature, tens of degrees),
   consistent with the linearisation argument of Section 3.2.
-* The **latitude** deviation is below 1.3 % for T ≤ 1.4 and below 3 % for
+* The **latitude** deviation is below 0.6 % for T ≤ 1.4 and below 1.3 % for
   T ≤ 1.8 (comfortably covering the observed range of solar cycle
-  variability), rising to 6.6 % absolute (7 % relative) only at T = 2.5.
+  variability), rising to 2.8 % absolute (3.0 % relative) only at T = 2.5.
   The deviation is systematically *positive* (SFT above theory): the true
   time weighting favours late-cycle emergence — where the belt sits at lower
   latitude and the instantaneous penalty is weaker — relative to the plain
@@ -481,11 +501,11 @@ Interpretation:
   unchanged; only the two moments are updated. **This refinement has now
   been implemented and quantified** via the adjoint-kernel analysis (see
   `docs/mathematical_framework.md`): with the yield-weighted moments
-  (t̄ = 6.52 yr, σ = 1.48 yr) the closure error drops from 6.6 × 10⁻² to
-  5.5 × 10⁻⁵, and the exact kernel-weighted average reproduces the SFT scan
+  (t̄ = 5.36 yr, σ = 2.09 yr) the closure error drops from 2.8 × 10⁻² to
+  2.4 × 10⁻⁶, and the exact kernel-weighted average reproduces the SFT scan
   identically.
 * The **combined** case is *more* accurate than the latitude case in absolute
-  terms (≤ 0.016) because the tilt and latitude residuals have opposite sign
+  terms (≤ 0.007) because the tilt and latitude residuals have opposite sign
   and partially cancel; its larger relative deviation at T = 2.5 reflects the
   strong suppression of the response there.
 

@@ -12,7 +12,7 @@ standing dipole), and comparing against the reduced map. The quenching is
 the combined efficiency-mode latitude + inflow factor, evaluated
 kernel-exactly, so **the only difference between the SFT and the maps is
 memory**. The fast matrix stepper used for the long runs reproduces the
-reference solver to 5 × 10⁻¹⁴.
+reference solver to 7 × 10⁻¹⁵.
 
 ## 1. The exact recurrence and the memory-corrected map
 
@@ -47,7 +47,7 @@ Measured three ways (Figure M1):
 
 | Measurement | Value |
 |---|---|
-| Source-free dipole survival over one period | **r = 0.986** |
+| Source-free dipole survival over one period | **r = 0.994** |
 | Survival after several periods | → 1.0000 |
 | Dominant eigenvalue of G_P | **1.0000** |
 
@@ -57,7 +57,7 @@ which is exponentially slow in the magnetic Reynolds number
 R_m = u₀R⊙/η ≈ 16.7: at the reference parameters the dominant dipolar
 eigenvalue of G_P is unity to the precision quoted (the parameter-space
 scan, `parameter_space.md`, shows it falling to ≈ 0.76 only in the
-diffusion-dominated corner R_m ≈ 3.5). The first-period value 0.986
+diffusion-dominated corner R_m ≈ 3.5). The first-period value 0.994
 reflects the transient adjustment of the end-of-cycle profile towards that
 slow mode. The memoryless assumption is therefore not mildly violated but
 structurally wrong in this regime: **almost half of the dynamo gain is
@@ -74,18 +74,18 @@ parameter alongside a.
 
 ## 3. The memory-corrected map reproduces the SFT dynamics
 
-With r = 0.986 inserted — no other change — the reduced map captures the
+With r = 0.994 inserted — no other change — the reduced map captures the
 multi-cycle SFT quantitatively (Figures M2, M3):
 
 * **One-step predictability.** Predicting T_{n+1} from the SFT's own
-  (T_n, D_{n−1}): mean error **97 %** for the memoryless map versus
-  **1.3 %** (stable gain) and **1.5 %** (modulated gain) for the
-  memory-corrected map — a seventy-fold improvement from one scalar.
-* **Fixed points.** At D₀ = 3.68 the SFT mean amplitude is 1.328 against
-  the memory map's 1.331 (memoryless: 1.923).
+  (T_n, D_{n−1}): mean error **99 %** for the memoryless map versus
+  **0.6 %** (stable gain) and **0.7 %** (modulated gain) for the
+  memory-corrected map — a hundred-fold improvement from one scalar.
+* **Fixed points.** At D₀ = 3.69 the SFT mean amplitude is 1.309 against
+  the memory map's 1.311 (memoryless: 1.901).
 * **Period-doubling onset.** The SFT attractor bifurcates to period-2
   exactly at the memory-corrected analytic boundary **D₀ = 3.35**
-  (memoryless prediction: 2.80) and follows the memory map's attractor
+  (memoryless prediction: 2.81) and follows the memory map's attractor
   through the subsequent cascade (Figure M3).
 * **Phase-locked modulation.** In the period-2 regime the memory map tracks
   the SFT *cycle by cycle*, including the phase of the even–odd
@@ -121,7 +121,7 @@ multi-cycle SFT quantitatively (Figures M2, M3):
 1. State the memoryless assumption of Eq. (49) explicitly, and present the
    exact recurrence above as its parent; introduce r and the corrected
    fixed-point and stability conditions (Section 1 table).
-2. Quote r for the reference transport (0.986; exactly 1 asymptotically for
+2. Quote r for the reference transport (0.994; 1.0000 asymptotically for
    τ = ∞) and note the connection to the flux-accumulation problem of
    decay-free SFT models.
 3. Replace the map-based stability discussion's thresholds by the

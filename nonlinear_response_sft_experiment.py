@@ -154,10 +154,9 @@ class SFTParams:
     lambda_R_deg: float = 20.0
 
     # Inflow amplitude [m/s] for T=1, scaled as T^2.
-    # The first stable run used 5 m/s, which was intentionally strong but
-    # caused dipole reversal in the inflow/combined cases. For a clean
-    # response-theory validation, use a moderate value. Stronger values can be
-    # explored later as an over-quenching experiment.
+    # 2 m/s is a moderate value giving a clean response-theory validation;
+    # 5 m/s is a deliberately strong over-quenching test, still positive but
+    # no longer well described by a single algebraic strength.
     inflow_amp_m_s: float = 2.0
     inflow_width_deg: float = 12.0
 
@@ -193,9 +192,10 @@ class SFTParams:
     # Inflow implementation.
     # "efficiency" multiplies the source by Q_I(T), giving a clean reduced-model
     # validation analogous to latitude quenching.
-    # "physical" applies an explicit converging flow. This is useful for
-    # exploratory tests, but it can introduce sign reversals and interaction
-    # effects not captured by the simple algebraic Q_I closure.
+    # "physical" applies an explicit converging flow. This acts on the
+    # transport operator rather than on the source, so it introduces
+    # amplitude dependence that the simple algebraic Q_I closure only
+    # approximates.
     inflow_mode: str = "efficiency"
 
 

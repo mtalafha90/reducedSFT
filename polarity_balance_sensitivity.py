@@ -25,9 +25,12 @@ Reported for both source forms:
     a               linear dipole yield
     tilt closure    max relative deviation of the normalised tilt response
     lambda_R^pair   kernel-derived pair-yield effectivity range
-    lambda_rev      sign-change latitude of the pair yield
+    lambda_rev      first sign-change latitude of the pair yield, and the
+                    depth of the negative excursion relative to the peak
     T_rev           reversal amplitude of the physical latitude shift
-    C, w0, ratio    scaling-law coefficients across the (eta, u0) plane
+    C, w0           scaling-law coefficients across the (eta, u0) plane,
+                    with the number of parameter sets showing a sign change
+                    or a negative linear yield
 
 Outputs are written to ./figures_balance/.
 """
@@ -111,8 +114,14 @@ def dipole(p, grid, K, T, balanced, mode):
 # Diagnostics
 # ============================================================
 
-def pair_yield(p, grid, K_asym, w, balanced, fit_hi_frac=0.85):
-    """Pair-yield curve versus centre latitude; returns lambda_R, lambda_rev."""
+def pair_yield(p, grid, K_asym, w, balanced, fit_lat_deg=(3.0, 27.0)):
+    """Pair-yield curve versus centre latitude.
+
+    Returns the Gaussian effectivity range fitted over the emergence belt and
+    the first sign-change latitude, or NaN if the yield stays positive. Both
+    source forms use the same fixed fit window, so the two effectivity ranges
+    are directly comparable.
+    """
     lat_deg = np.asarray(grid["lat_deg"])
     dmu = float(grid["dmu"])
     w_proj = w - w.mean()
@@ -124,11 +133,12 @@ def pair_yield(p, grid, K_asym, w, balanced, fit_hi_frac=0.85):
         f[i] = (K_asym @ shape) / (w_proj @ shape)
     neg = np.where(f <= 0)[0]
     lam_rev = float(centres[neg[0]]) if len(neg) else np.nan
-    hi = fit_hi_frac * lam_rev if np.isfinite(lam_rev) else 45.0
-    sel = (centres >= 3.0) & (centres <= hi) & (f > 0)
+    sel = (centres >= fit_lat_deg[0]) & (centres <= fit_lat_deg[1]) & (f > 0)
     slope, _ = np.polyfit(centres[sel] ** 2, np.log(f[sel]), 1)
     lamR = float(np.sqrt(-1.0 / (2.0 * slope))) if slope < 0 else np.nan
-    return lamR, lam_rev
+    # depth of any negative excursion, relative to the equatorward peak
+    depth = float(min(f.min(), 0.0) / f.max())
+    return lamR, lam_rev, depth
 
 
 def tilt_closure_error(p, grid, K, balanced):
@@ -159,10 +169,10 @@ def reversal_amplitude(p, grid, K, balanced):
 
 
 def scaling_coefficients(balanced, eta_vals, u0_vals):
-    """Quadrature scaling law and sign-change ratio across the (eta, u0) plane."""
+    """Quadrature scaling law and sign-change statistics across the plane."""
     from dataclasses import replace
     p_ref = nre.SFTParams()
-    lamR, lamrev, est = [], [], []
+    lamR, lamrev, depth, a_lin, est = [], [], [], [], []
     for u0 in u0_vals:
         for eta in eta_vals:
             p = replace(p_ref, u0_m_s=float(u0), eta_km2_s=float(eta))
@@ -174,20 +184,28 @@ def scaling_coefficients(balanced, eta_vals, u0_vals):
             w = mfa.dipole_weight(p, grid)
             RT = Minv @ (Pi @ (np.eye(n) + dt * A).T)
             K0 = Minv @ (Pi @ (w - w.mean()))
+            K_series = [K0]
             for _ in range(len(np.asarray(grid["t_yr"])) - 1):
                 K0 = RT @ K0
-            lr, lv = pair_yield(p, grid, K0, w, balanced)
-            lamR.append(lr); lamrev.append(lv)
+                K_series.append(K0)
+            K_fwd = np.array(K_series[::-1])
+            lr, lv, dp = pair_yield(p, grid, K0, w, balanced)
+            lamR.append(lr); lamrev.append(lv); depth.append(dp)
+            a_lin.append(dipole(p, grid, K_fwd, 1.0, balanced, "linear"))
             est.append(np.rad2deg(np.sqrt(eta * 1e10 / (2 * u0 * 100 * p_ref.R_sun))))
-    lamR = np.array(lamR); lamrev = np.array(lamrev); est = np.array(est)
-    good = np.isfinite(lamR) & np.isfinite(lamrev)
+    lamR = np.array(lamR); lamrev = np.array(lamrev)
+    depth = np.array(depth); a_lin = np.array(a_lin); est = np.array(est)
+    good = np.isfinite(lamR)
     A_ = np.column_stack([est[good] ** 2, np.ones(good.sum())])
     (C2, w02), *_ = np.linalg.lstsq(A_, lamR[good] ** 2, rcond=None)
     pred = np.sqrt(C2 * est[good] ** 2 + w02)
     res = (lamR[good] - pred) / pred
-    ratio = lamrev[good] / lamR[good]
-    return (float(np.sqrt(C2)), float(np.sqrt(w02)), float(res.std()),
-            float(np.abs(res).max()), float(ratio.mean()), float(ratio.std()))
+    return dict(C=float(np.sqrt(C2)), w0=float(np.sqrt(w02)),
+                scatter=float(res.std()), maxres=float(np.abs(res).max()),
+                n_signchange=int(np.count_nonzero(np.isfinite(lamrev))),
+                lamrev_min=float(np.nanmin(lamrev)) if np.any(np.isfinite(lamrev)) else np.nan,
+                depth_worst=float(depth.min()),
+                n_negative_a=int(np.count_nonzero(a_lin < 0)))
 
 
 # ============================================================
@@ -202,33 +220,41 @@ if __name__ == "__main__":
     K, w = mfa.adjoint_kernel(p, grid, A, M)
     K_asym = mfa.extended_kernel(p, grid, A, M, K[0], extra_years=40.0)
 
-    rows = []
     res = {}
     for bal in (False, True):
         tag = "balanced" if bal else "unbalanced"
         a = dipole(p, grid, K, 1.0, bal, "linear")
         tilt = tilt_closure_error(p, grid, K, bal)
-        lamR, lamrev = pair_yield(p, grid, K_asym, w, bal)
+        lamR, lamrev, depth = pair_yield(p, grid, K_asym, w, bal)
         Trev = reversal_amplitude(p, grid, K, bal)
-        res[tag] = dict(a=a, tilt=tilt, lamR=lamR, lamrev=lamrev, Trev=Trev)
+        res[tag] = dict(a=a, tilt=tilt, lamR=lamR, lamrev=lamrev,
+                        depth=depth, Trev=Trev)
         print(f"{tag:>11}:  a={a:.6e}  tilt_err={100*tilt:.3f}%  "
-              f"lamR={lamR:.3f}  lamrev={lamrev:.2f}  T_rev={Trev:.4f}")
+              f"lamR={lamR:.3f}  lamrev={lamrev:.2f}  "
+              f"depth={100*depth:.3f}%  T_rev={Trev:.4f}")
 
     print("\nScaling coefficients across the (eta,u0) plane ...")
     eta_vals = np.array([100., 200., 300., 400., 500., 600., 700., 800., 1000.])
     u0_vals = np.array([5., 8., 11., 14., 17., 20., 25.])
+    n_sets = eta_vals.size * u0_vals.size
     for bal in (False, True):
         tag = "balanced" if bal else "unbalanced"
-        C, w0, sc, mx, rm, rs = scaling_coefficients(bal, eta_vals, u0_vals)
-        res[tag].update(C=C, w0=w0, scatter=sc, maxres=mx, ratio=rm, ratio_sd=rs)
-        print(f"{tag:>11}:  C={C:.4f}  w0={w0:.3f}  scatter={100*sc:.2f}%  "
-              f"max={100*mx:.2f}%  lamrev/lamR={rm:.3f}+/-{rs:.3f}")
+        s = scaling_coefficients(bal, eta_vals, u0_vals)
+        res[tag].update(s)
+        print(f"{tag:>11}:  C={s['C']:.4f}  w0={s['w0']:.3f}  "
+              f"scatter={100*s['scatter']:.2f}%  max={100*s['maxres']:.2f}%")
+        print(f"{'':>11}   sign changes in {s['n_signchange']}/{n_sets} sets "
+              f"(lowest at {s['lamrev_min']:.1f} deg, worst depth "
+              f"{100*s['depth_worst']:.3f}% of the peak); "
+              f"negative a in {s['n_negative_a']}/{n_sets}")
 
     u, b = res["unbalanced"], res["balanced"]
-    with open(os.path.join(OUTDIR, "balance_sensitivity.csv"), "w") as f:
+    with open(os.path.join(OUTDIR, "balance_sensitivity.csv"), "w",
+              encoding="utf-8") as f:
         f.write("quantity,unbalanced,balanced,relative_change\n")
-        for k in ("a", "tilt", "lamR", "lamrev", "Trev", "C", "w0",
-                  "scatter", "maxres", "ratio", "ratio_sd"):
+        for k in ("a", "tilt", "lamR", "lamrev", "depth", "Trev", "C", "w0",
+                  "scatter", "maxres", "n_signchange", "lamrev_min",
+                  "depth_worst", "n_negative_a"):
             rel = (b[k] - u[k]) / u[k] if u[k] not in (0.0,) else np.nan
             f.write(f"{k},{u[k]:.8e},{b[k]:.8e},{rel:.6e}\n")
     print(f"\nWrote {OUTDIR}/balance_sensitivity.csv")

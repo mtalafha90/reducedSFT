@@ -1,8 +1,6 @@
 quantity,value
 lambda_R_pair_deg,12.066368
-lambda_rev_deg,nan
-shift_T_rev_measured,nan
-shift_T_rev_estimate,nan
+pair_yield_min,3.148393e-04
 shift_exact_kernel_max_rel_err,1.488072e-13
 shift_Q_at_T1,0.682186
 shift_closure_derived_max_abs_devQ_full,1.085915e-02
