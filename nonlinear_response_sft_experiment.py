@@ -37,8 +37,8 @@ Version 2 modifications
 -----------------------
 This version implements the corrections suggested after the first run:
 
-1. The main response variable is now the unsigned axial dipole |D(T)|,
-   not only the polar-cap field.
+1. The main response variable is the signed axial dipole D(T); its magnitude
+   is retained only as a secondary diagnostic.
 
 2. All main response plots include normalized curves:
 
@@ -119,8 +119,8 @@ class SFTParams:
     cycle_years: float = 11.0
 
     # mu = sin(latitude) grid
-    # Number of finite-volume cells in mu. 181 is enough for the controlled
-    # experiment and makes the explicit diffusion timestep stable and fast.
+    # Number of finite-volume cells in mu. The reference value provides
+    # adequate spatial resolution at modest computational cost.
     nmu: int = 181
     mu_min: float = -1.0
     mu_max: float = 1.0
@@ -176,8 +176,10 @@ class SFTParams:
     # True (default): every ring is normalised by its own surface integral, so
     # the two polarities of a pair carry equal and opposite flux, as a real
     # bipolar region does. False reproduces the earlier equal-peak
-    # construction, in which the poleward ring carries 2-4 per cent less flux
-    # and the pair acquires a spurious net flux.
+    # construction, in which the poleward ring carries 2-4 per cent less flux,
+    # so each pair is individually imbalanced. The assembled source stays
+    # antisymmetric and monopole-free either way; only the balance within a
+    # pair differs.
     balanced_polarities: bool = True
 
     # Reference latitude for the latitude-quenching factor.
