@@ -13,8 +13,9 @@ framework -- no tuned parameters.
 1.  Pair-yield function and derived effectivity range.
     The dipole yield of the actual four-ring source structure centred at
     latitude lambda_c is computed from the asymptotic kernel. A Gaussian fit
-    gives the pair effectivity range lambda_R_pair, the derived counterpart
-    of the closure's prescribed lambda_R.
+    over the emergence belt gives the pair effectivity range lambda_R_pair,
+    the derived counterpart of the closure's prescribed lambda_R. With
+    flux-balanced polarity rings the yield is positive at every latitude.
 
 2.  Shift-mode latitude quenching.
     The SFT is run with latitude_quenching_mode = "shift" (the activity belt
@@ -67,16 +68,24 @@ T_VALUES = np.array([0.2, 0.35, 0.5, 0.65, 0.8, 1.0, 1.2, 1.4,
 # 1. Source shapes and kernel predictions
 # ============================================================
 
-def ring_pair_shape(lat_deg: np.ndarray, lat_c: float, sep: float, width: float) -> np.ndarray:
+def ring_pair_shape(lat_deg: np.ndarray, lat_c: float, sep: float, width: float,
+                    balanced: bool = True) -> np.ndarray:
     """Monopole-free four-ring source shape centred at latitude lat_c.
 
     Identical construction to bipolar_ring_source, with explicit centre and
-    separation and unit amplitude.
+    separation and unit amplitude. With balanced=True each ring is normalised
+    by its own surface integral, so that the two polarities of a pair carry
+    equal and opposite flux.
     """
     NF = np.exp(-0.5 * ((lat_deg - (lat_c + sep / 2.0)) / width) ** 2)
     NL = np.exp(-0.5 * ((lat_deg - (lat_c - sep / 2.0)) / width) ** 2)
     SF = np.exp(-0.5 * ((lat_deg - (-lat_c - sep / 2.0)) / width) ** 2)
     SL = np.exp(-0.5 * ((lat_deg - (-lat_c + sep / 2.0)) / width) ** 2)
+    if balanced:
+        rings = (NF, NL, SF, SL)
+        phis = [float(np.mean(r)) for r in rings]
+        scale = float(np.mean(phis))
+        NF, NL, SF, SL = (scale * r / phi for r, phi in zip(rings, phis))
     s = (NF - NL) - (SF - SL)
     return s - s.mean()
 
@@ -114,12 +123,13 @@ def exact_kernel_prediction(p: nre.SFTParams, grid, K: np.ndarray, T: float,
 
 
 def pair_yield_function(p: nre.SFTParams, grid, K_asym: np.ndarray, w: np.ndarray,
-                        fit_lat_deg=(5.0, 22.0)):
+                        fit_lat_deg=(3.0, 27.0)):
     """Final-to-initial dipole yield of the ring-pair structure vs latitude.
 
-    Unlike the point yield, the pair yield changes sign at mid latitudes
-    (the sign-change latitude lambda_rev is returned), so the Gaussian fit
-    is restricted to the positive activity-belt range fit_lat_deg.
+    For flux-balanced polarity rings the yield is positive everywhere and
+    decreases monotonically towards the pole. The Gaussian fit is taken over
+    fit_lat_deg, chosen to span the emergence belt, because the yield is only
+    approximately Gaussian and a wider window biases the fitted width.
     """
     lat_deg = np.asarray(grid["lat_deg"])
     w_proj = w - w.mean()
@@ -129,14 +139,17 @@ def pair_yield_function(p: nre.SFTParams, grid, K_asym: np.ndarray, w: np.ndarra
         shape = ring_pair_shape(lat_deg, float(lc), p.polarity_sep_deg, p.source_width_deg)
         f_pair[i] = (K_asym @ shape) / (w_proj @ shape)
 
-    neg = np.where(f_pair <= 0)[0]
-    lam_rev = float(centres[neg[0]]) if len(neg) else np.nan
+    if np.any(f_pair <= 0.0):
+        raise RuntimeError(
+            "The pair yield changes sign, which flux-balanced rings should not "
+            "do. Check the ring normalisation in ring_pair_shape."
+        )
 
-    sel = (centres >= fit_lat_deg[0]) & (centres <= fit_lat_deg[1]) & (f_pair > 0)
+    sel = (centres >= fit_lat_deg[0]) & (centres <= fit_lat_deg[1])
     slope, intercept = np.polyfit(centres[sel] ** 2, np.log(f_pair[sel]), 1)
     lamR_pair = float(np.sqrt(-1.0 / (2.0 * slope)))
     f0_pair = float(np.exp(intercept))
-    return centres, f_pair, lamR_pair, f0_pair, lam_rev
+    return centres, f_pair, lamR_pair, f0_pair
 
 
 def aggregated_separation_yield(p: nre.SFTParams, grid, K: np.ndarray,
@@ -222,19 +235,13 @@ if __name__ == "__main__":
     # ---------------------------------------------------------------
     # Pair-yield function and derived effectivity range
     # ---------------------------------------------------------------
-    centres, f_pair, lamR_pair, f0_pair, lam_rev = pair_yield_function(p, grid, K_asym, w)
-    print(f"Pair-yield effectivity range (fit over 5-22 deg): "
+    centres, f_pair, lamR_pair, f0_pair = pair_yield_function(p, grid, K_asym, w)
+    print(f"Pair-yield effectivity range (fit over the emergence belt, 3-27 deg): "
           f"lambda_R_pair = {lamR_pair:.2f} deg "
           f"(prescribed in the closure: {p.lambda_R_deg:.1f} deg)")
-    print(f"Pair yield changes sign at lambda_rev ~ {lam_rev:.1f} deg; positive "
-          f"multiplicative closures are meaningful only while the "
-          f"emergence-weighted belt stays below this.")
-    # A-priori reversal estimate: the yield-weighted belt latitude plus the
-    # shift reaches lambda_rev at T ~ sqrt((lambda_rev - lambda_bar)/b_LQ).
-    lam_bar_w = p.base_lat_deg + p.lat_drift_deg * (1.0 - t_mean_w / p.cycle_years)
-    T_rev_est = float(np.sqrt(max(lam_rev - lam_bar_w, 0.0) / p.b_LQ))
-    print(f"A-priori reversal estimate for shift mode: "
-          f"T ~ sqrt((lambda_rev - lambda_bar)/b_LQ) = {T_rev_est:.2f}")
+    print(f"Pair yield stays positive over 2-60 deg: "
+          f"{f_pair.max():.3f} at {centres[np.argmax(f_pair)]:.0f} deg down to "
+          f"{f_pair.min():.2e} at {centres[np.argmin(f_pair)]:.0f} deg.")
 
     # ---------------------------------------------------------------
     # Task 1a: shift-mode latitude quenching
@@ -248,24 +255,13 @@ if __name__ == "__main__":
     raw_err_shift = float(np.max(np.abs(D_shift_exact - D_shift) / np.abs(D_shift)))
     print(f"Exact kernel vs SFT (shift mode), max relative error: {raw_err_shift:.3e}")
 
-    # Compare in efficiency units Q(T) = D/(aT): the shift response reverses
-    # sign, so normalising by the (strongly suppressed) T = 1 value would
-    # inflate every metric.
+    # Compare in efficiency units Q(T) = D/(aT). This is the natural measure
+    # for a multiplicative closure and avoids normalising by the strongly
+    # suppressed T = 1 value.
     Q_shift = D_shift / (a_lin * T_VALUES)
     Q_shift_exact = D_shift_exact / (a_lin * T_VALUES)
     q_derived = gaussian_shift_closure(T_VALUES, p, lamR_pair, t_mean_w, t_std_w)
     q_prescribed = gaussian_shift_closure(T_VALUES, p, p.lambda_R_deg, t_mean_w, t_std_w)
-
-    # Measured reversal amplitude (sign change of D_shift)
-    neg_idx = np.where(D_shift < 0)[0]
-    if len(neg_idx):
-        j = neg_idx[0]
-        T_rev = float(T_VALUES[j - 1] + (T_VALUES[j] - T_VALUES[j - 1])
-                      * D_shift[j - 1] / (D_shift[j - 1] - D_shift[j]))
-    else:
-        T_rev = np.nan
-    print(f"Measured sign reversal of the shift-mode response at T_rev = {T_rev:.2f} "
-          f"(a-priori estimate {T_rev_est:.2f})")
 
     weak = T_VALUES <= 0.8
     dev_exact = float(np.max(np.abs(Q_shift_exact - Q_shift)))
@@ -341,10 +337,6 @@ if __name__ == "__main__":
           f"leading-order fit (T<=1.2) {b_lead2:.3f}, full-scan fit {b_full2:.3f}")
     print(f"Effective algebraic strength, 5 m/s: b_eff(1) = {b_eff5[5]:.3f}, "
           f"leading-order fit (T<=1.2) {b_lead5:.3f}, full-scan fit {b_full5:.3f}")
-    if np.any(D_inf5 < 0):
-        Trev = T_VALUES[np.where(D_inf5 < 0)[0][0]]
-        print(f"5 m/s inflow reverses the dipole sign at T = {Trev:.2f} "
-              f"(outside the domain of any positive Q closure)")
 
     # ---------------------------------------------------------------
     # Figures
@@ -372,8 +364,6 @@ if __name__ == "__main__":
              label=fr"derived Gaussian closure ($\lambda_R = {lamR_pair:.1f}^\circ$)")
     plt.plot(T_VALUES, q_prescribed, ":",
              label=fr"prescribed closure ($\lambda_R = {p.lambda_R_deg:.0f}^\circ$)")
-    plt.axvline(T_rev, linestyle="--", linewidth=1.2, color="grey",
-                label=fr"measured sign reversal $T_{{\rm rev}} = {T_rev:.2f}$")
     plt.axhline(0.0, linewidth=1)
     plt.xlabel(r"Normalized cycle amplitude $T$")
     plt.ylabel(r"Latitude-quenching efficiency $Q(T) = D/(aT)$")
@@ -435,9 +425,7 @@ if __name__ == "__main__":
     with open(os.path.join(OUTDIR, "validation_results.csv"), "w", encoding="utf-8") as f:
         f.write("quantity,value\n")
         f.write(f"lambda_R_pair_deg,{lamR_pair:.6f}\n")
-        f.write(f"lambda_rev_deg,{lam_rev:.6f}\n")
-        f.write(f"shift_T_rev_measured,{T_rev:.6f}\n")
-        f.write(f"shift_T_rev_estimate,{T_rev_est:.6f}\n")
+        f.write(f"pair_yield_min,{f_pair.min():.6e}\n")
         f.write(f"shift_exact_kernel_max_rel_err,{raw_err_shift:.6e}\n")
         f.write(f"shift_Q_at_T1,{Q_shift[5]:.6f}\n")
         f.write(f"shift_closure_derived_max_abs_devQ_full,{dev_derived:.6e}\n")

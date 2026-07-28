@@ -45,8 +45,8 @@ the review document, but derived directly from the code's own update, so the
 duality is exact rather than approximate. Verified numerically:
 
 > **Duality check:** D from the adjoint sum and D from the forward linear
-> run agree to a relative difference of **1.9 × 10⁻¹⁵** (round-off), and
-> both equal the linear coefficient a = 7.8986 × 10⁻² at T = 1.
+> run agree to a relative difference of **4.3 × 10⁻¹⁵** (round-off), and
+> both equal the linear coefficient a = 1.6784 × 10⁻¹ at T = 1.
 
 The practical significance: **one adjoint solve replaces the entire
 amplitude scan** for any source-side nonlinearity. Since a source-side
@@ -90,19 +90,20 @@ Two conclusions:
    Since the relative importance of latitude quenching scales as 1/λ_R²,
    this distinction matters for any observational calibration.
 
-**A sign change no positive closure can capture.** The per-time pair yield
-ω(t) (Figure F3) is slightly *negative* for emergence in the first ≈ 2 yr
-of the cycle, when the belt sits above ≈ 25°: at such latitudes the ring
-pair's final dipole contribution reverses sign. A multiplicative factor
-Q_LQ > 0 cannot represent locally negative yields; the aggregate response
-remains well described (Section 3) because the envelope suppresses those
-early times, but this is a structural limitation of Gaussian-factor
-closures worth stating in the manuscript.
+**The per-time weights are positive throughout.** With flux-balanced
+polarity rings, every one of the 4019 daily yield weights ω(t) (Figure F3)
+is positive, rising from 4.1 × 10⁻⁶ at cycle start to a peak of
+8.5 × 10⁻⁵ at t = 5.3 yr. A positive multiplicative factor Q_LQ > 0 is
+therefore structurally appropriate: no part of the cycle contributes to the
+final dipole with reversed sign. (With rings of equal peak amplitude the
+early-cycle weights were slightly negative, which is an artefact of the
+unbalanced source — see `physical_validation.md` §5.)
 
 **Point yield versus pair yield.** The 29.2° above is the *point-source*
 effectivity range. The quantity governing latitude quenching of bipolar
-pairs is the **pair yield**, which is much narrower (λ_R,pair ≈ 10.5°,
-Gaussian fit over 5°–22°) and crosses zero at λ_rev ≈ 25° — see
+pairs is the **pair yield**, which is considerably narrower
+(λ_R,pair = 12.1°, Gaussian fit over the emergence belt, 3°–27°) because
+the two polarities of a pair partially cancel — see
 `physical_validation.md` for the measurement and its consequences for the
 physical (shift-mode) latitude quenching.
 
@@ -121,40 +122,40 @@ of closures, each evaluated against the stored SFT scan (Figure F4):
 
 | Closure level | Time weighting | Effective λ̄₀ | max \|ΔP̂\| over the scan |
 |---|---|---:|---:|
-| Exact kernel average | ωₖ (kernel × source) | — | 3.9 × 10⁻¹¹ * |
-| Yield-weighted Gaussian | Gaussian with t̄ = 6.52 yr, σ = 1.48 yr | 19.9° | **5.5 × 10⁻⁵** |
-| Envelope Gaussian (default) | Gaussian with t_max = 4.5 yr, σ_t = 2.2 yr | 22.1° | 6.6 × 10⁻² |
-| Static (original draft) | δ-function at cycle end | 15.0° | 1.7 × 10⁻¹ |
+| Exact kernel average | ωₖ (kernel × source) | — | 4.7 × 10⁻¹¹ * |
+| Yield-weighted Gaussian | Gaussian with t̄ = 5.36 yr, σ = 2.09 yr | 21.1° | **2.4 × 10⁻⁶** |
+| Envelope Gaussian (default) | Gaussian with t_max = 4.5 yr, σ_t = 2.2 yr | 22.1° | 2.8 × 10⁻² |
+| Static (original draft) | δ-function at cycle end | 15.0° | 2.1 × 10⁻¹ |
 
 \* limited by the 10-digit precision of the stored CSV, not by the identity.
 
 Findings:
 
 * The **entire residual** of the default closure reported in the review
-  document (≈ 0.066 at the largest amplitudes) is explained: it is the
+  document (≈ 0.028 at the largest amplitudes) is explained: it is the
   covariance between the instantaneous quenching factor and the
   time-dependence of the dipole yield, i.e. the difference between the
   envelope weighting s₁(t) and the true weighting ω(t).
-* The true weighting peaks at t̄ = **6.5 yr**, two years after cycle
-  maximum (Figure F3): early-cycle flux emerges at high latitude where its
-  yield is small (even negative), so the final dipole is built
-  predominantly by mid-to-late-cycle emergence at lower latitudes.
+* The true weighting peaks at t̄ = **5.36 yr**, later than the envelope's
+  4.5 yr (Figure F3): early-cycle flux emerges at high latitude where its
+  yield is small, so the final dipole is built predominantly by
+  mid-to-late-cycle emergence at lower latitudes.
 * Replacing the envelope moments by the yield-weighted moments — the same
   closed-form Gaussian closure, with (t_max, σ_t) → (t̄_ω, σ_ω) measured
-  once from a single adjoint solve — reduces the closure error by three
-  orders of magnitude, to **5.5 × 10⁻⁵**, indistinguishable from the SFT in
+  once from a single adjoint solve — reduces the closure error by four
+  orders of magnitude, to **2.4 × 10⁻⁶**, indistinguishable from the SFT in
   Figure F4. The third and higher cumulants of the weighting are
   negligible.
 * The ladder cleanly ranks the physical content of the reference latitude:
   static (15°, cycle-end belt) → envelope (22.1°, belt at cycle maximum) →
-  yield-weighted (19.9°, dipole-production-weighted belt).
+  yield-weighted (21.1°, dipole-production-weighted belt).
 
 **Recommended refinement for the manuscript:** keep the closed-form Gaussian
 factor of the review document, but state that its two time moments should be
 the yield-weighted ones, obtainable from one linear run plus one adjoint
 solve (or, in practice, from the linear run's dipole-contribution history).
 The envelope moments remain a good parameter-free approximation (error
-≈ 7 % at worst, ≲ 2 % in the observed range of solar variability).
+≈ 3 % at worst over the amplitude scan).
 
 ## 4. The cycle map beyond linear stability
 
@@ -190,10 +191,10 @@ memory-corrected map and its validation.
 
 | Quantity | Status |
 |---|---|
-| Linear coefficient a | **Derived**: a = Σₖωₖ = 7.8986 × 10⁻², exact duality 10⁻¹⁵ |
+| Linear coefficient a | **Derived**: a = Σₖωₖ = 1.6784 × 10⁻¹, exact duality 10⁻¹⁵ |
 | Reduction P = aTQ for source-side factors | **Exact identity** given the kernel (not an ansatz) |
-| Latitude-quenching closure | **Derived** to 5.5 × 10⁻⁵ (yield-weighted Gaussian); envelope form is its parameter-free approximation |
-| Effectivity range λ_R | **Measured**: 29.2° intrinsic to the transport; the closure's 20° is a free demonstration parameter |
+| Latitude-quenching closure | **Derived** to 2.4 × 10⁻⁶ (yield-weighted Gaussian); envelope form is its parameter-free approximation |
+| Effectivity range λ_R | **Measured**: 29.2° for a point source, 12.1° for the ring pair; the closure's 20° is a free demonstration parameter |
 | Tilt/inflow algebraic forms | Prescribed (Padé closures; see review document §3.2, §3.4) |
 | Stability boundary of the cycle map | **Analytic**, confirmed dynamically to the resolution of the bifurcation scan |
 
@@ -204,11 +205,12 @@ memory-corrected map and its validation.
    check as validation; the reduced relation P = aTQ(T) is then exact for
    time-independent factors and a controlled second-cumulant approximation
    for time-dependent ones.
-2. Quote the intrinsic λ_R = 29.2° of the reference transport alongside the
-   prescribed λ_R = 20°, and note the 1/λ_R² scaling of latitude-quenching
-   importance.
-3. Note the sign reversal of the pair yield above ≈ 25° as a structural
-   limit of positive multiplicative closures.
+2. Quote the intrinsic ranges of the reference transport — 29.2° for a point
+   source and 12.1° for the ring pair — alongside the prescribed λ_R = 20°,
+   and note the 1/λ_R² scaling of latitude-quenching importance.
+3. State that the pair yield is positive at all latitudes once the two
+   polarities of each pair are flux balanced, so a positive multiplicative
+   closure is structurally appropriate.
 4. Give the closure ladder (table above) as the error budget of the
    latitude-quenching factor.
 5. Use the bifurcation diagram to illustrate that the analytic boundary

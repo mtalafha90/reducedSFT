@@ -10,8 +10,6 @@ derived constants. This script maps them over the (eta, u0) plane:
     a         linear dipole yield (dipole per unit cycle amplitude),
     lambda_R  pair-yield effectivity range (Gaussian width of the dipole
               yield of the ring-pair source versus emergence latitude),
-    lambda_rev  sign-change latitude of the pair yield (domain boundary of
-              positive multiplicative closures),
     r         cycle-to-cycle memory (survival of the dipole over one
               period), both profile-based and as the dominant eigenvalue
               of the one-period propagator.
@@ -23,7 +21,7 @@ matrix power for the propagator spectrum.
 
 Scaling law. The advection-diffusion balance suggests
 lambda_R ~ sqrt(eta/(2 u0 R)); the map tests this collapse across the
-plane, and the ratio lambda_rev / lambda_R is tested for constancy.
+plane, in both a proportional and a quadrature form.
 
 The decay time tau enters ANALYTICALLY: the decay term -B/tau is
 proportional to the identity and commutes with the transport, so
@@ -83,11 +81,9 @@ def transport_constants(p: nre.SFTParams) -> dict:
         shape = pva.ring_pair_shape(lat_deg, float(lc), p.polarity_sep_deg, p.source_width_deg)
         f_pair[i] = (K0 @ shape) / (w_proj @ shape)
 
-    neg = np.where(f_pair <= 0)[0]
-    lam_rev = float(centres[neg[0]]) if len(neg) else np.nan
-
-    hi_fit = 0.85 * lam_rev if np.isfinite(lam_rev) else 45.0
-    sel = (centres >= 3.0) & (centres <= hi_fit) & (f_pair > 0)
+    # Fit over the emergence belt. The balanced pair yield is only
+    # approximately Gaussian, so a wider window biases the fitted width.
+    sel = (centres >= 3.0) & (centres <= 27.0) & (f_pair > 0)
     if np.count_nonzero(sel) >= 4:
         slope, _ = np.polyfit(centres[sel] ** 2, np.log(f_pair[sel]), 1)
         lamR = float(np.sqrt(-1.0 / (2.0 * slope))) if slope < 0 else np.nan
@@ -106,7 +102,8 @@ def transport_constants(p: nre.SFTParams) -> dict:
     G_P = np.linalg.matrix_power(Pstep, N_P)
     r_eig = float(np.max(np.abs(np.linalg.eigvals(G_P))))
 
-    return {"a": a, "lamR": lamR, "lam_rev": lam_rev, "r1": r1, "r_eig": r_eig}
+    return {"a": a, "lamR": lamR, "f_pair_min": float(f_pair.min()),
+            "r1": r1, "r_eig": r_eig}
 
 
 if __name__ == "__main__":
@@ -121,7 +118,7 @@ if __name__ == "__main__":
     shape = (len(u0_vals), len(eta_vals))
     a_map = np.full(shape, np.nan)
     lamR_map = np.full(shape, np.nan)
-    lamrev_map = np.full(shape, np.nan)
+    fmin_map = np.full(shape, np.nan)
     r1_map = np.full(shape, np.nan)
     reig_map = np.full(shape, np.nan)
 
@@ -132,10 +129,10 @@ if __name__ == "__main__":
             c = transport_constants(p)
             a_map[i, j] = c["a"]
             lamR_map[i, j] = c["lamR"]
-            lamrev_map[i, j] = c["lam_rev"]
+            fmin_map[i, j] = c["f_pair_min"]
             r1_map[i, j] = c["r1"]
             reig_map[i, j] = c["r_eig"]
-            rows.append((u0, eta, c["a"], c["lamR"], c["lam_rev"], c["r1"], c["r_eig"]))
+            rows.append((u0, eta, c["a"], c["lamR"], c["r1"], c["r_eig"]))
         print(f"  u0 = {u0:5.1f} m/s done "
               f"(lamR = {lamR_map[i,0]:.1f} ... {lamR_map[i,-1]:.1f} deg)")
 
@@ -155,14 +152,16 @@ if __name__ == "__main__":
     pred_quad = np.sqrt(C2 * lamR_est**2 + w02)
     scatter_quad = float(np.std(lamR_map[good] / pred_quad[good]))
 
-    ratio_revR = lamrev_map / lamR_map
-    ratio_mean = float(np.nanmean(ratio_revR))
-    ratio_std = float(np.nanstd(ratio_revR))
+    resid_quad = lamR_map[good] / pred_quad[good] - 1.0
+    max_resid_quad = float(np.max(np.abs(resid_quad)))
+    a_neg = int(np.count_nonzero(a_map < 0))
     print(f"\nScaling law (proportional): lambda_R = C sqrt(eta/(2 u0 R)) with "
           f"C = {coef:.3f} +/- {scatter:.3f}")
     print(f"Scaling law (quadrature): lambda_R^2 = ({C_quad:.3f})^2 eta/(2 u0 R) "
-          f"+ ({w0_quad:.2f} deg)^2, relative scatter {scatter_quad:.3f}")
-    print(f"Sign-change ratio: lambda_rev / lambda_R = {ratio_mean:.2f} +/- {ratio_std:.2f}")
+          f"+ ({w0_quad:.2f} deg)^2, relative scatter {scatter_quad:.3f}, "
+          f"max |residual| {max_resid_quad:.3f}")
+    print(f"Pair yield stays positive everywhere: min over the plane "
+          f"{np.nanmin(fmin_map):.3e}; negative linear yields a: {a_neg} of {a_map.size}")
     print(f"r_eig across the plane: min {np.nanmin(reig_map):.6f}, "
           f"max {np.nanmax(reig_map):.6f} (steady mode, tau = infinity)")
 
@@ -196,7 +195,6 @@ if __name__ == "__main__":
           f"(rel diff {abs(c_tau['r1']-r_pred)/r_pred:.2e})")
     print(f"  lamR:    tau=inf {c_inf['lamR']:.3f} deg, tau=5yr {c_tau['lamR']:.3f} deg "
           f"(invariance to {abs(c_tau['lamR']-c_inf['lamR'])/c_inf['lamR']:.2e})")
-    print(f"  lam_rev: tau=inf {c_inf['lam_rev']:.2f} deg, tau=5yr {c_tau['lam_rev']:.2f} deg")
 
     # r(tau) curve for the doc
     taus = np.array([2.5, 5.0, 10.0, 20.0, 40.0])
@@ -213,11 +211,10 @@ if __name__ == "__main__":
         ax.set_title(title)
         plt.colorbar(cs, ax=ax, label=cbar_label)
 
-    fig, axes = plt.subplots(2, 2, figsize=(12, 9))
-    contour_panel(axes[0, 0], lamR_map, "Pair-yield effectivity range", r"$\lambda_R$ [deg]")
-    contour_panel(axes[0, 1], lamrev_map, "Sign-change latitude", r"$\lambda_{\rm rev}$ [deg]")
-    contour_panel(axes[1, 0], r1_map, "Cycle memory (one period)", r"$r$")
-    contour_panel(axes[1, 1], a_map, "Linear dipole yield", r"$a$")
+    fig, axes = plt.subplots(1, 3, figsize=(16, 4.5))
+    contour_panel(axes[0], lamR_map, "Pair-yield effectivity range", r"$\lambda_R$ [deg]")
+    contour_panel(axes[1], r1_map, "Cycle memory (one period)", r"$r$")
+    contour_panel(axes[2], a_map, "Linear dipole yield", r"$a$")
     fig.suptitle(r"Transport constants of the reduced theory ($\tau = \infty$)")
     fig.tight_layout()
     fig.savefig(os.path.join(OUTDIR, "figP1_transport_constant_maps.png"), dpi=200)
@@ -240,18 +237,19 @@ if __name__ == "__main__":
     plt.savefig(os.path.join(OUTDIR, "figP2_lambdaR_scaling.png"), dpi=200)
     plt.close()
 
-    # P3: lambda_rev vs lambda_R
+    # P3: relative residuals of the quadrature law
     plt.figure(figsize=(8, 5))
-    plt.plot(lamR_map[good], lamrev_map[good], "o", markersize=4)
-    xs = np.linspace(0.0, np.nanmax(lamR_map) * 1.05, 50)
-    plt.plot(xs, ratio_mean * xs, "--",
-             label=fr"$\lambda_{{\rm rev}} = ({ratio_mean:.2f} \pm {ratio_std:.2f})\,\lambda_R$")
-    plt.xlabel(r"$\lambda_R$ [deg]")
-    plt.ylabel(r"$\lambda_{\rm rev}$ [deg]")
-    plt.title("Closure domain boundary versus effectivity range")
+    plt.plot(lamR_map[good], 100.0 * resid_quad, "o", markersize=4)
+    plt.axhline(0.0, linewidth=1)
+    plt.axhline(100.0 * scatter_quad, linestyle=":", linewidth=1, color="0.5",
+                label=fr"$\pm$ standard deviation ({100*scatter_quad:.1f}\%)")
+    plt.axhline(-100.0 * scatter_quad, linestyle=":", linewidth=1, color="0.5")
+    plt.xlabel(r"Measured $\lambda_R$ [deg]")
+    plt.ylabel("Relative residual of the quadrature law [\\%]")
+    plt.title("Residuals of the effectivity-range scaling law")
     plt.legend(fontsize=8)
     plt.tight_layout()
-    plt.savefig(os.path.join(OUTDIR, "figP3_lambdarev_vs_lambdaR.png"), dpi=200)
+    plt.savefig(os.path.join(OUTDIR, "figP3_scaling_residuals.png"), dpi=200)
     plt.close()
 
     # P4: analytic tau laws
@@ -277,10 +275,9 @@ if __name__ == "__main__":
     # Tables
     # ---------------------------------------------------------------
     with open(os.path.join(OUTDIR, "transport_constants.csv"), "w", encoding="utf-8") as f:
-        f.write("u0_m_s,eta_km2_s,a,lambda_R_deg,lambda_rev_deg,r1,r_eig\n")
-        for u0, eta, a, lamR, lam_rev, r1, r_eig in rows:
-            f.write(f"{u0:.1f},{eta:.1f},{a:.6e},{lamR:.4f},{lam_rev:.4f},"
-                    f"{r1:.6f},{r_eig:.6f}\n")
+        f.write("u0_m_s,eta_km2_s,a,lambda_R_deg,r1,r_eig\n")
+        for u0, eta, a, lamR, r1, r_eig in rows:
+            f.write(f"{u0:.1f},{eta:.1f},{a:.6e},{lamR:.4f},{r1:.6f},{r_eig:.6f}\n")
 
     with open(os.path.join(OUTDIR, "parameter_space_results.csv"), "w", encoding="utf-8") as f:
         f.write("quantity,value\n")
@@ -289,8 +286,9 @@ if __name__ == "__main__":
         f.write(f"quadrature_C,{C_quad:.6f}\n")
         f.write(f"quadrature_w0_deg,{w0_quad:.6f}\n")
         f.write(f"quadrature_scatter,{scatter_quad:.6f}\n")
-        f.write(f"lambda_rev_over_lambda_R_mean,{ratio_mean:.6f}\n")
-        f.write(f"lambda_rev_over_lambda_R_std,{ratio_std:.6f}\n")
+        f.write(f"quadrature_max_abs_residual,{max_resid_quad:.6f}\n")
+        f.write(f"pair_yield_min_over_plane,{np.nanmin(fmin_map):.6e}\n")
+        f.write(f"negative_a_count,{a_neg}\n")
         f.write(f"r_eig_min,{np.nanmin(reig_map):.6f}\n")
         f.write(f"r_eig_max,{np.nanmax(reig_map):.6f}\n")
         f.write(f"tau5_a_measured,{c_tau['a']:.6e}\n")

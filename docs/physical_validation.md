@@ -10,38 +10,48 @@ implementations of the nonlinearities available in the code — the poleward
 belt shift ("shift" mode) and explicit converging inflows ("physical"
 inflow mode) — using only quantities *derived* from the adjoint-kernel
 framework, with no tuned parameters. All results are for the reference
-parameters (b_TQ = 0.15, b_LQ = 2.4°, b_I = 0.2, λ_R = 20° prescribed).
+parameters (b_TQ = 0.15, b_LQ = 2.4°, b_I = 0.2, λ_R = 20° prescribed) and
+for flux-balanced polarity rings.
 
 ## Headline results
 
 | Test | Result |
 |---|---|
-| Exact kernel prediction of the shift-mode scan | max relative error **2 × 10⁻¹³** |
-| Exact kernel prediction of the tilt scan | max relative error **1 × 10⁻¹⁴** |
-| Improved (cubic-yield) tilt closure | error 0.030 → **0.0001** |
-| Pair-yield effectivity range (derived) | λ_R,pair = **10.5°** (fit over 5°–22°) |
-| Pair-yield **sign change** | λ_rev ≈ **25°** |
-| Shift-mode response sign reversal | measured at **T_rev = 1.11** |
-| Gaussian closures for shift mode | fail beyond weak shifts (see below) |
-| Physical inflows, 2 m s⁻¹ | b_eff(T = 1) = 0.40; super-quadratic growth |
-| Physical inflows, 5 m s⁻¹ | dipole sign reversal at T = 1.40 |
+| Exact kernel prediction of the shift-mode scan | max relative error **1.5 × 10⁻¹³** |
+| Exact kernel prediction of the tilt scan | max relative error **7.6 × 10⁻¹⁵** |
+| Improved (cubic-yield) tilt closure | error 1.16 × 10⁻² → **4.2 × 10⁻⁵** |
+| Pair-yield effectivity range (derived) | λ_R,pair = **12.1°** (fit over 3°–27°) |
+| Pair yield sign | **positive at every latitude**, 3.26 at 2° down to 3.1 × 10⁻⁴ at 60° |
+| Gaussian closure with the derived λ_R,pair | max \|ΔQ\| = **1.1 × 10⁻²** over the full scan |
+| Gaussian closure with the prescribed λ_R = 20° | max \|ΔQ\| = **0.35** |
+| Physical inflows, 2 m s⁻¹ | b_eff(T = 1) = 0.149; mildly super-quadratic |
+| Physical inflows, 5 m s⁻¹ | b_eff(T = 1) = 0.411; still positive, no reversal |
 
-## 1. The pair-yield function and its sign change
+## 1. The pair-yield function
 
 The dipole yield of the actual four-ring source structure, computed from the
 asymptotic kernel as a function of the pair-centre latitude (Figure V1), is
 approximately Gaussian over the activity belt with a **derived effectivity
-range λ_R,pair = 10.5°** — but it **changes sign at λ_rev ≈ 25°**: pairs
-emerging poleward of 25° contribute to the final dipole with *reversed*
-sign in this transport model. Two consequences follow immediately:
+range λ_R,pair = 12.1°**. With flux-balanced polarity rings — each ring
+normalised by its own surface integral, so that the two polarities of a pair
+carry equal and opposite flux — the yield is **positive at every latitude
+sampled** and falls monotonically towards the pole, from 3.26 at 2° to
+3.1 × 10⁻⁴ at 60°. Two points follow:
 
-1. The point-source yield (framework document: λ_R ≈ 29°) and the pair
-   yield are different objects; the quantity relevant to latitude quenching
-   of bipolar regions is the pair yield, and it is both narrower and
-   sign-changing.
-2. Any *positive* multiplicative closure Q_LQ > 0 — Gaussian or otherwise —
-   is structurally limited to the regime where the emergence-weighted belt
-   stays equatorward of λ_rev.
+1. The point-source yield (framework document: λ_R ≈ 29.2°) and the pair
+   yield are different objects. The quantity relevant to latitude quenching
+   of bipolar regions is the pair yield, and it is considerably narrower,
+   because the two polarities of a pair partially cancel.
+2. A *positive* multiplicative closure Q_LQ > 0 is therefore structurally
+   appropriate: there is no latitude at which additional emergence subtracts
+   from the final dipole.
+
+**Why balance matters.** Equal *peak* amplitudes do not give equal
+integrated flux, because the surface measure is dμ = cos λ dλ; over the
+emergence belt the poleward ring is short by 2–4 %. The residual net flux is
+small, but the final dipole is a small difference between large cancelling
+contributions, so the effect is not small. `polarity_balance_sensitivity.py`
+quantifies this directly (see §5).
 
 ## 2. Physical (shift-mode) latitude quenching
 
@@ -49,47 +59,41 @@ The SFT was run with the belt physically displaced poleward by δ = b_LQ T²
 (Figure V2, in efficiency units Q(T) = D/(aT)):
 
 * **The kernel predicts the physical runs exactly** (max relative error
-  2 × 10⁻¹³ on the raw dipole; the source geometry changes with T, so this
-  is a genuine prediction of a nonlinear response from one linear adjoint
-  solve, not a factor identity).
-* **The response reverses sign at T_rev = 1.11**: for stronger cycles the
-  belt spends enough of the cycle poleward of λ_rev that the negative-yield
-  contributions win. The a-priori estimate from the closure geometry,
-  T ≈ √((λ_rev − λ̄₀)/b_LQ) = 1.46, gives the right scale; it is optimistic
-  because the early-cycle belt (27° + δ) enters the negative-yield region
-  first.
-* **Gaussian closures fail well before the reversal.** Even with the derived
-  λ_R,pair = 10.5° and yield-weighted time moments (every ingredient
-  measured, nothing tuned), the closure deviates by up to 0.30 in Q over
-  the weak-shift domain T ≤ 0.8, and by 1.8 over the full scan; the
-  prescribed λ_R = 20° closure is worse (0.48 and 2.2). The reason is
-  structural, not a calibration issue: near the sign change the yield falls
-  *linearly* through zero, while a Gaussian ratio falls log-linearly — the
-  local logarithmic slope of the true yield at the weighted belt latitude
-  (~20°) is more than twice the fitted Gaussian's.
+  1.5 × 10⁻¹³ on the raw dipole). The source geometry changes with T, so
+  this is a genuine prediction of a nonlinear response from one linear
+  adjoint solve, not a factor identity.
+* **The derived Gaussian closure tracks the physical shift closely.** Using
+  the derived λ_R,pair = 12.1° together with the yield-weighted time moments
+  — every ingredient measured, nothing tuned — the closure reproduces the
+  physical response to within max \|ΔQ\| = 1.1 × 10⁻² across the whole scan
+  (8.0 × 10⁻³ over the weak-shift domain T ≤ 0.8), against a suppression
+  that reaches Q(1) = 0.68.
+* **The prescribed λ_R = 20° closure does not.** With the same time moments
+  but the closure's demonstration value of λ_R, the error is 0.35 over the
+  full scan and 0.134 for T ≤ 0.8 — more than an order of magnitude worse.
+  The effectivity range must be *derived* from the transport, not chosen.
 
-**Implication for the manuscript.** The efficiency-mode Q_LQ and a physical
-belt shift with the *same nominal* b_LQ are **not equivalent** in this
-transport regime. The efficiency factor with λ_R = 20° corresponds to a far
-milder feedback: matching the small-T behaviour of the physical shift would
-require an efficiency-mode strength roughly (20/10.5)² ≈ 3.6 times larger
-(b_LQ ≈ 8.7 at λ_R = 20°) — which sits at the edge of the period-doubling
-region of the stability map — and even then only up to moderate amplitudes,
-beyond which the response is a *signed* competition that requires the kernel
-(or a signed closure) rather than any positive Q(T).
+**Implication for the manuscript.** Efficiency-mode Q_LQ and a physical belt
+shift with the *same nominal* b_LQ are equivalent only if the efficiency
+range is the pair yield's. Retaining λ_R = 20° while reproducing the
+physical shift would require an efficiency-mode strength larger by
+(20/12.1)² ≈ 2.7, i.e. b_LQ ≈ 6.6. That combination remains stable at
+moderate gains, but it reaches period doubling at a lower critical gain than
+the reference value does, so the two parametrisations are not
+interchangeable in the stability analysis either.
 
 ## 3. Tilt quenching: exact prediction and an improved closure
 
 The tilt case modifies the source *geometry* (polarity separation
 Δλ(T) = Δλ₀/(1 + b_TQ T²)), so it is not a scalar source factor — yet the
-kernel predicts the scan **exactly** (max relative error 1 × 10⁻¹⁴,
+kernel predicts the scan **exactly** (max relative error 7.6 × 10⁻¹⁵,
 Figure V3), because the response to *any* source is available once the
 kernel is known.
 
 The cycle-aggregated yield as a function of separation is measured to be
 
 $$
-A(s) = c_1 s + c_3 s^3, \qquad c_3/c_1 = +1.7\times10^{-3}\ \mathrm{deg}^{-2},
+A(s) = c_1 s + c_3 s^3, \qquad c_3/c_1 = +6.4\times10^{-4}\ \mathrm{deg}^{-2},
 $$
 
 confirming the odd-yield structure asserted in the review document and
@@ -100,11 +104,11 @@ Q_{\rm TQ}(T) = \frac{A(\Delta\lambda_0 f_{\rm TQ}(T))}{A(\Delta\lambda_0)},
 \qquad f_{\rm TQ} = \frac{1}{1 + b_{\rm TQ}T^2},
 $$
 
-reduces the closure error across the scan from 0.030 (naive Q_TQ = f_TQ) to
-**0.0001** — the same three-orders-of-magnitude gain the yield-weighted
-moments delivered for latitude quenching. The naive closure remains a good
-approximation (≤ 2 % relative over the scan, ≤ 3 % absolute in P̂), and its
-error now has a measured, first-principles origin.
+reduces the closure error across the scan from 1.16 × 10⁻² (naive
+Q_TQ = f_TQ) to **4.2 × 10⁻⁵** — the same kind of three-orders-of-magnitude
+gain that the yield-weighted moments deliver for latitude quenching. The
+naive closure remains a good approximation (≤ 0.8 % relative over the scan),
+and its error now has a measured, first-principles origin.
 
 ## 4. Physical converging inflows
 
@@ -113,34 +117,60 @@ which is precisely what makes this the hardest test for a source-side
 algebraic factor Q_I = 1/(1 + b_I T²) (Figures V4, V5):
 
 * At the reference inflow amplitude (2 m s⁻¹ at T = 1, scaling as T²), the
-  effective strength at the calibration point is b_eff(T = 1) = **0.40**,
-  and the leading-order fit over T ≤ 1.2 gives b_I ≈ 0.42. The algebraic
-  form is adequate for weak-to-moderate cycles but **b_eff grows with T**
-  (full-scan fit 1.5): the physical nonlinearity is super-quadratic, and
-  the constant-b Padé form under-predicts the suppression of strong cycles.
-* At 5 m s⁻¹ the dipole **reverses sign at T = 1.40** — over-quenching to
-  reversal, again outside the domain of any positive closure, consistent
-  with the domain-of-validity statement in the review document.
-* Cross-calibration: b_eff(1) = 0.40 for a 2 m s⁻¹ inflow implies that the
-  paper-calibrated b_I = 0.2 (Talafha, Petrovay and Opitz 2025) corresponds
-  to an inflow amplitude of roughly **1 m s⁻¹** at cycle maximum in this
-  model's convention — a useful consistency check between the reduced
-  parameter and the physical flow speed.
+  effective strength at the calibration point is b_eff(T = 1) = **0.149**,
+  and the leading-order fit over T ≤ 1.2 gives b_I ≈ 0.150. The algebraic
+  form is a good description for weak-to-moderate cycles, but **b_eff grows
+  with T** (full-scan fit 0.183): the physical nonlinearity is mildly
+  super-quadratic, and the constant-b form slightly under-predicts the
+  suppression of strong cycles.
+* At 5 m s⁻¹ the effective strength rises to b_eff(1) = **0.411** (full-scan
+  fit 0.584), and the departure from a constant b is correspondingly larger.
+  The dipole nevertheless stays positive across the whole amplitude scan, so
+  the algebraic closure remains inside its domain of validity; it simply
+  loses accuracy.
+* Cross-calibration: b_eff(1) = 0.149 at 2 m s⁻¹ and 0.411 at 5 m s⁻¹ imply
+  that the paper-calibrated b_I = 0.2 (Talafha, Petrovay and Opitz 2025)
+  corresponds to an inflow amplitude of roughly **2.6 m s⁻¹** at cycle
+  maximum in this model's convention — a useful consistency check between
+  the reduced parameter and the physical flow speed.
 
-## 5. What this adds to the theory
+## 5. Sensitivity to polarity-flux balance
 
-1. **The kernel framework is now validated against physical, geometry- and
+`polarity_balance_sensitivity.py` recomputes the same diagnostics with the
+earlier equal-peak rings, using an identical fit window so that the two
+estimators are directly comparable:
+
+| Quantity | Equal peaks | Flux balanced |
+|---|---|---|
+| Linear yield a | 7.90 × 10⁻² | **1.68 × 10⁻¹** |
+| Tilt closure error | 2.01 % | **0.78 %** |
+| λ_R,pair (fit 3°–27°) | 9.17° | **12.07°** |
+| Pair-yield sign change | at 25° | **none** |
+| Shift-mode reversal | T_rev = 1.12 | **none** |
+| Sign change across the (η, u₀) plane | 63 of 63 sets, lowest at 16° | **8 of 63, lowest at 32.5°** |
+| Negative linear yield a | 21 of 63 sets | **0 of 63** |
+| Scaling-law scatter | 59 % | **5.8 %** |
+
+The imbalance is a 2–4 % error in the source, but the final dipole is a
+small residual of large cancelling contributions, so it changes the linear
+yield by more than a factor of two and manufactures a sign change inside the
+emergence belt (which reaches 27°). Under balance the eight remaining sign
+changes all lie at 32.5° or higher — above the belt — and the deepest
+negative excursion is 0.09 % of the equatorward peak, so no result in this
+work depends on them.
+
+## 6. What this adds to the theory
+
+1. **The kernel framework is validated against physical, geometry- and
    position-changing nonlinearities** — not just injected factors — at the
    10⁻¹³ level, for the cost of one adjoint solve.
 2. **Closures have measured domains of validity.** Tilt: excellent
-   everywhere, exact with the cubic yield. Latitude (efficiency mode):
-   excellent with yield-weighted moments. Latitude (physical shift):
-   requires the kernel beyond weak shifts; sign reversal at T_rev ≈ 1.1 for
-   the reference b_LQ. Inflows: algebraic form good to T ≈ 1.2 at
-   observationally calibrated strengths; super-quadratic beyond; reversal
-   for strong inflows.
+   everywhere, essentially exact with the cubic yield. Latitude (efficiency
+   mode): excellent with yield-weighted moments. Latitude (physical shift):
+   accurate to about 1 % in Q *provided* the derived λ_R,pair is used.
+   Inflows: algebraic form good at observationally calibrated strengths,
+   mildly super-quadratic beyond.
 3. **The manuscript should distinguish carefully between the two
-   implementations of latitude quenching**: they are equivalent only in the
-   weak-shift limit and only if the efficiency-range parameter is the pair
-   yield's (≈ 10.5°), not the point yield's (≈ 29°) nor an arbitrary
-   intermediate value.
+   effectivity ranges**: the prescribed closure parameter (20°, a
+   demonstration value) and the derived pair yield (12.1°). They are not
+   interchangeable, and only the latter is a property of the transport.

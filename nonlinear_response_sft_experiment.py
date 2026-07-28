@@ -154,10 +154,9 @@ class SFTParams:
     lambda_R_deg: float = 20.0
 
     # Inflow amplitude [m/s] for T=1, scaled as T^2.
-    # The first stable run used 5 m/s, which was intentionally strong but
-    # caused dipole reversal in the inflow/combined cases. For a clean
-    # response-theory validation, use a moderate value. Stronger values can be
-    # explored later as an over-quenching experiment.
+    # 2 m/s is a moderate value giving a clean response-theory validation;
+    # 5 m/s is a deliberately strong over-quenching test, still positive but
+    # no longer well described by a single algebraic strength.
     inflow_amp_m_s: float = 2.0
     inflow_width_deg: float = 12.0
 
@@ -173,6 +172,14 @@ class SFTParams:
     # The default is "efficiency" because it tests the reduced theory cleanly.
     latitude_quenching_mode: str = "efficiency"
 
+    # Polarity-flux balance of each bipolar ring pair.
+    # True (default): every ring is normalised by its own surface integral, so
+    # the two polarities of a pair carry equal and opposite flux, as a real
+    # bipolar region does. False reproduces the earlier equal-peak
+    # construction, in which the poleward ring carries 2-4 per cent less flux
+    # and the pair acquires a spurious net flux.
+    balanced_polarities: bool = True
+
     # Reference latitude for the latitude-quenching factor.
     # "belt": the efficiency factor follows the instantaneous emergence
     #         latitude lambda0(t) of the drifting activity belt, and the
@@ -185,9 +192,10 @@ class SFTParams:
     # Inflow implementation.
     # "efficiency" multiplies the source by Q_I(T), giving a clean reduced-model
     # validation analogous to latitude quenching.
-    # "physical" applies an explicit converging flow. This is useful for
-    # exploratory tests, but it can introduce sign reversals and interaction
-    # effects not captured by the simple algebraic Q_I closure.
+    # "physical" applies an explicit converging flow. This acts on the
+    # transport operator rather than on the source, so it introduces
+    # amplitude dependence that the simple algebraic Q_I closure only
+    # approximates.
     inflow_mode: str = "efficiency"
 
 
@@ -497,6 +505,20 @@ def bipolar_ring_source(
     N_lead   = np.exp(-0.5 * ((lat_deg - (lat0 - sep / 2.0)) / width) ** 2)
     S_follow = np.exp(-0.5 * ((lat_deg - (-lat0 - sep / 2.0)) / width) ** 2)
     S_lead   = np.exp(-0.5 * ((lat_deg - (-lat0 + sep / 2.0)) / width) ** 2)
+
+    if p.balanced_polarities:
+        # Equal PEAK amplitudes do not give equal integrated flux, because the
+        # surface measure is dmu = cos(lambda) dlambda: the poleward ring
+        # carries a few per cent less flux than the equatorward one. A real
+        # bipolar region is flux balanced, so each ring is normalised by its
+        # own surface integral and the mean flux scale is restored, leaving
+        # the overall amplitude convention unchanged.
+        rings = (N_follow, N_lead, S_follow, S_lead)
+        phis = [float(np.mean(r)) for r in rings]  # uniform dmu: mean ∝ integral
+        scale = float(np.mean(phis))
+        N_follow, N_lead, S_follow, S_lead = (
+            scale * r / phi for r, phi in zip(rings, phis)
+        )
 
     source = (N_follow - N_lead) - (S_follow - S_lead)
 

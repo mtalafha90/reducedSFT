@@ -104,6 +104,11 @@ def precompute_cycle_source(p: nre.SFTParams, grid, Minv: np.ndarray, Pi: np.nda
         NL = np.exp(-0.5 * ((lat_deg - (lam0[k] - sep / 2.0)) / width) ** 2)
         SF = np.exp(-0.5 * ((lat_deg - (-lam0[k] - sep / 2.0)) / width) ** 2)
         SL = np.exp(-0.5 * ((lat_deg - (-lam0[k] + sep / 2.0)) / width) ** 2)
+        if p.balanced_polarities:
+            rings = (NF, NL, SF, SL)
+            phis = [float(np.mean(r)) for r in rings]
+            scale = float(np.mean(phis))
+            NF, NL, SF, SL = (scale * r / phi for r, phi in zip(rings, phis))
         shape = (NF - NL) - (SF - SL)
         shape = shape - shape.mean()
         PMshape[k] = Pi @ (Minv @ shape)
