@@ -163,7 +163,7 @@ def test_dlnQ_analytic_vs_numerical():
         assert nre.reduced_dlnQ_dT(T, *args) == pytest.approx(num, rel=1e-6)
 
 
-def test_single_algebraic_quenching_multiplier():
+def test_single_rational_quenching_multiplier():
     # For Q = 1/(1 + b T^2) alone: T* = sqrt((D0-1)/b) and
     # M'(T*) = (2 - D0)/D0, unconditionally stable for D0 > 1.
     b, D0 = 0.5, 3.0

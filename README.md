@@ -16,9 +16,9 @@ three quenching mechanisms:
 
 | Factor | Form | Mechanism |
 |--------|------|-----------|
-| `Q_TQ(T) = 1 / (1 + b_TQ T²)` | algebraic | tilt quenching — stronger cycles produce smaller polarity separations |
+| `Q_TQ(T) = 1 / (1 + b_TQ T²)` | rational | tilt quenching — stronger cycles produce smaller polarity separations |
 | `Q_LQ(T) = exp(−[2 λ̄₀ δ + (1 − ε) δ²] / (2 λ_R²))`, `δ = b_LQ T²` | Gaussian | latitude quenching — stronger cycles emerge at higher latitudes, where flux contributes less to the dipole |
-| `Q_I(T) = 1 / (1 + b_I T²)` | algebraic | inflow quenching — converging flows towards the activity belts reduce dipole build-up |
+| `Q_I(T) = 1 / (1 + b_I T²)` | rational | inflow quenching — converging flows towards the activity belts reduce dipole build-up |
 
 Here `λ̄₀` is the activity-weighted mean emergence latitude (the belt latitude
 at cycle maximum) and `ε` a small variance correction; both come from the
@@ -144,8 +144,8 @@ point).
   the closure itself.
 - For the reduced cycle map: a nonzero fixed point exists and is unique
   exactly when `D₀ > 1`; instability is only possible through period
-  doubling, with criterion `q(T*) = −dlnQ/dlnT ≥ 2`. A single algebraic
-  quenching can never destabilise the cycle, whereas Gaussian latitude
+  doubling, with criterion `q(T*) = −dlnQ/dlnT ≥ 2`. A single rational
+  quenching factor can never destabilise the cycle, whereas Gaussian latitude
   quenching always does for `D₀ ≥ e` — the analytic content behind the
   structure of the stability map.
 - The reduced theory with `Q > 0` describes saturation and over-quenched
@@ -165,7 +165,7 @@ point).
   with a derived λ_R = 12.1°, and the Gaussian closure built from that
   derived range reproduces the physical belt shift to 1.1 × 10⁻² in `Q`,
   against 0.35 for the prescribed λ_R = 20°; an improved cubic tilt closure
-  reaches 4 × 10⁻⁵; physical inflows follow the algebraic Q_I closely at
+  reaches 4 × 10⁻⁵; physical inflows follow the rational Q_I closely at
   calibrated strengths, with a mildly super-quadratic departure at larger
   amplitudes.
 - Multi-cycle SFT with dynamo feedback shows the map's memoryless

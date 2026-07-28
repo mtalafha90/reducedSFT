@@ -118,11 +118,11 @@ and its error now has a measured, first-principles origin.
 
 Inflows modify the *transport operator*, so no kernel prediction exists —
 which is precisely what makes this the hardest test for a source-side
-algebraic factor Q_I = 1/(1 + b_I T²) (Figures V4, V5):
+rational factor Q_I = 1/(1 + b_I T²) (Figures V4, V5):
 
 * At the reference inflow amplitude (2 m s⁻¹ at T = 1, scaling as T²), the
   effective strength at the calibration point is b_eff(T = 1) = **0.149**,
-  and the leading-order fit over T ≤ 1.2 gives b_I ≈ 0.150. The algebraic
+  and the leading-order fit over T ≤ 1.2 gives b_I ≈ 0.150. The rational
   form is a good description for weak-to-moderate cycles, but **b_eff grows
   with T** (full-scan fit 0.183): the physical nonlinearity is mildly
   super-quadratic, and the constant-b form slightly under-predicts the
@@ -130,7 +130,7 @@ algebraic factor Q_I = 1/(1 + b_I T²) (Figures V4, V5):
 * At 5 m s⁻¹ the effective strength rises to b_eff(1) = **0.411** (full-scan
   fit 0.584), and the departure from a constant b is correspondingly larger.
   The dipole nevertheless stays positive across the whole amplitude scan, so
-  the algebraic closure remains inside its domain of validity; it simply
+  the rational factor remains inside its domain of validity; it simply
   loses accuracy.
 * Cross-calibration: b_eff(1) = 0.149 at 2 m s⁻¹ and 0.411 at 5 m s⁻¹ imply
   that the paper-calibrated b_I = 0.2 (Talafha, Petrovay and Opitz 2025)
@@ -172,7 +172,7 @@ work depends on them.
    everywhere, essentially exact with the cubic yield. Latitude (efficiency
    mode): excellent with yield-weighted moments. Latitude (physical shift):
    accurate to about 1 % in Q *provided* the derived λ_R,pair is used.
-   Inflows: algebraic form good at observationally calibrated strengths,
+   Inflows: rational form good at observationally calibrated strengths,
    mildly super-quadratic beyond.
 3. **The manuscript should distinguish carefully between the two
    effectivity ranges**: the prescribed closure parameter (20°, a

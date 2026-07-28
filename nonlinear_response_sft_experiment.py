@@ -156,7 +156,7 @@ class SFTParams:
     # Inflow amplitude [m/s] for T=1, scaled as T^2.
     # 2 m/s is a moderate value giving a clean response-theory validation;
     # 5 m/s is a deliberately strong over-quenching test, still positive but
-    # no longer well described by a single algebraic strength.
+    # no longer well described by a single quenching strength.
     inflow_amp_m_s: float = 2.0
     inflow_width_deg: float = 12.0
 
@@ -196,7 +196,7 @@ class SFTParams:
     # validation analogous to latitude quenching.
     # "physical" applies an explicit converging flow. This acts on the
     # transport operator rather than on the source, so it introduces
-    # amplitude dependence that the simple algebraic Q_I closure only
+    # amplitude dependence that the simple rational Q_I factor only
     # approximates.
     inflow_mode: str = "efficiency"
 
@@ -588,7 +588,7 @@ def Q_LQ(T: np.ndarray | float, p: SFTParams) -> np.ndarray | float:
     "belt" mode: closed-form envelope-weighted average of the instantaneous
     factor exp(-[2 lambda0(t) delta + delta^2]/(2 lamR^2)) over the Gaussian
     cycle envelope. Because the exponent is linear in t, the Gaussian average
-    is exact and yields the same algebraic form with lambda0 replaced by the
+    is exact and yields the same functional form with lambda0 replaced by the
     belt latitude at cycle maximum, lambda_bar_0, and delta^2 reduced by the
     variance correction (1 - epsilon):
 

@@ -195,7 +195,7 @@ memory-corrected map and its validation.
 | Reduction P = aTQ for source-side factors | **Exact identity** given the kernel (not an ansatz) |
 | Latitude-quenching closure | **Derived** to 2.4 × 10⁻⁶ (yield-weighted Gaussian); envelope form is its parameter-free approximation |
 | Effectivity range λ_R | **Measured**: 29.2° for a point source, 12.1° for the ring pair; the closure's 20° is a free demonstration parameter |
-| Tilt/inflow algebraic forms | Prescribed (Padé closures; see review document §3.2, §3.4) |
+| Tilt/inflow rational forms | Prescribed (Padé closures; see review document §3.2, §3.4) |
 | Stability boundary of the cycle map | **Analytic**, confirmed dynamically to the resolution of the bifurcation scan |
 
 ## 6. Additions recommended for the manuscript
