@@ -37,8 +37,8 @@ Version 2 modifications
 -----------------------
 This version implements the corrections suggested after the first run:
 
-1. The main response variable is now the unsigned axial dipole |D(T)|,
-   not only the polar-cap field.
+1. The main response variable is the signed axial dipole D(T); its magnitude
+   is retained only as a secondary diagnostic.
 
 2. All main response plots include normalized curves:
 
@@ -119,8 +119,8 @@ class SFTParams:
     cycle_years: float = 11.0
 
     # mu = sin(latitude) grid
-    # Number of finite-volume cells in mu. 181 is enough for the controlled
-    # experiment and makes the explicit diffusion timestep stable and fast.
+    # Number of finite-volume cells in mu. The reference value provides
+    # adequate spatial resolution at modest computational cost.
     nmu: int = 181
     mu_min: float = -1.0
     mu_max: float = 1.0
@@ -156,7 +156,7 @@ class SFTParams:
     # Inflow amplitude [m/s] for T=1, scaled as T^2.
     # 2 m/s is a moderate value giving a clean response-theory validation;
     # 5 m/s is a deliberately strong over-quenching test, still positive but
-    # no longer well described by a single algebraic strength.
+    # no longer well described by a single quenching strength.
     inflow_amp_m_s: float = 2.0
     inflow_width_deg: float = 12.0
 
@@ -176,8 +176,10 @@ class SFTParams:
     # True (default): every ring is normalised by its own surface integral, so
     # the two polarities of a pair carry equal and opposite flux, as a real
     # bipolar region does. False reproduces the earlier equal-peak
-    # construction, in which the poleward ring carries 2-4 per cent less flux
-    # and the pair acquires a spurious net flux.
+    # construction, in which the poleward ring carries 2-4 per cent less flux,
+    # so each pair is individually imbalanced. The assembled source stays
+    # antisymmetric and monopole-free either way; only the balance within a
+    # pair differs.
     balanced_polarities: bool = True
 
     # Reference latitude for the latitude-quenching factor.
@@ -194,7 +196,7 @@ class SFTParams:
     # validation analogous to latitude quenching.
     # "physical" applies an explicit converging flow. This acts on the
     # transport operator rather than on the source, so it introduces
-    # amplitude dependence that the simple algebraic Q_I closure only
+    # amplitude dependence that the simple rational Q_I factor only
     # approximates.
     inflow_mode: str = "efficiency"
 
@@ -586,7 +588,7 @@ def Q_LQ(T: np.ndarray | float, p: SFTParams) -> np.ndarray | float:
     "belt" mode: closed-form envelope-weighted average of the instantaneous
     factor exp(-[2 lambda0(t) delta + delta^2]/(2 lamR^2)) over the Gaussian
     cycle envelope. Because the exponent is linear in t, the Gaussian average
-    is exact and yields the same algebraic form with lambda0 replaced by the
+    is exact and yields the same functional form with lambda0 replaced by the
     belt latitude at cycle maximum, lambda_bar_0, and delta^2 reduced by the
     variance correction (1 - epsilon):
 

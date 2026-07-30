@@ -21,7 +21,7 @@ for flux-balanced polarity rings.
 | Exact kernel prediction of the tilt scan | max relative error **7.6 × 10⁻¹⁵** |
 | Improved (cubic-yield) tilt closure | error 1.16 × 10⁻² → **4.2 × 10⁻⁵** |
 | Pair-yield effectivity range (derived) | λ_R,pair = **12.1°** (fit over 3°–27°) |
-| Pair yield sign | **positive at every latitude**, 3.26 at 2° down to 3.1 × 10⁻⁴ at 60° |
+| Pair yield sign | **positive at every latitude**, 3.26 at 2° down to 3.1 × 10⁻⁴ at 60° (final-to-emergence dipole ratio) |
 | Gaussian closure with the derived λ_R,pair | max \|ΔQ\| = **1.1 × 10⁻²** over the full scan |
 | Gaussian closure with the prescribed λ_R = 20° | max \|ΔQ\| = **0.35** |
 | Physical inflows, 2 m s⁻¹ | b_eff(T = 1) = 0.149; mildly super-quadratic |
@@ -29,10 +29,12 @@ for flux-balanced polarity rings.
 
 ## 1. The pair-yield function
 
-The dipole yield of the actual four-ring source structure, computed from the
-asymptotic kernel as a function of the pair-centre latitude (Figure V1), is
-approximately Gaussian over the activity belt with a **derived effectivity
-range λ_R,pair = 12.1°**. With flux-balanced polarity rings — each ring
+The dipole yield of a ring pair is the ratio of the final axial dipole it
+produces to the dipole it deposits at the moment of emergence; the source
+amplitude cancels between the two, so the ratio is dimensionless. Computed
+from the asymptotic kernel as a function of the pair-centre latitude
+(Figure V1), it is approximately Gaussian over the activity belt with a
+**derived effectivity range λ_R,pair = 12.1°**. With flux-balanced polarity rings — each ring
 normalised by its own surface integral, so that the two polarities of a pair
 carry equal and opposite flux — the yield is **positive at every latitude
 sampled** and falls monotonically towards the pole, from 3.26 at 2° to
@@ -48,9 +50,11 @@ sampled** and falls monotonically towards the pole, from 3.26 at 2° to
 
 **Why balance matters.** Equal *peak* amplitudes do not give equal
 integrated flux, because the surface measure is dμ = cos λ dλ; over the
-emergence belt the poleward ring is short by 2–4 %. The residual net flux is
-small, but the final dipole is a small difference between large cancelling
-contributions, so the effect is not small. `polarity_balance_sensitivity.py`
+emergence belt the poleward ring is short by 2–4 %. The assembled source is
+antisymmetric and carries no net flux either way — what differs is the
+balance *within* each pair. That imbalance is small, but the final dipole is
+a small difference between large cancelling contributions, so its effect is
+not. `polarity_balance_sensitivity.py`
 quantifies this directly (see §5).
 
 ## 2. Physical (shift-mode) latitude quenching
@@ -114,11 +118,11 @@ and its error now has a measured, first-principles origin.
 
 Inflows modify the *transport operator*, so no kernel prediction exists —
 which is precisely what makes this the hardest test for a source-side
-algebraic factor Q_I = 1/(1 + b_I T²) (Figures V4, V5):
+rational factor Q_I = 1/(1 + b_I T²) (Figures V4, V5):
 
 * At the reference inflow amplitude (2 m s⁻¹ at T = 1, scaling as T²), the
   effective strength at the calibration point is b_eff(T = 1) = **0.149**,
-  and the leading-order fit over T ≤ 1.2 gives b_I ≈ 0.150. The algebraic
+  and the leading-order fit over T ≤ 1.2 gives b_I ≈ 0.150. The rational
   form is a good description for weak-to-moderate cycles, but **b_eff grows
   with T** (full-scan fit 0.183): the physical nonlinearity is mildly
   super-quadratic, and the constant-b form slightly under-predicts the
@@ -126,7 +130,7 @@ algebraic factor Q_I = 1/(1 + b_I T²) (Figures V4, V5):
 * At 5 m s⁻¹ the effective strength rises to b_eff(1) = **0.411** (full-scan
   fit 0.584), and the departure from a constant b is correspondingly larger.
   The dipole nevertheless stays positive across the whole amplitude scan, so
-  the algebraic closure remains inside its domain of validity; it simply
+  the rational factor remains inside its domain of validity; it simply
   loses accuracy.
 * Cross-calibration: b_eff(1) = 0.149 at 2 m s⁻¹ and 0.411 at 5 m s⁻¹ imply
   that the paper-calibrated b_I = 0.2 (Talafha, Petrovay and Opitz 2025)
@@ -168,7 +172,7 @@ work depends on them.
    everywhere, essentially exact with the cubic yield. Latitude (efficiency
    mode): excellent with yield-weighted moments. Latitude (physical shift):
    accurate to about 1 % in Q *provided* the derived λ_R,pair is used.
-   Inflows: algebraic form good at observationally calibrated strengths,
+   Inflows: rational form good at observationally calibrated strengths,
    mildly super-quadratic beyond.
 3. **The manuscript should distinguish carefully between the two
    effectivity ranges**: the prescribed closure parameter (20°, a

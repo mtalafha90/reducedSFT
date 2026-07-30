@@ -262,12 +262,12 @@ source-side factor Q_I(T) requires two assumptions worth stating:
    final dipole is linear in the inflow amplitude, which scales as T²; the
    leading-order effect is therefore a multiplicative reduction
    1 − b_I T² + 𝒪(T⁴).
-2. **Padé resummation.** The algebraic form 1/(1 + b_I T²) is the [0/1] Padé
+2. **Padé resummation.** The rational form 1/(1 + b_I T²) is the [0/1] Padé
    approximant of that series. It agrees with the perturbative result at
    small T while remaining positive and monotonically decreasing for all T —
    the minimal well-behaved extension.
 
-The same argument justifies the algebraic form of Q_TQ. The manuscript
+The same argument justifies the rational form of Q_TQ. The manuscript
 currently gives the forms without motivation; two sentences to this effect
 close the logical gap. The explicit converging-inflow mode remains in the
 code for exploratory runs, but note the caveat in Section 3.6.
@@ -333,7 +333,7 @@ $$
 \boxed{\;q(T_*) \ge 2\;}
 $$
 
-**(iii) A single algebraic quenching never destabilises.** For
+**(iii) A single rational quenching factor never destabilises.** For
 Q = 1/(1 + bT²) alone, the fixed point is T\* = √((D₀−1)/b) and
 
 $$
@@ -345,7 +345,7 @@ The fixed point is unconditionally stable, for *any* quenching strength b and
 any gain. This explains at one stroke why simple tilt-quenched
 Babcock–Leighton models are so robustly steady: the map cannot period-double.
 
-**(iv) Stacked algebraic quenchings.** For Q = Π_i 1/(1 + b_iT²),
+**(iv) Stacked rational quenchings.** For Q = Π_i 1/(1 + b_iT²),
 q(T\*) = Σ_i 2s_i with saturation fractions s_i = b_iT\*²/(1 + b_iT\*²) < 1.
 Instability requires Σ s_i > 1, hence **at least two mechanisms**, each
 already substantially saturated. For two equal strengths, the condition is
@@ -364,7 +364,7 @@ where the second equality uses the fixed-point condition. Hence latitude
 quenching alone is **always period-doubling unstable when D₀ ≥ e ≈ 2.72**,
 and for D₀ < e it destabilises once δ\*² > 2λ_R²(1 − ln D₀)/(1−ε). The
 super-exponential tail of the Gaussian factor is what allows q to grow
-without bound — algebraic factors saturate at q → 2 per factor, the Gaussian
+without bound — rational factors saturate at q → 2 per factor, the Gaussian
 factor does not. This is the analytic content behind the structure of the
 stability map (Figs. 9–11): the unstable region is entered by increasing
 b_LQ far more readily than by increasing b_TQ.
@@ -518,7 +518,7 @@ Interpretation:
    ε = 0.0144 for the reference parameters, and give b_LQ its units
    (degrees).
 3. **After Eq. (24) and Eq. (28):** add the Padé/linearisation justification
-   for the algebraic forms (Sections 3.2 and 3.4).
+   for the rational forms (Sections 3.2 and 3.4).
 4. **After Eq. (32):** state the independence assumption of the product
    closure (Section 3.5).
 5. **Section 1.13:** add the identity linking ℛ to 𝓜′ (Section 3.8).
