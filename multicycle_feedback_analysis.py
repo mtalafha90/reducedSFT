@@ -397,9 +397,9 @@ if __name__ == "__main__":
     plt.plot(mapB_x, mapB_y, ",", color="0.6", label="memory-corrected map attractor")
     plt.plot(sft_x, sft_y, "o", markersize=3, label="multi-cycle SFT attractor")
     plt.axvline(D0_pd_mem, linestyle="--", linewidth=1.2, color="C3",
-                label=fr"analytic PD (memory), $D_0 = {D0_pd_mem:.2f}$")
+                label=fr"analytic period doubling (memory), $D_0 = {D0_pd_mem:.2f}$")
     plt.axvline(D0_pd_nomem, linestyle=":", linewidth=1.2, color="C2",
-                label=fr"analytic PD (memoryless), $D_0 = {D0_pd_nomem:.2f}$")
+                label=fr"analytic period doubling (memoryless), $D_0 = {D0_pd_nomem:.2f}$")
     plt.xlabel(r"Linear gain $D_0 = k\,a$")
     plt.ylabel(r"Attractor of $T_n$")
     plt.title("Multi-cycle SFT vs reduced maps: bifurcation structure")

@@ -226,11 +226,11 @@ if __name__ == "__main__":
              label="measured (adjoint kernel)")
     xs = np.linspace(0.0, np.nanmax(lamR_est) * 1.05, 200)
     plt.plot(xs, np.sqrt(C2 * xs**2 + w02), "--",
-             label=(fr"quadrature law: $\lambda_R^2 = ({C_quad:.2f})^2\,\eta/(2u_0R)"
+             label=(fr"quadrature law: $(\lambda_R^{{\rm pair}})^2 = ({C_quad:.2f})^2\,\lambda_{{\rm tr}}^2"
                     fr" + ({w0_quad:.1f}^\circ)^2$"))
     plt.plot(xs, xs, ":", linewidth=1, color="0.6", label="one-to-one (pure transport)")
-    plt.xlabel(r"$\sqrt{\eta/(2u_0R_\odot)}$ [deg]")
-    plt.ylabel(r"Measured $\lambda_R$ [deg]")
+    plt.xlabel(r"Transport scale $\lambda_{\rm tr}=\sqrt{\eta/(2u_0R_\odot)}$ [deg]")
+    plt.ylabel(r"Measured $\lambda_R^{\rm pair}$ [deg]")
     plt.title("Scaling collapse of the effectivity range")
     plt.legend(fontsize=8)
     plt.tight_layout()
@@ -244,7 +244,7 @@ if __name__ == "__main__":
     plt.axhline(100.0 * scatter_quad, linestyle=":", linewidth=1, color="0.5",
                 label=fr"$\pm$ standard deviation ({100*scatter_quad:.1f}\%)")
     plt.axhline(-100.0 * scatter_quad, linestyle=":", linewidth=1, color="0.5")
-    plt.xlabel(r"Measured $\lambda_R$ [deg]")
+    plt.xlabel(r"Measured $\lambda_R^{\rm pair}$ [deg]")
     plt.ylabel("Relative residual of the quadrature law [\\%]")
     plt.title("Residuals of the effectivity-range scaling law")
     plt.legend(fontsize=8)

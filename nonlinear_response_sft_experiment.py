@@ -40,7 +40,7 @@ This version implements the corrections suggested after the first run:
 1. The main response variable is the signed axial dipole D(T); its magnitude
    is retained only as a secondary diagnostic.
 
-2. All main response plots include normalized curves:
+2. All main response plots include normalised curves:
 
        P_hat(T) = P(T) / P(T_ref)
 
@@ -139,7 +139,7 @@ class SFTParams:
     # BMR-pair latitudinal separation proxy [deg]
     polarity_sep_deg: float = 5.0
 
-    # Source normalization. Arbitrary because this is a normalized experiment.
+    # Source normalization. Arbitrary because this is a normalised experiment.
     source_amp: float = 1.0
 
     # Nonlinear parameters for the reference run.
@@ -163,7 +163,7 @@ class SFTParams:
     # Polar cap threshold [deg]
     polar_cap_deg: float = 60.0
 
-    # Reference amplitude for normalized plots
+    # Reference amplitude for normalised plots
     T_ref: float = 1.0
 
     # Latitude-quenching implementation.
@@ -626,7 +626,7 @@ def Q_theory(T: np.ndarray | float, p: SFTParams, case: str) -> np.ndarray | flo
 
 
 def theory_normalized(T: np.ndarray, p: SFTParams, case: str) -> np.ndarray:
-    """Normalized theoretical curve T Q(T) / [T_ref Q(T_ref)]."""
+    """Normalised theoretical curve T Q(T) / [T_ref Q(T_ref)]."""
     T = np.asarray(T, dtype=float)
     tref = p.T_ref
     numerator = T * Q_theory(T, p, case)
@@ -839,8 +839,8 @@ def plot_results(results: Dict[str, Dict[str, np.ndarray]], p: SFTParams, outdir
     for case in cases:
         plt.plot(results[case]["T"], results[case]["P"], "o-", label=labels[case])
     plt.axhline(0.0, linewidth=1)
-    plt.xlabel(r"Normalized cycle amplitude $T$")
-    plt.ylabel(r"Final signed axial dipole, $P(T)$")
+    plt.xlabel(r"Normalised cycle amplitude $T$")
+    plt.ylabel(r"Final signed axial dipole, $P(T)$ [arb. units]")
     plt.title(r"Signed axial-dipole response")
     plt.legend(fontsize=8)
     plt.tight_layout()
@@ -851,7 +851,7 @@ def plot_results(results: Dict[str, Dict[str, np.ndarray]], p: SFTParams, outdir
     plt.figure(figsize=(8, 5))
     for case in cases:
         plt.plot(results[case]["T"], results[case]["P_abs"], "o-", label=labels[case])
-    plt.xlabel(r"Normalized cycle amplitude $T$")
+    plt.xlabel(r"Normalised cycle amplitude $T$")
     plt.ylabel(r"Secondary response $|D(T)|$")
     plt.title(r"Unsigned axial-dipole response")
     plt.legend(fontsize=8)
@@ -860,7 +860,7 @@ def plot_results(results: Dict[str, Dict[str, np.ndarray]], p: SFTParams, outdir
     plt.close()
 
     # --------------------------------------------------------
-    # Figure 2: normalized P_hat(T) with normalized theory
+    # Figure 2: normalised P_hat(T) with normalised theory
     # --------------------------------------------------------
     plt.figure(figsize=(8, 5))
     for case in cases:
@@ -868,9 +868,9 @@ def plot_results(results: Dict[str, Dict[str, np.ndarray]], p: SFTParams, outdir
     for case in cases:
         plt.plot(Tfine, theory_normalized(Tfine, p, case), "--", alpha=0.8, label=f"Theory: {labels[case]}")
     plt.axhline(1.0, linewidth=1)
-    plt.xlabel(r"Normalized cycle amplitude $T$")
-    plt.ylabel(r"Normalized response $\hat{P}(T)=P(T)/P(1)$")
-    plt.title(r"Normalized nonlinear response")
+    plt.xlabel(r"Normalised cycle amplitude $T$")
+    plt.ylabel(r"Normalised response $\hat{P}(T)=P(T)/P(1)$")
+    plt.title(r"Normalised nonlinear response")
     plt.legend(fontsize=7, ncol=2)
     plt.tight_layout()
     plt.savefig(os.path.join(outdir, "fig2_normalized_response_vs_theory.png"), dpi=200)
@@ -883,9 +883,9 @@ def plot_results(results: Dict[str, Dict[str, np.ndarray]], p: SFTParams, outdir
     for case in cases:
         plt.plot(results[case]["T"], results[case]["R_hat"], "o-", label=labels[case])
     plt.axhline(0.0, linewidth=1)
-    plt.xlabel(r"Normalized cycle amplitude $T$")
+    plt.xlabel(r"Normalised cycle amplitude $T$")
     plt.ylabel(r"$d\hat{P}/dT$")
-    plt.title(r"Normalized nonlinear response function")
+    plt.title(r"Normalised nonlinear response function")
     plt.legend(fontsize=8)
     plt.tight_layout()
     plt.savefig(os.path.join(outdir, "fig3_normalized_nonlinear_response.png"), dpi=200)
@@ -898,7 +898,7 @@ def plot_results(results: Dict[str, Dict[str, np.ndarray]], p: SFTParams, outdir
     for case in cases:
         plt.plot(results[case]["T"], results[case]["D"], "o-", label=labels[case])
     plt.axhline(0.0, linewidth=1)
-    plt.xlabel(r"Normalized cycle amplitude $T$")
+    plt.xlabel(r"Normalised cycle amplitude $T$")
     plt.ylabel(r"Signed axial dipole $D(T)$")
     plt.title(r"Signed axial dipole response")
     plt.legend(fontsize=8)
@@ -912,7 +912,7 @@ def plot_results(results: Dict[str, Dict[str, np.ndarray]], p: SFTParams, outdir
     plt.figure(figsize=(8, 5))
     for case in cases:
         plt.plot(results[case]["T"], results[case]["P_polar"], "o-", label=labels[case])
-    plt.xlabel(r"Normalized cycle amplitude $T$")
+    plt.xlabel(r"Normalised cycle amplitude $T$")
     plt.ylabel(r"Polar-cap proxy")
     plt.title(r"Polar-cap field response, secondary diagnostic")
     plt.legend(fontsize=8)
@@ -927,7 +927,7 @@ def plot_results(results: Dict[str, Dict[str, np.ndarray]], p: SFTParams, outdir
     for case in cases:
         q = Q_theory(Tfine, p, case)
         plt.plot(Tfine, q, label=labels[case])
-    plt.xlabel(r"Normalized cycle amplitude $T$")
+    plt.xlabel(r"Normalised cycle amplitude $T$")
     plt.ylabel(r"Nonlinear efficiency $Q(T)$")
     plt.title(r"Reduced nonlinear efficiency factors")
     plt.legend(fontsize=8)
@@ -946,7 +946,7 @@ def plot_results(results: Dict[str, Dict[str, np.ndarray]], p: SFTParams, outdir
         Deff = D0 * Q_theory(Tfine, p, case)
         plt.plot(Tfine, Deff, label=labels[case])
     plt.axhline(1.0, linewidth=1, linestyle="--")
-    plt.xlabel(r"Normalized cycle amplitude $T$")
+    plt.xlabel(r"Normalised cycle amplitude $T$")
     plt.ylabel(r"Effective gain $D_{\rm eff}=D_0Q(T)$")
     plt.title(r"Finite-amplitude saturation condition")
     plt.legend(fontsize=8)
