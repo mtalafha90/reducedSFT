@@ -436,6 +436,23 @@ def run_feedback(mdl: Model, k_gains: np.ndarray, n_cycles: int, T0: float = 1.0
     return out
 
 
+def is_modulated(T_seq: np.ndarray, n_keep: int) -> np.ndarray:
+    """True where the even-odd alternation of T_n persists (columns).
+
+    Near a multiplier of -1 a transient alternation decays very slowly, so
+    a fixed tolerance on the spread would misread it as modulation. The
+    alternation is taken as persistent if it is not decaying: its amplitude
+    over the last n_keep cycles is at least 0.99 times that over the
+    preceding n_keep cycles (a decaying transient at multiplier M gives
+    |M|^n_keep, e.g. 0.79 for M = -0.99), and not negligibly small.
+    """
+    def amp(X):
+        return np.abs(X[1:] - X[:-1]).mean(axis=0) / X.mean(axis=0)
+    late = amp(T_seq[-n_keep:])
+    early = amp(T_seq[-2 * n_keep:-n_keep])
+    return (late > 1e-6) & (late >= 0.99 * early)
+
+
 def run_scalar_map(k: float, n_cycles: int, T_tab, P_tab, r: float, T0: float = 1.0):
     """Scalar memory map D_n = s_n P(T_n) + r D_{n-1}, T_{n+1} = k |D_n|."""
     T, s, D_prev = T0, 1.0, 0.0
@@ -635,8 +652,7 @@ if __name__ == "__main__":
         T_map = np.column_stack([run_scalar_map(k, 4000, T_tab, P_tabs[name],
                                                 thr["r_star_T1"]) for k in D0s / a])
         bif[name] = (D0s, T_full, T_map)
-        rel = lambda X: np.ptp(X[-n_keep:], axis=0) / np.mean(X[-n_keep:], axis=0)
-        mod_full, mod_map = rel(T_full) > 1e-3, rel(T_map) > 1e-3
+        mod_full, mod_map = is_modulated(T_full, n_keep), is_modulated(T_map, n_keep)
         on_full = D0s[np.argmax(mod_full)] if mod_full.any() else np.nan
         on_map = D0s[np.argmax(mod_map)] if mod_map.any() else np.nan
         print(f"[3b] {name}: first modulated gain in the scan: complete SFT "
