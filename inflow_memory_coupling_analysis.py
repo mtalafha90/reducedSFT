@@ -382,23 +382,28 @@ def full_state_stability(mdl: Model, Tstar: float, a: float, h: float = 1e-4):
     c_old = (GB[:, 0] - GB[:, 1]) / (2 * h)
     c_new = (bb[:, 0] - bb[:, 1]) / (2 * h)
 
-    def leading(J):
-        ev = np.linalg.eigvals(J)
-        return ev[np.argmax(np.abs(ev))]
-
-    lead = leading(-G - k * np.outer(c_old - c_new, mdl.w))
-    lead_frozen = leading(-G + k * np.outer(c_new, mdl.w))
     r_star = float(mdl.w @ (G @ Bs)) / Ds
     rr = mdl.dipole(GB) / Ds
     Tr_prime = Tstar * float(rr[0] - rr[1]) / (2 * h)
     Pp = mdl.dipole(bb)
     P = float(mdl.w @ b)
     q = 1.0 - Tstar * float(Pp[0] - Pp[1]) / (2 * h) / P
+    scalar = 1.0 - (1.0 + r_star) * q - Tr_prime
+
+    def feedback_branch(J):
+        # The eigenvalue continuing the dipole-feedback branch (closest to
+        # the scalar multiplier), and the spectral radius. Near a multiplier
+        # of 0 a non-dipolar mode of -G (|eigenvalue| < 0.1) can have the
+        # larger modulus; it plays no part in the crossing of -1.
+        ev = np.linalg.eigvals(J)
+        return ev[np.argmin(np.abs(ev - scalar))], float(np.max(np.abs(ev)))
+
+    full, rho_full = feedback_branch(-G - k * np.outer(c_old - c_new, mdl.w))
+    frozen, _ = feedback_branch(-G + k * np.outer(c_new, mdl.w))
     return dict(T=Tstar, D0=k * a, Dstar=Ds, k=k, P=P, q=q,
-                full=float(lead.real), full_imag=float(abs(lead.imag)),
-                frozen=float(lead_frozen.real),
-                scalar=1.0 - (1.0 + r_star) * q - Tr_prime,
-                r_star=r_star, Tr_prime=Tr_prime)
+                full=float(full.real), full_imag=float(abs(full.imag)),
+                spectral_radius=rho_full, frozen=float(frozen.real),
+                scalar=scalar, r_star=r_star, Tr_prime=Tr_prime)
 
 
 def scalar_map_threshold(T_grid, P_new, a, r_const):
@@ -612,7 +617,9 @@ if __name__ == "__main__":
 
     # --- 3. stability of the complete field evolution -------------------------
     T_star = np.round(np.arange(0.70, 1.801, 0.05), 3)
-    T_tab = np.linspace(0.3, 2.5, 111)
+    # Fine table: the scalar map interpolates P(T) linearly, and its slope
+    # must match the smooth derivative used for the analytic threshold.
+    T_tab = np.linspace(0.3, 2.5, 441)
     stab, P_tabs = {}, {}
     for name, c in configs.items():
         stab[name] = stability_scan(pool, p, c, a, T_star)
@@ -628,12 +635,14 @@ if __name__ == "__main__":
         for key in ("full", "frozen", "scalar", "const_r"):
             summary.append((f"D0_pd_{key}[{name}]", thr[key]))
     with open(os.path.join(OUTDIR, "stability_scan.csv"), "w", encoding="utf-8") as f:
-        f.write("config,T_star,D0,q,r_star,T_dr_dT,mult_full,mult_frozen,mult_scalar\n")
+        f.write("config,T_star,D0,q,r_star,T_dr_dT,mult_full,mult_frozen,mult_scalar,"
+                "spectral_radius\n")
         for name, (rows, _) in stab.items():
             for r in rows:
                 f.write(f"{name},{r['T']:.3f},{r['D0']:.6f},{r['q']:.6f},"
                         f"{r['r_star']:.6f},{r['Tr_prime']:.6f},{r['full']:.6f},"
-                        f"{r['frozen']:.6f},{r['scalar']:.6f}\n")
+                        f"{r['frozen']:.6f},{r['scalar']:.6f},"
+                        f"{r['spectral_radius']:.6f}\n")
 
     # --- 3b. nonlinear multi-cycle check ----------------------------------------
     # Gains bracket both thresholds; transients near a multiplier of -1 decay
@@ -735,6 +744,7 @@ if __name__ == "__main__":
                                                                inflow_centre="shifted")),
         "decay tau = 8 yr": (replace(p, tau_yr=8.0), REF),
         "grid N_mu = 361": (replace(p, nmu=361), REF),
+        "grid N_mu = 721": (replace(p, nmu=721), REF),
         "time step 0.5 day": (replace(p, dt_days=0.5), REF),
     }
     ctrl_rows = []
@@ -769,7 +779,7 @@ if __name__ == "__main__":
         keys = list(ctrl_rows[0].keys())
         f.write(",".join(keys) + "\n")
         for row in ctrl_rows:
-            f.write(",".join(str(row[k]) if k == "name" else f"{row[k]:.6g}"
+            f.write(",".join(f"\"{row[k]}\"" if k == "name" else f"{row[k]:.6g}"
                              for k in keys) + "\n")
     pool.shutdown()
 
@@ -814,8 +824,12 @@ if __name__ == "__main__":
     x = np.arange(3)
     for j, (name, hatch) in enumerate((("inflows 2 m/s", ""), ("inflows 5 m/s", "//"))):
         vals = budgets[name][:3]
-        ax0.bar(x + (j - 0.5) * 0.36, vals, width=0.34, color=styles[name][0],
+        xs = x + (j - 0.5) * 0.36
+        ax0.bar(xs, vals, width=0.34, color=styles[name][0],
                 hatch=hatch, edgecolor="white", label=name)
+        # The inherited-flux bars are too small to see: label their values.
+        ax0.annotate(f"{vals[2]:+.1e}", (xs[2], vals[2]), xytext=(0, 6 + 12 * j),
+                     textcoords="offset points", ha="center", fontsize=7)
     ax0.axhline(0.0, color="0.3", linewidth=0.8)
     ax0.set_xticks(x)
     ax0.set_xticklabels(labels, fontsize=8)
@@ -896,7 +910,7 @@ if __name__ == "__main__":
         ax.text(0.03, 0.94, lab, transform=ax.transAxes, fontsize=9)
         ax.grid(alpha=0.25)
     axes[0].set_ylabel(r"Error of $s_n(D_n-\rho D_{n-1})$ relative to $P(T_n)$ [%]")
-    axes[1].legend(fontsize=8, loc="lower right")
+    axes[1].legend(fontsize=8, loc="upper right")
     fig.tight_layout()
     fig.savefig(os.path.join(OUTDIR, "figI5_scalar_subtraction.png"), dpi=200)
     plt.close(fig)
