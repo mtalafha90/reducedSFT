@@ -728,6 +728,8 @@ if __name__ == "__main__":
         "reference (2 m/s)": (p, REF),
         "envelope-timed inflow": (p, replace(REF, inflow_amp_m_s=amp_env,
                                              inflow_timing="envelope")),
+        "shifted belt, no inflow": (p_shift, replace(REF, lat_mode="shift",
+                                                     inflow_amp_m_s=0.0)),
         "shifted belt, fixed-centre inflow": (p_shift, replace(REF, lat_mode="shift")),
         "shifted belt, inflow follows belt": (p_shift, replace(REF, lat_mode="shift",
                                                                inflow_centre="shifted")),
@@ -753,7 +755,7 @@ if __name__ == "__main__":
         rf = tab.result()
         rp = [x.result()[0] for x in tabp]
         row = dict(name=name, inflow_reduction_T1=1.0 - P1 / Plin,
-                   ratio_inherited_to_new=told / tnew,
+                   ratio_inherited_to_new=told / tnew if tnew != 0.0 else np.nan,
                    dr_flow=rf[1] - rf[0], dr_profile=rp[1] - rp[0],
                    D0_full=thr["full"], D0_frozen=thr["frozen"],
                    D0_scalar=thr["scalar"])
