@@ -909,12 +909,23 @@ if __name__ == "__main__":
         T_peak = crossing(Ts_, [r["Tdln_Ps"] for r in rows], 0.0)
         q_pd = float(np.interp(T_pd, Ts_, [r["q"] for r in rows]))
         u_pd = 1.0 - float(np.interp(T_pd, Ts_, [r["r1"] for r in rows]))
+        # Critical stiffness of the scalar map at the same amplitude.
+        q_scalar = 2.0 / (1.0 + float(np.interp(T_pd, Ts_, [r["r_star"] for r in rows])))
+        rel = {key: thr[key] / thr["full"] - 1.0
+               for key in ("frozen", "two_var", "scalar", "const_r", "clean_r")}
         print(f"[3] {name}: complete-field threshold at T* = {T_pd:.4f} "
-              f"(stiffness q* = {q_pd:.4f}); settled dipole of the new flux "
-              f"peaks at T = {T_peak:.4f}; unsettled fraction there {u_pd:.4f}")
+              f"(stiffness q* = {q_pd:.4f}; scalar map 2/(1+r*) = {q_scalar:.4f}); "
+              f"settled dipole of the new flux peaks at T = {T_peak:.4f}; "
+              f"unsettled fraction at the threshold {u_pd:.4f}")
+        print(f"[3] {name}: threshold relative to the complete field: frozen "
+              f"{100*rel['frozen']:+.3f}%, settled-dipole map {100*rel['two_var']:+.3f}%, "
+              f"scalar r(T) {100*rel['scalar']:+.2f}%, r*(1) {100*rel['const_r']:+.2f}%, "
+              f"clean-slate r {100*rel['clean_r']:+.2f}%")
         summary += [(f"T_star_pd_full[{name}]", T_pd), (f"q_star_pd_full[{name}]", q_pd),
+                    (f"q_star_pd_scalar_map[{name}]", q_scalar),
                     (f"T_peak_settled_dipole[{name}]", T_peak),
                     (f"unsettled_fraction_at_pd[{name}]", u_pd)]
+        summary += [(f"D0_pd_rel_to_full_{key}[{name}]", val) for key, val in rel.items()]
         summary += [(f"two_var_max_multiplier_diff[{name}]", closure),
                     (f"r1_first_cycle_survival_T1[{name}]", row1["r1"]),
                     (f"lambda1_settled_survival_T1[{name}]", row1["lam1"]),
@@ -1107,13 +1118,18 @@ if __name__ == "__main__":
                    ratio_inherited_to_new=told / tnew if tnew != 0.0 else np.nan,
                    dr_flow=rf[1] - rf[0], dr_profile=rp[1] - rp[0],
                    D0_full=thr["full"], D0_frozen=thr["frozen"],
-                   D0_two_var=thr["two_var"], D0_scalar=thr["scalar"])
+                   D0_two_var=thr["two_var"], D0_scalar=thr["scalar"],
+                   rel_frozen=thr["frozen"] / thr["full"] - 1.0,
+                   rel_two_var=thr["two_var"] / thr["full"] - 1.0,
+                   rel_scalar=thr["scalar"] / thr["full"] - 1.0)
         ctrl_rows.append(row)
         print(f"[5] {name}: inflow reduction at T=1 {100*row['inflow_reduction_T1']:.1f}%, "
               f"inherited/new transport term {row['ratio_inherited_to_new']:+.4f}, "
               f"dr flow {row['dr_flow']:+.4f}, dr profile {row['dr_profile']:+.4f}, "
               f"D0_pd complete {thr['full']:.4f} frozen {thr['frozen']:.4f} "
-              f"settled-dipole {thr['two_var']:.4f} scalar {thr['scalar']:.4f}")
+              f"settled-dipole {thr['two_var']:.4f} scalar {thr['scalar']:.4f} "
+              f"(relative to complete: {100*row['rel_frozen']:+.3f}%, "
+              f"{100*row['rel_two_var']:+.3f}%, {100*row['rel_scalar']:+.2f}%)")
     with open(os.path.join(OUTDIR, "controls.csv"), "w", encoding="utf-8") as f:
         keys = list(ctrl_rows[0].keys())
         f.write(",".join(keys) + "\n")
@@ -1121,6 +1137,22 @@ if __name__ == "__main__":
             f.write(",".join(f"\"{row[k]}\"" if k == "name" else f"{row[k]:.6g}"
                              for k in keys) + "\n")
     pool.shutdown()
+
+    # Grid-convergence trend over N_mu = 181, 361, 721: ratio of successive
+    # differences and the limit it implies if that ratio persists (a rough
+    # guide only; the scheme is first order in space).
+    by_name = {row["name"]: row for row in ctrl_rows}
+    grids = ("reference (2 m/s)", "grid N_mu = 361", "grid N_mu = 721")
+    if all(g in by_name for g in grids):
+        for key in ("D0_full", "D0_scalar", "rel_scalar", "rel_frozen",
+                    "dr_profile", "dr_flow", "ratio_inherited_to_new"):
+            v = [by_name[g][key] for g in grids]
+            d1, d2 = v[1] - v[0], v[2] - v[1]
+            ratio = d2 / d1 if d1 != 0.0 else np.nan
+            limit = v[2] + d2 * ratio / (1.0 - ratio) if 0.0 < ratio < 1.0 else np.nan
+            print(f"[5] grid trend {key}: {v[0]:.5g}, {v[1]:.5g}, {v[2]:.5g}; ratio of "
+                  f"successive differences {ratio:.2f}; implied limit {limit:.5g}")
+            summary += [(f"grid_ratio[{key}]", ratio), (f"grid_limit[{key}]", limit)]
 
     with open(os.path.join(OUTDIR, "inflow_memory_results.csv"), "w", encoding="utf-8") as f:
         f.write("quantity,value\n")
