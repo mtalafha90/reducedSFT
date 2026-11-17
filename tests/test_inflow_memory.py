@@ -10,7 +10,9 @@ Regression tests for the inflow-memory coupling analysis
 - the Hale-alternating periodic state maps onto its negative;
 - the two-variable settled-dipole map has the fixed point and the leading
   multiplier of the complete field, and follows a multi-cycle SFT run
-  cycle by cycle.
+  cycle by cycle;
+- the weight that defines the settled dipole is the dipole-yield kernel at
+  the start of a cycle.
 
 Total runtime is of the order of one minute.
 """
@@ -25,6 +27,7 @@ import pytest
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import nonlinear_response_sft_experiment as nre  # noqa: E402
+import mathematical_framework_analysis as mfa  # noqa: E402
 import inflow_memory_coupling_analysis as imc  # noqa: E402
 
 
@@ -99,3 +102,21 @@ def test_settled_dipole_map_follows_multicycle_sft(ref_model):
     T_two = imc.run_settled_map(k, n_cycles, T_tab, P_tab, T_flow_tab, Ps_tab, lam_tab)
     assert T_sft.min() > T_tab[0] and T_sft.max() < T_tab[-1]
     assert np.max(np.abs(T_two - T_sft)) < 2e-3
+
+
+def test_settled_dipole_weight_is_start_of_cycle_kernel():
+    # For fixed transport the settled dipole of a field B is w^T G B. The
+    # weight G^T w is the adjoint dipole-yield kernel at the start of a
+    # cycle (advanced by the one explicit step that precedes its first
+    # implicit solve), so the settled dipole needs no new machinery.
+    p = nre.SFTParams()
+    grid = nre.make_grid(p)
+    A, M = mfa.build_operators(p, grid)
+    K, w = mfa.adjoint_kernel(p, grid, A, M)
+    mdl = imc.Model(p, imc.Coupling(inflow_amp_m_s=0.0, lat_mode="none"))
+    settled_weight = mdl.propagator(1.0).T @ w
+    kernel_start = (np.eye(p.nmu) + float(grid["dt"]) * A).T @ K[0]
+    assert np.max(np.abs(settled_weight - kernel_start)) < 1e-10 * np.max(np.abs(settled_weight))
+    # First-cycle survival of a linear cycle: the published r = 0.994.
+    b = mdl.new_flux(1.0)[:, 0]
+    assert abs(settled_weight @ b / (w @ b) - 0.993962) < 2e-6

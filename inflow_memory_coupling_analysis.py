@@ -748,7 +748,7 @@ def make_figures(res: dict) -> None:
     plt.close(fig)
 
     # I4: nonlinear multi-cycle attractors
-    fig, axes = plt.subplots(1, 2, figsize=(11, 4.6))
+    fig, axes = plt.subplots(1, len(bif), figsize=(5.4 * len(bif), 4.6))
     for ax, (name, (D0s, T_full, T_map, T_two)) in zip(axes, bif.items()):
         thr = stab[name][1]
         for j, D0 in enumerate(D0s):
@@ -951,9 +951,13 @@ if __name__ == "__main__":
     bif, futs = {}, {}
     half = max(os.cpu_count() // 2, 1)
     T_flow_tab = np.linspace(0.3, 2.5, 4 if QUICK else 12)
-    for name in ("inflows 2 m/s", "inflows 5 m/s"):
+    # With fixed transport the two thresholds lie close together, so the
+    # gains are spaced more finely there.
+    margin = {"fixed transport": 0.03, "inflows 2 m/s": 0.12, "inflows 5 m/s": 0.12}
+    for name in configs:
         thr = stab[name][1]
-        D0s = np.linspace(thr["full"] - 0.12, thr["const_r"] + 0.12, n_gain)
+        D0s = np.linspace(thr["full"] - margin[name], thr["const_r"] + margin[name],
+                          n_gain)
         futs[name] = (D0s,
                       [pool.submit(_job_feedback, (p, configs[name], ch, n_cyc))
                        for ch in np.array_split(D0s / a, half)],
@@ -1006,6 +1010,82 @@ if __name__ == "__main__":
                     (f"cycle_by_cycle_max_diff_two_var[{name}]", w_two),
                     (f"attractor_max_diff_two_var[{name}]", at_two),
                     (f"attractor_max_diff_scalar[{name}]", at_map)]
+
+    # --- 3c. the published multi-cycle configuration ---------------------------
+    # Latitude and inflow quenching as source factors, fixed transport, tau =
+    # infinity: the configuration of the scalar memory map in the manuscript.
+    # Its quoted existence threshold, period-doubling gain and multipliers
+    # are compared with the complete field.
+    mdl_fix = Model(p, FIXED)
+    w_fix = mdl_fix.w
+    G_fix = mdl_fix.propagator(1.0)        # no inflows: independent of amplitude
+    T_ms = np.linspace(0.05, 2.0, 40 if QUICK else 391)
+    b_ms = mdl_fix.new_flux(T_ms)
+    P_ms = w_fix @ b_ms
+    Q_ms = P_ms / (a * T_ms)
+    q_ms = -T_ms * np.gradient(np.log(Q_ms), T_ms, edge_order=2)
+    D0_ms = a * T_ms / (w_fix @ np.linalg.solve(np.eye(mdl_fix.n) + G_fix, b_ms))
+    b_lin = mdl_lin.new_flux(1.0)[:, 0]
+    D0_exist = a / float(w_fix @ np.linalg.solve(np.eye(mdl_fix.n) + G_fix, b_lin))
+    pub = [("r_clean_slate", r_clean),
+           ("existence_gain_scalar_map", 1.0 + r_clean),
+           ("existence_gain_complete_field", D0_exist),
+           ("period_doubling_gain_scalar_map", stab["fixed transport"][1]["clean_r"]),
+           ("period_doubling_gain_complete_field", stab["fixed transport"][1]["full"])]
+    print(f"[3c] published configuration: existence gain {1.0 + r_clean:.4f} (scalar "
+          f"map) vs {D0_exist:.4f} (complete field); period doubling "
+          f"{stab['fixed transport'][1]['clean_r']:.4f} vs "
+          f"{stab['fixed transport'][1]['full']:.4f}")
+    gains = (2.05, 2.50, 3.20)
+    T_c = [float(np.interp(g, D0_ms, T_ms)) for g in gains]
+    rows_c = list(pool.map(_job_stability, [(p, FIXED, a, T) for T in T_c]))
+    for g, row in zip(gains, rows_c):
+        # Scalar map of the manuscript: fixed point D0 Q(T*) = 1 + r.
+        T_s = float(np.interp((1.0 + r_clean) / g, Q_ms[::-1], T_ms[::-1]))
+        m_s = 1.0 - (1.0 + r_clean) * float(np.interp(T_s, T_ms, q_ms))
+        m_c = row["full"]
+        n_s, n_c = -1.0 / np.log(abs(m_s)), -1.0 / np.log(abs(m_c))
+        print(f"[3c] D0 = {g:.2f}: scalar map T* = {T_s:.4f}, multiplier {m_s:+.4f}, "
+              f"relaxation {n_s:.2f} cycles; complete field T* = {row['T']:.4f} "
+              f"(gain check {row['D0']:.4f}), multiplier {m_c:+.4f}, relaxation "
+              f"{n_c:.2f} cycles; settled-dipole map {row['two_var']:+.4f}")
+        pub += [(f"T_star_scalar_map[D0={g}]", T_s), (f"multiplier_scalar_map[D0={g}]", m_s),
+                (f"relaxation_cycles_scalar_map[D0={g}]", n_s),
+                (f"T_star_complete_field[D0={g}]", row["T"]),
+                (f"multiplier_complete_field[D0={g}]", m_c),
+                (f"relaxation_cycles_complete_field[D0={g}]", n_c),
+                (f"multiplier_settled_dipole_map[D0={g}]", row["two_var"])]
+    # Fastest relaxation. The scalar map has a multiplier of exactly zero at
+    # q = 1/(1+r). The complete field has two dipole eigenvalues, the roots
+    # of mu^2 - (k P' - lambda_1) mu + k (P_s' - lambda_1 P') = 0, which never
+    # vanish together; its spectral radius has a non-zero minimum.
+    Gb_ms = G_fix @ b_ms
+    Ps_ms = w_fix @ Gb_ms
+    lam_fix = float(w_fix @ (G_fix @ Gb_ms[:, -1]) / Ps_ms[-1])
+    k_ms = T_ms / (P_ms - Ps_ms / (1.0 + lam_fix))
+    dP_ms = np.gradient(P_ms, T_ms, edge_order=2)
+    dPs_ms = np.gradient(Ps_ms, T_ms, edge_order=2)
+    tr_ms = k_ms * dP_ms - lam_fix
+    det_ms = k_ms * (dPs_ms - lam_fix * dP_ms)
+    disc = np.sqrt(tr_ms**2 - 4.0 * det_ms + 0j)
+    rho_ms = np.maximum(np.abs((tr_ms + disc) / 2.0), np.abs((tr_ms - disc) / 2.0))
+    i_min = int(np.argmin(rho_ms))
+    rho_min, D0_min, T_min = float(rho_ms[i_min]), float(a * k_ms[i_min]), float(T_ms[i_min])
+    T_zero = float(np.interp(1.0 / (1.0 + r_clean), q_ms, T_ms))
+    D0_zero = (1.0 + r_clean) / float(np.interp(T_zero, T_ms, Q_ms))
+    print(f"[3c] fastest relaxation: scalar map multiplier 0 at D0 = {D0_zero:.4f}; "
+          f"complete field (settled-dipole formula) smallest spectral radius "
+          f"{rho_min:.4f} at D0 = {D0_min:.4f} (T* = {T_min:.3f}), i.e. "
+          f"{-1.0 / np.log(rho_min):.2f} cycles")
+    pub += [("gain_of_zero_multiplier_scalar_map", D0_zero),
+            ("smallest_spectral_radius_complete_field", rho_min),
+            ("gain_of_smallest_spectral_radius", D0_min),
+            ("fastest_relaxation_cycles_complete_field", -1.0 / np.log(rho_min))]
+    with open(os.path.join(OUTDIR, "published_configuration.csv"), "w",
+              encoding="utf-8") as f:
+        f.write("quantity,value\n")
+        for key, val in pub:
+            f.write(f"\"{key}\",{val:.6g}\n")
 
     # --- 4. scalar remnant subtraction along a prescribed sequence ------------
     rng = np.random.default_rng(2026)
