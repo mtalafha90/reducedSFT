@@ -84,9 +84,12 @@ multi-cycle SFT quantitatively (Figures M2, M3):
 * **Fixed points.** At D₀ = 3.69 the SFT mean amplitude is 1.309 against
   the memory map's 1.311 (memoryless: 1.901).
 * **Period-doubling onset.** The SFT attractor bifurcates to period-2
-  exactly at the memory-corrected analytic boundary **D₀ = 3.35**
-  (memoryless prediction: 2.81) and follows the memory map's attractor
-  through the subsequent cascade (Figure M3).
+  at the memory-corrected analytic boundary **D₀ = 3.35**, to the
+  resolution of this gain scan (memoryless prediction: 2.81), and follows
+  the memory map's attractor through the subsequent cascade (Figure M3).
+  The leading multiplier of the complete field reaches −1 at D₀ = 3.335,
+  0.5 per cent lower; the cause and an exact two-variable correction are
+  in `inflow_memory_coupling.md`, Section 4.
 * **Phase-locked modulation.** In the period-2 regime the memory map tracks
   the SFT *cycle by cycle*, including the phase of the even–odd
   alternation (Figure M2, middle panel). In the chaotic regime individual

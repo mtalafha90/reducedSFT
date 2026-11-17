@@ -1,0 +1,173 @@
+quantity,value
+"linear_yield_a",0.167836
+"validation_max_rel_diff",1.81028e-14
+"dr_flow_0.5_to_1.5[fixed transport]",0
+"dr_profile_0.5_to_1.5[fixed transport]",-0.00068838
+"dr_flow_0.5_to_1.5[inflows 2 m/s]",-0.00179828
+"dr_profile_0.5_to_1.5[inflows 2 m/s]",-0.0126263
+"dr_flow_0.5_to_1.5[inflows 5 m/s]",-0.00490347
+"dr_profile_0.5_to_1.5[inflows 5 m/s]",-0.0761974
+"budget_source[inflows 2 m/s]",0.09196
+"budget_transport_new[inflows 2 m/s]",-0.035237
+"budget_transport_inherited[inflows 2 m/s]",0.000119962
+"budget_adjoint_vs_fd_max_rel[inflows 2 m/s]",1.57079e-07
+"budget_source[inflows 5 m/s]",0.0751898
+"budget_transport_new[inflows 5 m/s]",-0.0698277
+"budget_transport_inherited[inflows 5 m/s]",0.000275727
+"budget_adjoint_vs_fd_max_rel[inflows 5 m/s]",3.59888e-07
+"r_clean_slate",0.993962
+"D0_pd_full[fixed transport]",3.33527
+"D0_pd_frozen[fixed transport]",3.33527
+"D0_pd_two_var[fixed transport]",3.33527
+"D0_pd_scalar[fixed transport]",3.34722
+"D0_pd_const_r[fixed transport]",3.34715
+"D0_pd_clean_r[fixed transport]",3.35216
+"T_star_pd_full[fixed transport]",1.28907
+"q_star_pd_full[fixed transport]",0.999407
+"q_star_pd_scalar_map[fixed transport]",1.00632
+"T_peak_settled_dipole[fixed transport]",1.28908
+"unsettled_fraction_at_pd[fixed transport]",0.00632517
+"D0_pd_rel_to_full_frozen[fixed transport]",0
+"D0_pd_rel_to_full_two_var[fixed transport]",2.84909e-10
+"D0_pd_rel_to_full_scalar[fixed transport]",0.0035832
+"D0_pd_rel_to_full_const_r[fixed transport]",0.00356267
+"D0_pd_rel_to_full_clean_r[fixed transport]",0.00506576
+"two_var_max_multiplier_diff[fixed transport]",1.22987e-07
+"r1_first_cycle_survival_T1[fixed transport]",0.99379
+"lambda1_settled_survival_T1[fixed transport]",0.999986
+"r_star_T1[fixed transport]",0.987671
+"r_star_T1.6[fixed transport]",0.987129
+"Q_bias_const_r_T1.6[fixed transport]",0.000272761
+"D0_pd_full[inflows 2 m/s]",3.18608
+"D0_pd_frozen[inflows 2 m/s]",3.18358
+"D0_pd_two_var[inflows 2 m/s]",3.18615
+"D0_pd_scalar[inflows 2 m/s]",3.22398
+"D0_pd_const_r[inflows 2 m/s]",3.22571
+"D0_pd_clean_r[inflows 2 m/s]",3.23539
+"T_star_pd_full[inflows 2 m/s]",1.31362
+"q_star_pd_full[inflows 2 m/s]",0.988068
+"q_star_pd_scalar_map[inflows 2 m/s]",1.01153
+"T_peak_settled_dipole[inflows 2 m/s]",1.31258
+"unsettled_fraction_at_pd[inflows 2 m/s]",0.011546
+"D0_pd_rel_to_full_frozen[inflows 2 m/s]",-0.000784857
+"D0_pd_rel_to_full_two_var[inflows 2 m/s]",2.07983e-05
+"D0_pd_rel_to_full_scalar[inflows 2 m/s]",0.011896
+"D0_pd_rel_to_full_const_r[inflows 2 m/s]",0.0124392
+"D0_pd_rel_to_full_clean_r[inflows 2 m/s]",0.0154772
+"two_var_max_multiplier_diff[inflows 2 m/s]",0.000145089
+"r1_first_cycle_survival_T1[inflows 2 m/s]",0.99124
+"lambda1_settled_survival_T1[inflows 2 m/s]",0.999981
+"r_star_T1[inflows 2 m/s]",0.982651
+"r_star_T1.6[inflows 2 m/s]",0.968646
+"Q_bias_const_r_T1.6[inflows 2 m/s]",0.0071141
+"D0_pd_full[inflows 5 m/s]",3.21504
+"D0_pd_frozen[inflows 5 m/s]",3.2109
+"D0_pd_two_var[inflows 5 m/s]",3.21517
+"D0_pd_scalar[inflows 5 m/s]",3.28838
+"D0_pd_const_r[inflows 5 m/s]",3.28431
+"D0_pd_clean_r[inflows 5 m/s]",3.30296
+"T_star_pd_full[inflows 5 m/s]",1.01385
+"q_star_pd_full[inflows 5 m/s]",0.974393
+"q_star_pd_scalar_map[inflows 5 m/s]",1.01552
+"T_peak_settled_dipole[inflows 5 m/s]",1.01247
+"unsettled_fraction_at_pd[inflows 5 m/s]",0.0155354
+"D0_pd_rel_to_full_frozen[inflows 5 m/s]",-0.00128751
+"D0_pd_rel_to_full_two_var[inflows 5 m/s]",4.0808e-05
+"D0_pd_rel_to_full_scalar[inflows 5 m/s]",0.0228131
+"D0_pd_rel_to_full_const_r[inflows 5 m/s]",0.0215464
+"D0_pd_rel_to_full_clean_r[inflows 5 m/s]",0.0273479
+"two_var_max_multiplier_diff[inflows 5 m/s]",0.00235288
+"r1_first_cycle_survival_T1[inflows 5 m/s]",0.984899
+"lambda1_settled_survival_T1[inflows 5 m/s]",0.999969
+"r_star_T1[inflows 5 m/s]",0.970276
+"r_star_T1.6[inflows 5 m/s]",0.869648
+"Q_bias_const_r_T1.6[inflows 5 m/s]",0.0538219
+"nonlinear_onset_full[fixed transport]",3.33881
+"nonlinear_onset_two_var[fixed transport]",3.33881
+"nonlinear_onset_scalar[fixed transport]",3.35319
+"gains_followed_cycle_by_cycle_two_var[fixed transport]",16
+"gains_followed_cycle_by_cycle_scalar[fixed transport]",0
+"cycle_by_cycle_max_diff_two_var[fixed transport]",0.000110335
+"attractor_max_diff_two_var[fixed transport]",8.50312e-05
+"attractor_max_diff_scalar[fixed transport]",0.0567535
+"nonlinear_onset_full[inflows 2 m/s]",3.19658
+"nonlinear_onset_two_var[inflows 2 m/s]",3.19658
+"nonlinear_onset_scalar[inflows 2 m/s]",3.23386
+"gains_followed_cycle_by_cycle_two_var[inflows 2 m/s]",12
+"gains_followed_cycle_by_cycle_scalar[inflows 2 m/s]",0
+"cycle_by_cycle_max_diff_two_var[inflows 2 m/s]",0.0014747
+"attractor_max_diff_two_var[inflows 2 m/s]",0.00048406
+"attractor_max_diff_scalar[inflows 2 m/s]",0.123813
+"nonlinear_onset_full[inflows 5 m/s]",3.21875
+"nonlinear_onset_two_var[inflows 5 m/s]",3.21875
+"nonlinear_onset_scalar[inflows 5 m/s]",3.30122
+"gains_followed_cycle_by_cycle_two_var[inflows 5 m/s]",16
+"gains_followed_cycle_by_cycle_scalar[inflows 5 m/s]",0
+"cycle_by_cycle_max_diff_two_var[inflows 5 m/s]",0.00409632
+"attractor_max_diff_two_var[inflows 5 m/s]",0.000821436
+"attractor_max_diff_scalar[inflows 5 m/s]",0.150465
+"seq_b_true[0.0,inf]",2.07932e-14
+"seq_rms_err[0.0,inf,exp(-P/tau)]",0.00706268
+"seq_max_err[0.0,inf,exp(-P/tau)]",0.0148285
+"seq_b_inferred[0.0,inf,exp(-P/tau)]",-0.00198967
+"seq_rms_err[0.0,inf,best constant r]",0.00479054
+"seq_max_err[0.0,inf,best constant r]",0.013108
+"seq_b_inferred[0.0,inf,best constant r]",0.00112571
+"seq_b_true[2.0,inf]",0.164483
+"seq_rms_err[2.0,inf,exp(-P/tau)]",0.0128174
+"seq_max_err[2.0,inf,exp(-P/tau)]",0.034423
+"seq_b_inferred[2.0,inf,exp(-P/tau)]",0.157669
+"seq_rms_err[2.0,inf,best constant r]",0.00781856
+"seq_max_err[2.0,inf,best constant r]",0.0299008
+"seq_b_inferred[2.0,inf,best constant r]",0.16326
+"seq_b_true[5.0,inf]",0.463477
+"seq_rms_err[5.0,inf,exp(-P/tau)]",0.0529604
+"seq_max_err[5.0,inf,exp(-P/tau)]",0.193914
+"seq_b_inferred[5.0,inf,exp(-P/tau)]",0.423967
+"seq_rms_err[5.0,inf,best constant r]",0.0461384
+"seq_max_err[5.0,inf,best constant r]",0.18669
+"seq_b_inferred[5.0,inf,best constant r]",0.438716
+"seq_b_true[0.0,8.0]",2.28038e-14
+"seq_rms_err[0.0,8.0,exp(-P/tau)]",0.00308173
+"seq_max_err[0.0,8.0,exp(-P/tau)]",0.00648867
+"seq_b_inferred[0.0,8.0,exp(-P/tau)]",-0.0012546
+"seq_rms_err[0.0,8.0,best constant r]",0.000296685
+"seq_max_err[0.0,8.0,best constant r]",0.000856763
+"seq_b_inferred[0.0,8.0,best constant r]",-2.41746e-06
+"seq_b_true[2.0,8.0]",0.145117
+"seq_rms_err[2.0,8.0,exp(-P/tau)]",0.00487664
+"seq_max_err[2.0,8.0,exp(-P/tau)]",0.0121641
+"seq_b_inferred[2.0,8.0,exp(-P/tau)]",0.142331
+"seq_rms_err[2.0,8.0,best constant r]",0.00156174
+"seq_max_err[2.0,8.0,best constant r]",0.00601236
+"seq_b_inferred[2.0,8.0,best constant r]",0.144456
+"seq_b_true[5.0,8.0]",0.407726
+"seq_rms_err[5.0,8.0,exp(-P/tau)]",0.0135892
+"seq_max_err[5.0,8.0,exp(-P/tau)]",0.0438246
+"seq_b_inferred[5.0,8.0,exp(-P/tau)]",0.39672
+"seq_rms_err[5.0,8.0,best constant r]",0.0100652
+"seq_max_err[5.0,8.0,best constant r]",0.0381623
+"seq_b_inferred[5.0,8.0,best constant r]",0.401584
+"reduction_true[2.0,inf]",0.195706
+"reduction_estimated[2.0,inf]",0.191297
+"reduction_true[5.0,inf]",0.387527
+"reduction_estimated[5.0,inf]",0.370488
+"reduction_true[2.0,8.0]",0.178587
+"reduction_estimated[2.0,8.0]",0.177243
+"reduction_true[5.0,8.0]",0.359804
+"reduction_estimated[5.0,8.0]",0.355264
+"envelope_inflow_amplitude_m_s",2.72219
+"grid_ratio[D0_full]",0.627518
+"grid_limit[D0_full]",3.14334
+"grid_ratio[D0_scalar]",0.6661
+"grid_limit[D0_scalar]",3.21043
+"grid_ratio[rel_scalar]",0.617542
+"grid_limit[rel_scalar]",0.0214504
+"grid_ratio[rel_frozen]",-1.01188
+"grid_limit[rel_frozen]",nan
+"grid_ratio[dr_profile]",0.641906
+"grid_limit[dr_profile]",-0.0251184
+"grid_ratio[dr_flow]",0.512622
+"grid_limit[dr_flow]",-0.00192128
+"grid_ratio[ratio_inherited_to_new]",0.699486
+"grid_limit[ratio_inherited_to_new]",-0.00346086

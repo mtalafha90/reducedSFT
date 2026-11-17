@@ -82,8 +82,9 @@ Runtime is a few minutes. All outputs are written to
 
 The exact identities underlying the theory (adjoint duality, operator
 conservativity, stepper equivalence, the closed-form closures, the map
-algebra, the memory parameter, and the end-to-end latitude agreement) are
-pinned by a regression suite that runs in about ten seconds:
+algebra, the memory parameter, the end-to-end latitude agreement, and the
+inflow-memory analysis with its settled-dipole map) are pinned by a
+regression suite that runs in under a minute:
 
 ```bash
 pip install pytest
@@ -177,8 +178,17 @@ point).
   exponentially slow at the reference R_m ≈ 17), so nearly half the gain
   is spent reversing the old polar field. The memory-corrected map
   T[D₀Q − r] restores the agreement: one-step prediction error drops from
-  99 % to 0.6 %, and the SFT bifurcates exactly at the corrected boundary
-  D₀ = 3.35 (memoryless: 2.81).
+  99 % to 0.6 %, and the SFT bifurcates at the corrected boundary
+  D₀ = 3.35 (memoryless: 2.81) to the resolution of the gain scan; the
+  complete-field threshold is 3.335, 0.5 % lower.
+- Inflow–memory coupling (`docs/inflow_memory_coupling.md`):
+  amplitude-dependent transport of the surviving flux is negligible (it
+  moves the onset of modulation by about 0.1 %). The scalar memory map's
+  remaining error, 0.4–2.7 % in the period-doubling gain, comes from flux
+  that has not yet settled at the poles by the end of a cycle. Carrying
+  that settled dipole as a second variable makes the map exact (to
+  0.004 %) and, for τ = ∞, places period doubling where the settled dipole
+  of a cycle stops growing with its amplitude.
 - Across the (η, u₀) plane the effectivity range obeys the quadrature law
   λ_R² = C² η/(2u₀R⊙) + w₀² (C = 1.19, w₀ = 3.5° ≈ the source ring width,
   scatter 5.8 %), and the decay time enters analytically:
