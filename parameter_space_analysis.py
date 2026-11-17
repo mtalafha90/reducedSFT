@@ -224,26 +224,28 @@ if __name__ == "__main__":
     plt.plot(lamR_est[good], lamR_map[good], "o", markersize=4,
              label="measured (adjoint kernel)")
     xs = np.linspace(0.0, np.nanmax(lamR_est) * 1.05, 200)
+    # Labels follow the manuscript's Figure 8: an empirical fit, and the
+    # angular transport scale expressed in degrees.
     plt.plot(xs, np.sqrt(C2 * xs**2 + w02), "--",
-             label=(fr"quadrature law: $(\lambda_R^{{\rm pair}})^2 = ({C_quad:.2f})^2\,\lambda_{{\rm tr}}^2"
+             label=(fr"empirical fit: $(\lambda_R^{{\rm pair}})^2 \simeq ({C_quad:.2f})^2\,\lambda_{{\rm tr}}^2"
                     fr" + ({w0_quad:.1f}^\circ)^2$"))
-    plt.plot(xs, xs, ":", linewidth=1, color="0.6", label="one-to-one (pure transport)")
-    plt.xlabel(r"Transport scale $\lambda_{\rm tr}=\sqrt{\eta/(2u_0R_\odot)}$ [deg]")
+    plt.plot(xs, xs, ":", linewidth=1, color="0.6", label="one-to-one reference")
+    plt.xlabel(r"Transport scale $\lambda_{\rm tr}$ [deg]")
     plt.ylabel(r"Measured $\lambda_R^{\rm pair}$ [deg]")
     plt.legend(fontsize=8)
     plt.tight_layout()
     plt.savefig(os.path.join(OUTDIR, "figP2_lambdaR_scaling.png"), dpi=200)
     plt.close()
 
-    # P3: relative residuals of the quadrature law
+    # P3: relative residuals of the empirical fit
     plt.figure(figsize=(8, 5))
     plt.plot(lamR_map[good], 100.0 * resid_quad, "o", markersize=4)
     plt.axhline(0.0, linewidth=1)
     plt.axhline(100.0 * scatter_quad, linestyle=":", linewidth=1, color="0.5",
-                label=fr"$\pm$ standard deviation ({100*scatter_quad:.1f}\%)")
+                label=fr"$\pm$ standard deviation ({100*scatter_quad:.1f}%)")
     plt.axhline(-100.0 * scatter_quad, linestyle=":", linewidth=1, color="0.5")
     plt.xlabel(r"Measured $\lambda_R^{\rm pair}$ [deg]")
-    plt.ylabel("Relative residual of the quadrature law [\\%]")
+    plt.ylabel("Relative residual of the empirical fit [%]")
     plt.legend(fontsize=8)
     plt.tight_layout()
     plt.savefig(os.path.join(OUTDIR, "figP3_scaling_residuals.png"), dpi=200)

@@ -311,7 +311,7 @@ tilt omitted, τ = ∞). All values are in `published_configuration.csv`.
 | Period-doubling gain, D₀ | 3.352 | 3.335 |
 | Multiplier at D₀ = 2.05 / 2.50 / 3.20 | +0.890 / +0.117 / −0.823 | +0.879 / +0.146 / −0.845 |
 | Relaxation time at D₀ = 2.05 / 2.50 / 3.20 [cycles] | 8.57 / 0.47 / 5.15 | 7.77 / 0.52 / 5.92 |
-| Fastest relaxation | one step (multiplier 0 at D₀ = 2.578) | 0.40 cycles (smallest spectral radius 0.083, at D₀ = 2.565) |
+| Fastest relaxation | one step (multiplier 0 at D₀ = 2.578) | 0.40 cycles (smallest spectral radius 0.082, at D₀ = 2.564) |
 
 The scalar-map column is recomputed here and reproduces the values quoted
 in the manuscript's multi-cycle section. The complete field differs by 0.3
@@ -321,7 +321,10 @@ attractor begins its transition "near the corrected analytic boundary".
 The relaxation times differ by up to 15 per cent (5.92 rather than 5.15
 cycles at D₀ = 3.20). The complete field also has no gain at which
 perturbations vanish in one step: because part of each cycle's flux is
-unsettled, its leading multiplier never falls below 0.083 in modulus.
+unsettled, its leading multiplier never falls below 0.082 in modulus.
+(The table value, 0.0827, is the smallest over the sampled amplitudes; a
+direct minimisation, in the manuscript repository's
+`revisions/settled_dipole/` record, gives 0.0819 at D₀ = 2.564.)
 
 ## 5. Scalar remnant subtraction along a prescribed sequence
 
@@ -433,7 +436,7 @@ decision.
 2. **Two statements hold for the scalar map only.** The sentence "When
    m\* = 0, the linear perturbation vanishes after one step" does not carry
    over to the complete field, whose leading multiplier never falls below
-   0.083. Its relaxation times at D₀ = 2.05, 2.50 and 3.20 are 7.8, 0.52
+   0.082. Its relaxation times at D₀ = 2.05, 2.50 and 3.20 are 7.8, 0.52
    and 5.9 cycles, against the quoted 8.6, 0.47 and 5.2. A referee who asks
    how well the reduced map represents the full field would receive these
    numbers.
