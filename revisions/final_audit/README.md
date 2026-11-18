@@ -38,8 +38,9 @@ The current `../point9/plot_figures.py` and `figure_layout.json` use
 “empirical fit”, an approximate equality, “one-to-one reference”, and the
 axis label “Transport scale lambda_tr [deg]”. (Entry PA03 later redrew all
 eight figures in the journal's artwork style; units are now in parentheses,
-“(deg)”.) Equation (37) in the manuscript gives the degrees conversion
-explicitly. Only Figure 8 was regenerated in
+“(deg)”.) Equation (51) in the manuscript gives the degrees conversion
+explicitly; it was Equation (37) until entry PA09 numbered every displayed
+equation. Only Figure 8 was regenerated in
 this audit. Its frozen coordinates, fitted coefficients, dimensions and font
 sizes are unchanged. The other seven figure PDFs are byte-identical to the
 pre-audit versions. Point 9's original verification reports remain historical
