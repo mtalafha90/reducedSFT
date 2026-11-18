@@ -21,7 +21,7 @@ regular-weight lettering for the accepted version.
 | A key may sit inside the plot frame if it fits without crowding; otherwise it goes in the caption | Springer figure guide | Every key is inside its frame, in a region without data; the script checks that no symbol or curve lies under it |
 | Units in parentheses | Springer figure guide | (arb. units), (deg) |
 | Lines at least 0.1 mm (0.3 pt) wide | Springer artwork guidelines | Thinnest line 0.5 pt (key frame) |
-| Book-sized journals: 80 or 122 mm wide, at most 198 mm high | Springer artwork guidelines; spr-sola text block 122 × 198 mm | 122 mm wide, 104–110 mm high |
+| Book-sized journals: 80 or 122 mm wide, at most 198 mm high | Springer artwork guidelines; spr-sola text block 122 × 198 mm | 122 mm wide, 78–83 mm high (104–110 mm until PA12 made each figure 25% shorter) |
 | Vector graphics with embedded fonts; colour in RGB | Springer artwork guidelines | Vector PDF, no raster images, TrueType fonts embedded, RGB |
 | Patterns as well as colours | Springer accessibility rules | Each series has its own symbol or line style |
 

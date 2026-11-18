@@ -10,7 +10,9 @@ The style follows Springer's artwork rules, which Solar Physics uses
   (Springer: 8-12 pt, with minimal variation). Subscripts and superscripts
   are naturally smaller.
 * The spr-sola text width, 347 pt = 122 mm (Springer's full width for
-  book-sized journals). Every figure is lower than the 198 mm maximum.
+  book-sized journals). Every figure is lower than the 198 mm maximum:
+  78-83 mm since entry PA12 of the manuscript's revision log, which made
+  each figure 25% shorter (104-110 mm before) to shorten the paper.
 * Lines of at least 0.5 pt, RGB colour, vector output, no titles.
 * Each key sits inside the plotting frame, in a region that holds no data;
   save() checks this. Units are given in parentheses.
@@ -58,10 +60,10 @@ DEG = r"\hspace{-0.1}°\hspace{-0.1}"
 # fraction of its range to make an empty strip for the key; it changes no data.
 PLACEMENT = {
     "fig1_main_signed_axial_dipole_response_raw": dict(loc="upper left"),
-    "fig2_normalized_response_vs_theory": dict(loc="upper left"),
-    "fig3_normalized_nonlinear_response": dict(loc="upper right", ncol=2),
+    "fig2_normalized_response_vs_theory": dict(loc="upper left", headroom=.15),
+    "fig3_normalized_nonlinear_response": dict(loc="upper right", ncol=2, headroom=.2),
     "figF4_closure_ladder": dict(loc="lower right"),
-    "figV2_shift_validation": dict(loc="lower left"),
+    "figV2_shift_validation": dict(loc="lower left", headroom=.15),
     "figV4_inflow_validation": dict(loc="lower right"),
     "figM3_bifurcation_comparison": dict(loc="upper left"),
     "figP2_lambdaR_scaling": dict(loc="upper left"),
@@ -148,7 +150,7 @@ def covered(fig, ax, lg) -> int:
 
 
 def fig1(place):
-    fig, ax = axes("Final signed axial dipole\n" + r"$P(T)$ (arb. units)", 4.1)
+    fig, ax = axes("Final signed axial dipole\n" + r"$P(T)$ (arb. units)", 3.08)
     for i, case in enumerate(CASES):
         ax.plot(T, DATA[f"{case}_P_signed_main"], marker=MARKERS[i], color=f"C{i}", label=LABELS[i])
     reference(ax, y=0.)
@@ -157,7 +159,7 @@ def fig1(place):
 
 
 def fig2(place):
-    fig, ax = axes("Normalised response\n" + r"$\hat{P}(T)=P(T)/P(1)$", 4.3)
+    fig, ax = axes("Normalised response\n" + r"$\hat{P}(T)=P(T)/P(1)$", 3.23)
     for i, case in enumerate(CASES):
         ax.plot(DATA["Tfine"], DATA[f"{case}_theory"], "--", color=f"C{i}", zorder=2)
         ax.plot(T, DATA[f"{case}_P_hat"], ls="none", marker=MARKERS[i], color=f"C{i}",
@@ -168,7 +170,7 @@ def fig2(place):
 
 
 def fig3(place):
-    fig, ax = axes(r"$\mathrm{d}\hat{P}/\mathrm{d}T$", 4.1)
+    fig, ax = axes(r"$\mathrm{d}\hat{P}/\mathrm{d}T$", 3.08)
     for i, case in enumerate(CASES):
         ax.plot(T, DATA[f"{case}_R_hat"], marker=MARKERS[i], color=f"C{i}", label=LABELS[i])
     reference(ax, y=0.)
@@ -177,7 +179,7 @@ def fig3(place):
 
 
 def fig4(place):
-    fig, ax = axes(r"Normalised response $\hat{P}(T)$", 4.35)
+    fig, ax = axes(r"Normalised response $\hat{P}(T)$", 3.26)
     ax.plot(T, DATA["latitude_P_hat"], "o", color="C0", ls="none", label="SFT latitude case", zorder=3)
     for k, ls, col, label in (
             ("exact", "-", "C1", "exact kernel average"),
@@ -191,7 +193,7 @@ def fig4(place):
 
 
 def fig5(place):
-    fig, ax = axes("Latitude-quenching efficiency\n" + r"$Q(T)=D/(aT)$", 4.35)
+    fig, ax = axes("Latitude-quenching efficiency\n" + r"$Q(T)=D/(aT)$", 3.26)
     ax.plot(T, DATA["shift_Q"], "o", ls="none", color="C0", label="SFT, physical shift mode", zorder=3)
     ax.plot(T, DATA["shift_exact_Q"], "-", color="C1", label="exact kernel prediction")
     ax.plot(T, DATA["shift_derived_Q"], "--", color="C2",
@@ -204,7 +206,7 @@ def fig5(place):
 
 
 def fig6(place):
-    fig, ax = axes(r"$T\,Q_{\mathrm{IQ}}(T)$ (dipole in units of $a$)", 4.35)
+    fig, ax = axes(r"$T\,Q_{\mathrm{IQ}}(T)$ (dipole in units of $a$)", 3.26)
     for i, speed in enumerate((2, 5)):
         ax.plot(T, DATA[f"inflow{speed}_D_over_a"], ls="none", marker=("o", "s")[i], color=f"C{i}",
                 label=fr"physical inflow {speed} m s$^{{-1}}$: $D/a$", zorder=3)
@@ -218,7 +220,7 @@ def fig6(place):
 
 
 def fig7(place):
-    fig, ax = axes(r"Attractor of $T_n$", 4.35)
+    fig, ax = axes(r"Attractor of $T_n$", 3.26)
     gains = DATA["bifurcation_gains"]
     ax.plot(np.repeat(gains, 60), DATA["bifurcation_map"].ravel(), ".", color="0.4", markersize=2.4,
             label="memory-corrected map attractor", zorder=2)
@@ -236,7 +238,7 @@ def fig7(place):
 
 
 def fig8(place):
-    fig, ax = axes(r"Measured $\lambda_R^{\mathrm{pair}}$ (deg)", 4.1)
+    fig, ax = axes(r"Measured $\lambda_R^{\mathrm{pair}}$ (deg)", 3.08)
     ax.plot(DATA["transport_x"], DATA["transport_y"], "o", color="C0", markersize=4.2,
             label="measured (adjoint kernel)", zorder=3)
     ax.plot(DATA["transport_curve_x"], DATA["transport_curve_y"], "--", color="C1",
