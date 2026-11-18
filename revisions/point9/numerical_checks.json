@@ -1,0 +1,45 @@
+{
+  "solver_commit": "41640e936c5d777a168ff5c0753491b840263c49",
+  "input_sha256": {
+    "reducedSFT/nonlinear_response_sft_experiment.py": "2962d1281854b237e06bb38e9f07b69f4b7cdf683d0a46a65eb7a001908281b0",
+    "reducedSFT/mathematical_framework_analysis.py": "08368af1c11a37d5b33d1bf7550b431f65a9ff2a0578ef2c908bdfa7e0e386c1",
+    "reducedSFT/physical_validation_analysis.py": "4583faea2045454695ed1ae7991fb85f4f8116d17f7c9d8e33dc45101d3395a3",
+    "reducedSFT/multicycle_feedback_analysis.py": "fe113277dacf8da0b102b026fadec1d017f4734badceb13d38110a69e638c0e6",
+    "reducedSFT/figures_parameter_space/transport_constants.csv": "9d274be7dfff6a998fb378940be9470fe43b42d4884ed366db689a4d564ae113",
+    "reducedSFT/figures_parameter_space/parameter_space_results.csv": "06ede4ba8b2ffcdcafe2ad9893e0bf20cc8fe951a0f89e5a7b3028984b1a706b",
+    "reducedSFT/figures_multicycle/multicycle_results.csv": "66614703af93e2ec736aa26132c271d88a77a9979ee9e29b30e14af5a437127c",
+    "reducedSFT/figures_validation/validation_results.csv": "331ccfe76a5d9d5237f608195296bcd90bce5f75245ae45f47068dd87ab3e2f0",
+    "reducedSFT/figures_framework/framework_results.csv": "840eb0ea8bfe0cd0c1b4ecf7f74f300d5b5ff2fc5da0a3a4f24889f7951cb9fc",
+    "figures/nonlinear_response_results_v2.csv": "2fa2dadeabc8a170133aca661a6848c5d01cf0d6c6a70b2d0934b53b43f0f007",
+    "revisions/point5/grid_sensitivity_results.csv": "f357e98d8795a4fa5f15ce5b3bee956cb556073a4cc481aa5385a9d9f3c678bd"
+  },
+  "archived_scan_vs_point5_max_abs_D": 4.873698666862936e-12,
+  "a": 0.1678355566299387,
+  "adjoint_vs_baseline_linear_relative_error": 4.440892098500626e-16,
+  "closure_max_abs_errors": {
+    "exact": 4.7420734006209386e-11,
+    "yield_weighted": 2.396812838423301e-06,
+    "envelope": 0.028149435785823296,
+    "static": 0.20531102699763903
+  },
+  "lambda_R_pair_deg": 12.066367802557538,
+  "shift_exact_kernel_max_rel_err": 1.5654144647214707e-13,
+  "inflow2_b_fit_leading": 0.15044195586493095,
+  "inflow5_b_fit_leading": 0.4207181047794291,
+  "transport_refit_from_rounded_C": 1.189299395705068,
+  "transport_refit_from_rounded_w0_deg": 3.4699443643774095,
+  "transport_C": 1.189298,
+  "transport_w0_deg": 3.469989,
+  "transport_squared_coefficient_rounding_bounds": [
+    1.1523525842501976e-05,
+    0.0015984522458431477
+  ],
+  "transport_points": 63,
+  "r_first_period": 0.993962256864483,
+  "D0_period_doubling_memory": 3.3521566382062535,
+  "D0_period_doubling_memoryless": 2.806343051134381,
+  "fast_stepper_vs_baseline_relative_error": 4.6629367034256575e-15,
+  "runtime_seconds": 38.24235458099997,
+  "figure_data_sha256": "8b694b5c59c85c254f700079aa60d53f04dd598422d8fcab2a48679ac4dfbe25",
+  "numpy_version": "2.3.5"
+}

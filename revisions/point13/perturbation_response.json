@@ -1,0 +1,58 @@
+{
+  "solver_commit": "41640e936c5d777a168ff5c0753491b840263c49",
+  "source_sha256": {
+    "nonlinear_response_sft_experiment.py": "2962d1281854b237e06bb38e9f07b69f4b7cdf683d0a46a65eb7a001908281b0",
+    "mathematical_framework_analysis.py": "08368af1c11a37d5b33d1bf7550b431f65a9ff2a0578ef2c908bdfa7e0e386c1",
+    "multicycle_feedback_analysis.py": "fe113277dacf8da0b102b026fadec1d017f4734badceb13d38110a69e638c0e6"
+  },
+  "definition": "Kernel-exact latitude-efficiency times scalar inflow efficiency; no tilt quenching, as in the original multi-cycle experiment.",
+  "discretisation": {
+    "nmu": 181,
+    "dt_days": 1.0,
+    "source_steps": 4019
+  },
+  "a": 0.16783555662993893,
+  "r": 0.9939622568719242,
+  "fixed_points": [
+    {
+      "D0": 2.05,
+      "T_star": 0.2916503079788428,
+      "Q_star": 0.9726645155472802,
+      "q_star": 0.055251967124419314,
+      "multiplier": 0.8898296629359795,
+      "relaxation_cycles": 8.56712851914853,
+      "six_cycle_sensitivity": 0.4964108605834516
+    },
+    {
+      "D0": 2.5,
+      "T_star": 0.8420271163108513,
+      "Q_star": 0.7975849027487697,
+      "q_star": 0.4426461270250253,
+      "multiplier": 0.11738032956156408,
+      "relaxation_cycles": 0.46678020150726357,
+      "six_cycle_sensitivity": 2.615603724627162e-06
+    },
+    {
+      "D0": 3.2,
+      "T_star": 1.2305361658224183,
+      "Q_star": 0.6231132052724763,
+      "q_star": 0.9144399409150733,
+      "multiplier": -0.8233587283608486,
+      "relaxation_cycles": 5.145004376422836,
+      "six_cycle_sensitivity": 0.31155488325626396
+    }
+  ],
+  "zero_linear_multiplier": {
+    "T_star": 0.8985312412476512,
+    "D0": 2.5777401720629265,
+    "q_star": 0.5015140063727727
+  },
+  "period_doubling_D0": 3.3521566382121875,
+  "checks": {
+    "max_fixed_point_residual": 0.0,
+    "max_multiplier_finite_difference_error": 5.7552185239728715e-11,
+    "max_fixed_point_six_cycle_error": 3.304842510765127e-10,
+    "nonstationary_six_cycle_product_error": 6.389209839907477e-13
+  },
+  "scope": "Local deterministic sensitivity on the successful-reversal branch with constant r and k. Relaxation time is not a measured stochastic correlation time or forecast horizon. No stochastic dynamo or new multi-cycle SFT ensemble is run."
+}

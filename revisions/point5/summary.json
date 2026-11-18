@@ -1,0 +1,3510 @@
+{
+  "reference_grid": 1441,
+  "common_dt_days": 0.25,
+  "protocol": "exact_11yr",
+  "spatial": [
+    {
+      "nmu": 91,
+      "a_trapezoid": 0.1537247466507237,
+      "a_full_cell": 0.19586138736410136,
+      "max_outgoing_Courant": 0.033927239424556284,
+      "controlled_P_hat": {
+        "max_relative_percent": 0.11698070478846079,
+        "relative_at": [
+          "latitude",
+          2.5
+        ],
+        "max_absolute": 0.0011466534955063556,
+        "absolute_at": [
+          "latitude",
+          2.5
+        ]
+      },
+      "physical_P_hat": {
+        "max_relative_percent": 8.252010835893731,
+        "relative_at": [
+          "physical_5",
+          2.5
+        ],
+        "max_absolute": 0.09377172513826726,
+        "absolute_at": [
+          "physical_2",
+          2.5
+        ]
+      },
+      "controlled_P_hat_full_cell": {
+        "max_relative_percent": 0.15010807791072667,
+        "relative_at": [
+          "latitude",
+          2.5
+        ],
+        "max_absolute": 0.0014713087475082265,
+        "absolute_at": [
+          "latitude",
+          2.5
+        ]
+      },
+      "physical_P_hat_full_cell": {
+        "max_relative_percent": 18.04635975471063,
+        "relative_at": [
+          "shift",
+          2.5
+        ],
+        "max_absolute": 0.12416313493745457,
+        "absolute_at": [
+          "physical_2",
+          2.5
+        ]
+      },
+      "by_case": {
+        "linear": {
+          "D": {
+            "max_relative_percent": 18.600328318899027,
+            "relative_at": [
+              "linear",
+              0.2
+            ],
+            "max_absolute": 0.08781763793977626,
+            "absolute_at": [
+              "linear",
+              2.5
+            ]
+          },
+          "D_midpoint": {
+            "max_relative_percent": 1.3568795558322355,
+            "relative_at": [
+              "linear",
+              1.8
+            ],
+            "max_absolute": 0.00655506349090218,
+            "absolute_at": [
+              "linear",
+              2.5
+            ]
+          },
+          "P_hat": {
+            "max_relative_percent": 2.220446049250313e-14,
+            "relative_at": [
+              "linear",
+              1.8
+            ],
+            "max_absolute": 2.220446049250313e-16,
+            "absolute_at": [
+              "linear",
+              1.8
+            ]
+          },
+          "P_hat_midpoint": {
+            "max_relative_percent": 2.220446049250313e-14,
+            "relative_at": [
+              "linear",
+              0.65
+            ],
+            "max_absolute": 2.220446049250313e-16,
+            "absolute_at": [
+              "linear",
+              1.4
+            ]
+          },
+          "Q": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "linear",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "linear",
+              0.2
+            ]
+          },
+          "Q_midpoint": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "linear",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "linear",
+              0.2
+            ]
+          }
+        },
+        "tilt": {
+          "D": {
+            "max_relative_percent": 18.59938535925494,
+            "relative_at": [
+              "tilt",
+              0.2
+            ],
+            "max_absolute": 0.044642020867825205,
+            "absolute_at": [
+              "tilt",
+              2.5
+            ]
+          },
+          "D_midpoint": {
+            "max_relative_percent": 1.4634963754344588,
+            "relative_at": [
+              "tilt",
+              2.5
+            ],
+            "max_absolute": 0.003605784094139225,
+            "absolute_at": [
+              "tilt",
+              2.5
+            ]
+          },
+          "P_hat": {
+            "max_relative_percent": 0.04914724679814242,
+            "relative_at": [
+              "tilt",
+              2.5
+            ],
+            "max_absolute": 0.0007234501240562796,
+            "absolute_at": [
+              "tilt",
+              2.5
+            ]
+          },
+          "P_hat_midpoint": {
+            "max_relative_percent": 0.07069171536082663,
+            "relative_at": [
+              "tilt",
+              2.5
+            ],
+            "max_absolute": 0.001040616637945968,
+            "absolute_at": [
+              "tilt",
+              2.5
+            ]
+          },
+          "Q": {
+            "max_relative_percent": 0.07308383908986027,
+            "relative_at": [
+              "tilt",
+              2.5
+            ],
+            "max_absolute": 0.00037848175781307614,
+            "absolute_at": [
+              "tilt",
+              2.2
+            ]
+          },
+          "Q_midpoint": {
+            "max_relative_percent": 0.1051895244501111,
+            "relative_at": [
+              "tilt",
+              2.5
+            ],
+            "max_absolute": 0.0005448561216425674,
+            "absolute_at": [
+              "tilt",
+              2.2
+            ]
+          }
+        },
+        "latitude": {
+          "D": {
+            "max_relative_percent": 18.71479559611138,
+            "relative_at": [
+              "latitude",
+              2.5
+            ],
+            "max_absolute": 0.03903924796138947,
+            "absolute_at": [
+              "latitude",
+              1.8
+            ]
+          },
+          "D_midpoint": {
+            "max_relative_percent": 1.3557128482908354,
+            "relative_at": [
+              "latitude",
+              0.2
+            ],
+            "max_absolute": 0.0027353267164703654,
+            "absolute_at": [
+              "latitude",
+              1.6
+            ]
+          },
+          "P_hat": {
+            "max_relative_percent": 0.11698070478846079,
+            "relative_at": [
+              "latitude",
+              2.5
+            ],
+            "max_absolute": 0.0011466534955063556,
+            "absolute_at": [
+              "latitude",
+              2.5
+            ]
+          },
+          "P_hat_midpoint": {
+            "max_relative_percent": 0.15010807791072667,
+            "relative_at": [
+              "latitude",
+              2.5
+            ],
+            "max_absolute": 0.0014713087475082265,
+            "absolute_at": [
+              "latitude",
+              2.5
+            ]
+          },
+          "Q": {
+            "max_relative_percent": 0.1406237578706615,
+            "relative_at": [
+              "latitude",
+              2.5
+            ],
+            "max_absolute": 0.0005062658682020715,
+            "absolute_at": [
+              "latitude",
+              2.2
+            ]
+          },
+          "Q_midpoint": {
+            "max_relative_percent": 0.17881820186709252,
+            "relative_at": [
+              "latitude",
+              2.5
+            ],
+            "max_absolute": 0.0006354921272274106,
+            "absolute_at": [
+              "latitude",
+              2.2
+            ]
+          }
+        },
+        "inflow": {
+          "D": {
+            "max_relative_percent": 18.600328318899038,
+            "relative_at": [
+              "inflow",
+              0.2
+            ],
+            "max_absolute": 0.0392680494852658,
+            "absolute_at": [
+              "inflow",
+              2.2
+            ]
+          },
+          "D_midpoint": {
+            "max_relative_percent": 1.3568795558322355,
+            "relative_at": [
+              "inflow",
+              1.0
+            ],
+            "max_absolute": 0.0029311259512164456,
+            "absolute_at": [
+              "inflow",
+              2.2
+            ]
+          },
+          "P_hat": {
+            "max_relative_percent": 2.220446049250313e-14,
+            "relative_at": [
+              "inflow",
+              0.35
+            ],
+            "max_absolute": 2.220446049250313e-16,
+            "absolute_at": [
+              "inflow",
+              1.4
+            ]
+          },
+          "P_hat_midpoint": {
+            "max_relative_percent": 2.220446049250313e-14,
+            "relative_at": [
+              "inflow",
+              0.35
+            ],
+            "max_absolute": 2.220446049250313e-16,
+            "absolute_at": [
+              "inflow",
+              0.8
+            ]
+          },
+          "Q": {
+            "max_relative_percent": 2.220446049250313e-14,
+            "relative_at": [
+              "inflow",
+              0.5
+            ],
+            "max_absolute": 1.1102230246251565e-16,
+            "absolute_at": [
+              "inflow",
+              0.2
+            ]
+          },
+          "Q_midpoint": {
+            "max_relative_percent": 2.220446049250313e-14,
+            "relative_at": [
+              "inflow",
+              0.65
+            ],
+            "max_absolute": 1.1102230246251565e-16,
+            "absolute_at": [
+              "inflow",
+              0.65
+            ]
+          }
+        },
+        "combined": {
+          "D": {
+            "max_relative_percent": 18.662233091598544,
+            "relative_at": [
+              "combined",
+              2.5
+            ],
+            "max_absolute": 0.02217673662829163,
+            "absolute_at": [
+              "combined",
+              1.0
+            ]
+          },
+          "D_midpoint": {
+            "max_relative_percent": 1.3623351398399874,
+            "relative_at": [
+              "combined",
+              1.0
+            ],
+            "max_absolute": 0.001662016301238925,
+            "absolute_at": [
+              "combined",
+              1.0
+            ]
+          },
+          "P_hat": {
+            "max_relative_percent": 0.0758545100671304,
+            "relative_at": [
+              "combined",
+              2.5
+            ],
+            "max_absolute": 0.0002335709302011546,
+            "absolute_at": [
+              "combined",
+              2.5
+            ]
+          },
+          "P_hat_midpoint": {
+            "max_relative_percent": 0.08541253942483396,
+            "relative_at": [
+              "combined",
+              2.5
+            ],
+            "max_absolute": 0.0002629993382148865,
+            "absolute_at": [
+              "combined",
+              2.5
+            ]
+          },
+          "Q": {
+            "max_relative_percent": 0.07605039605325103,
+            "relative_at": [
+              "combined",
+              2.5
+            ],
+            "max_absolute": 6.728360034677361e-05,
+            "absolute_at": [
+              "combined",
+              2.2
+            ]
+          },
+          "Q_midpoint": {
+            "max_relative_percent": 0.08003458750007741,
+            "relative_at": [
+              "combined",
+              2.5
+            ],
+            "max_absolute": 6.420919003488623e-05,
+            "absolute_at": [
+              "combined",
+              2.2
+            ]
+          }
+        },
+        "shift": {
+          "D": {
+            "max_relative_percent": 18.565578094833,
+            "relative_at": [
+              "shift",
+              0.2
+            ],
+            "max_absolute": 0.022651677267335774,
+            "absolute_at": [
+              "shift",
+              1.0
+            ]
+          },
+          "D_midpoint": {
+            "max_relative_percent": 22.139763635207864,
+            "relative_at": [
+              "shift",
+              2.5
+            ],
+            "max_absolute": 0.009197044329118262,
+            "absolute_at": [
+              "shift",
+              2.0
+            ]
+          },
+          "P_hat": {
+            "max_relative_percent": 3.0639837850945373,
+            "relative_at": [
+              "shift",
+              2.0
+            ],
+            "max_absolute": 0.017803057365293196,
+            "absolute_at": [
+              "shift",
+              1.8
+            ]
+          },
+          "P_hat_midpoint": {
+            "max_relative_percent": 18.04635975471063,
+            "relative_at": [
+              "shift",
+              2.5
+            ],
+            "max_absolute": 0.04968676088030538,
+            "absolute_at": [
+              "shift",
+              2.2
+            ]
+          },
+          "Q": {
+            "max_relative_percent": 4.25764260624466,
+            "relative_at": [
+              "shift",
+              2.0
+            ],
+            "max_absolute": 0.010850318615361454,
+            "absolute_at": [
+              "shift",
+              1.6
+            ]
+          },
+          "Q_midpoint": {
+            "max_relative_percent": 20.504660532615794,
+            "relative_at": [
+              "shift",
+              2.5
+            ],
+            "max_absolute": 0.02259536204599394,
+            "absolute_at": [
+              "shift",
+              1.8
+            ]
+          }
+        },
+        "physical_2": {
+          "D": {
+            "max_relative_percent": 18.549348432168735,
+            "relative_at": [
+              "physical_2",
+              0.2
+            ],
+            "max_absolute": 0.0315583697159543,
+            "absolute_at": [
+              "physical_2",
+              1.4
+            ]
+          },
+          "D_midpoint": {
+            "max_relative_percent": 13.382497851905285,
+            "relative_at": [
+              "physical_2",
+              2.5
+            ],
+            "max_absolute": 0.028182138852692468,
+            "absolute_at": [
+              "physical_2",
+              2.5
+            ]
+          },
+          "P_hat": {
+            "max_relative_percent": 7.461366181487272,
+            "relative_at": [
+              "physical_2",
+              2.5
+            ],
+            "max_absolute": 0.09377172513826726,
+            "absolute_at": [
+              "physical_2",
+              2.5
+            ]
+          },
+          "P_hat_midpoint": {
+            "max_relative_percent": 9.845515618048672,
+            "relative_at": [
+              "physical_2",
+              2.5
+            ],
+            "max_absolute": 0.12416313493745457,
+            "absolute_at": [
+              "physical_2",
+              2.5
+            ]
+          },
+          "Q": {
+            "max_relative_percent": 9.228783467895862,
+            "relative_at": [
+              "physical_2",
+              2.5
+            ],
+            "max_absolute": 0.04045539660827202,
+            "absolute_at": [
+              "physical_2",
+              2.2
+            ]
+          },
+          "Q_midpoint": {
+            "max_relative_percent": 11.864629563155393,
+            "relative_at": [
+              "physical_2",
+              2.5
+            ],
+            "max_absolute": 0.0517196226626811,
+            "absolute_at": [
+              "physical_2",
+              2.5
+            ]
+          }
+        },
+        "physical_5": {
+          "D": {
+            "max_relative_percent": 18.47242520142841,
+            "relative_at": [
+              "physical_5",
+              0.2
+            ],
+            "max_absolute": 0.019835561378336142,
+            "absolute_at": [
+              "physical_5",
+              1.0
+            ]
+          },
+          "D_midpoint": {
+            "max_relative_percent": 15.75258959856971,
+            "relative_at": [
+              "physical_5",
+              2.5
+            ],
+            "max_absolute": 0.01913436305212088,
+            "absolute_at": [
+              "physical_5",
+              1.8
+            ]
+          },
+          "P_hat": {
+            "max_relative_percent": 8.252010835893731,
+            "relative_at": [
+              "physical_5",
+              2.5
+            ],
+            "max_absolute": 0.049817851220727016,
+            "absolute_at": [
+              "physical_5",
+              2.5
+            ]
+          },
+          "P_hat_midpoint": {
+            "max_relative_percent": 8.86184271600201,
+            "relative_at": [
+              "physical_5",
+              2.5
+            ],
+            "max_absolute": 0.07625057222523979,
+            "absolute_at": [
+              "physical_5",
+              1.8
+            ]
+          },
+          "Q": {
+            "max_relative_percent": 12.893019687907747,
+            "relative_at": [
+              "physical_5",
+              2.5
+            ],
+            "max_absolute": 0.040530161364144224,
+            "absolute_at": [
+              "physical_5",
+              1.4
+            ]
+          },
+          "Q_midpoint": {
+            "max_relative_percent": 14.202992540637215,
+            "relative_at": [
+              "physical_5",
+              2.5
+            ],
+            "max_absolute": 0.05172717198870952,
+            "absolute_at": [
+              "physical_5",
+              1.6
+            ]
+          }
+        }
+      }
+    },
+    {
+      "nmu": 181,
+      "a_trapezoid": 0.16783275158994224,
+      "a_full_cell": 0.1945940351782226,
+      "max_outgoing_Courant": 0.06744235074652273,
+      "controlled_P_hat": {
+        "max_relative_percent": 0.0534613881782664,
+        "relative_at": [
+          "latitude",
+          2.5
+        ],
+        "max_absolute": 0.0005240324696289544,
+        "absolute_at": [
+          "latitude",
+          2.5
+        ]
+      },
+      "physical_P_hat": {
+        "max_relative_percent": 3.5500493376406705,
+        "relative_at": [
+          "physical_5",
+          2.5
+        ],
+        "max_absolute": 0.03926525921247159,
+        "absolute_at": [
+          "physical_2",
+          2.5
+        ]
+      },
+      "controlled_P_hat_full_cell": {
+        "max_relative_percent": 0.07390446932872274,
+        "relative_at": [
+          "latitude",
+          2.5
+        ],
+        "max_absolute": 0.0007243866800291654,
+        "absolute_at": [
+          "latitude",
+          2.5
+        ]
+      },
+      "physical_P_hat_full_cell": {
+        "max_relative_percent": 8.500404797285688,
+        "relative_at": [
+          "shift",
+          2.5
+        ],
+        "max_absolute": 0.059694202757374804,
+        "absolute_at": [
+          "physical_2",
+          2.5
+        ]
+      },
+      "by_case": {
+        "linear": {
+          "D": {
+            "max_relative_percent": 11.12991776270551,
+            "relative_at": [
+              "linear",
+              0.2
+            ],
+            "max_absolute": 0.052547625591729874,
+            "absolute_at": [
+              "linear",
+              2.5
+            ]
+          },
+          "D_midpoint": {
+            "max_relative_percent": 0.7010337835354319,
+            "relative_at": [
+              "linear",
+              1.8
+            ],
+            "max_absolute": 0.003386683026205317,
+            "absolute_at": [
+              "linear",
+              2.5
+            ]
+          },
+          "P_hat": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "linear",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "linear",
+              0.2
+            ]
+          },
+          "P_hat_midpoint": {
+            "max_relative_percent": 2.220446049250313e-14,
+            "relative_at": [
+              "linear",
+              0.65
+            ],
+            "max_absolute": 4.440892098500626e-16,
+            "absolute_at": [
+              "linear",
+              1.8
+            ]
+          },
+          "Q": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "linear",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "linear",
+              0.2
+            ]
+          },
+          "Q_midpoint": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "linear",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "linear",
+              0.2
+            ]
+          }
+        },
+        "tilt": {
+          "D": {
+            "max_relative_percent": 11.129475041673576,
+            "relative_at": [
+              "tilt",
+              0.2
+            ],
+            "max_absolute": 0.026730941693212745,
+            "absolute_at": [
+              "tilt",
+              2.5
+            ]
+          },
+          "D_midpoint": {
+            "max_relative_percent": 0.7537725582570154,
+            "relative_at": [
+              "tilt",
+              2.5
+            ],
+            "max_absolute": 0.0018571560181383784,
+            "absolute_at": [
+              "tilt",
+              2.5
+            ]
+          },
+          "P_hat": {
+            "max_relative_percent": 0.021162112596728733,
+            "relative_at": [
+              "tilt",
+              2.5
+            ],
+            "max_absolute": 0.00031150743898789024,
+            "absolute_at": [
+              "tilt",
+              2.5
+            ]
+          },
+          "P_hat_midpoint": {
+            "max_relative_percent": 0.03520296143642021,
+            "relative_at": [
+              "tilt",
+              2.5
+            ],
+            "max_absolute": 0.0005182048163454578,
+            "absolute_at": [
+              "tilt",
+              2.5
+            ]
+          },
+          "Q": {
+            "max_relative_percent": 0.03145566271032241,
+            "relative_at": [
+              "tilt",
+              2.5
+            ],
+            "max_absolute": 0.0001628870990421083,
+            "absolute_at": [
+              "tilt",
+              2.2
+            ]
+          },
+          "Q_midpoint": {
+            "max_relative_percent": 0.0523716318890699,
+            "relative_at": [
+              "tilt",
+              2.5
+            ],
+            "max_absolute": 0.00027127012815597595,
+            "absolute_at": [
+              "tilt",
+              2.2
+            ]
+          }
+        },
+        "latitude": {
+          "D": {
+            "max_relative_percent": 11.187228340062571,
+            "relative_at": [
+              "latitude",
+              2.5
+            ],
+            "max_absolute": 0.02334812319733806,
+            "absolute_at": [
+              "latitude",
+              1.8
+            ]
+          },
+          "D_midpoint": {
+            "max_relative_percent": 0.7004632241169206,
+            "relative_at": [
+              "latitude",
+              0.2
+            ],
+            "max_absolute": 0.0014175886656921377,
+            "absolute_at": [
+              "latitude",
+              1.6
+            ]
+          },
+          "P_hat": {
+            "max_relative_percent": 0.0534613881782664,
+            "relative_at": [
+              "latitude",
+              2.5
+            ],
+            "max_absolute": 0.0005240324696289544,
+            "absolute_at": [
+              "latitude",
+              2.5
+            ]
+          },
+          "P_hat_midpoint": {
+            "max_relative_percent": 0.07390446932872274,
+            "relative_at": [
+              "latitude",
+              2.5
+            ],
+            "max_absolute": 0.0007243866800291654,
+            "absolute_at": [
+              "latitude",
+              2.5
+            ]
+          },
+          "Q": {
+            "max_relative_percent": 0.06448804357358506,
+            "relative_at": [
+              "latitude",
+              2.5
+            ],
+            "max_absolute": 0.00023325193640705288,
+            "absolute_at": [
+              "latitude",
+              2.2
+            ]
+          },
+          "Q_midpoint": {
+            "max_relative_percent": 0.08804765686510896,
+            "relative_at": [
+              "latitude",
+              2.5
+            ],
+            "max_absolute": 0.00031288339042845337,
+            "absolute_at": [
+              "latitude",
+              2.2
+            ]
+          }
+        },
+        "inflow": {
+          "D": {
+            "max_relative_percent": 11.12991776270552,
+            "relative_at": [
+              "inflow",
+              1.0
+            ],
+            "max_absolute": 0.023496905752399544,
+            "absolute_at": [
+              "inflow",
+              2.2
+            ]
+          },
+          "D_midpoint": {
+            "max_relative_percent": 0.7010337835354319,
+            "relative_at": [
+              "inflow",
+              1.8
+            ],
+            "max_absolute": 0.0015143704588722884,
+            "absolute_at": [
+              "inflow",
+              2.2
+            ]
+          },
+          "P_hat": {
+            "max_relative_percent": 4.440892098500626e-14,
+            "relative_at": [
+              "inflow",
+              0.5
+            ],
+            "max_absolute": 4.440892098500626e-16,
+            "absolute_at": [
+              "inflow",
+              2.0
+            ]
+          },
+          "P_hat_midpoint": {
+            "max_relative_percent": 2.220446049250313e-14,
+            "relative_at": [
+              "inflow",
+              0.5
+            ],
+            "max_absolute": 2.220446049250313e-16,
+            "absolute_at": [
+              "inflow",
+              1.6
+            ]
+          },
+          "Q": {
+            "max_relative_percent": 2.220446049250313e-14,
+            "relative_at": [
+              "inflow",
+              0.5
+            ],
+            "max_absolute": 2.220446049250313e-16,
+            "absolute_at": [
+              "inflow",
+              1.0
+            ]
+          },
+          "Q_midpoint": {
+            "max_relative_percent": 2.220446049250313e-14,
+            "relative_at": [
+              "inflow",
+              2.5
+            ],
+            "max_absolute": 1.1102230246251565e-16,
+            "absolute_at": [
+              "inflow",
+              0.35
+            ]
+          }
+        },
+        "combined": {
+          "D": {
+            "max_relative_percent": 11.163233267036254,
+            "relative_at": [
+              "combined",
+              2.5
+            ],
+            "max_absolute": 0.013270862361302316,
+            "absolute_at": [
+              "combined",
+              1.0
+            ]
+          },
+          "D_midpoint": {
+            "max_relative_percent": 0.7038954789307494,
+            "relative_at": [
+              "combined",
+              1.0
+            ],
+            "max_absolute": 0.000858735656256146,
+            "absolute_at": [
+              "combined",
+              1.0
+            ]
+          },
+          "P_hat": {
+            "max_relative_percent": 0.03651100026279552,
+            "relative_at": [
+              "combined",
+              2.5
+            ],
+            "max_absolute": 0.00011455824526701575,
+            "absolute_at": [
+              "combined",
+              2.2
+            ]
+          },
+          "P_hat_midpoint": {
+            "max_relative_percent": 0.04169046683087929,
+            "relative_at": [
+              "combined",
+              2.5
+            ],
+            "max_absolute": 0.0001283718439964998,
+            "absolute_at": [
+              "combined",
+              2.5
+            ]
+          },
+          "Q": {
+            "max_relative_percent": 0.037487873862662724,
+            "relative_at": [
+              "combined",
+              2.5
+            ],
+            "max_absolute": 3.487677273081302e-05,
+            "absolute_at": [
+              "combined",
+              2.0
+            ]
+          },
+          "Q_midpoint": {
+            "max_relative_percent": 0.03884987797719841,
+            "relative_at": [
+              "combined",
+              2.5
+            ],
+            "max_absolute": 3.093026688549827e-05,
+            "absolute_at": [
+              "combined",
+              2.2
+            ]
+          }
+        },
+        "shift": {
+          "D": {
+            "max_relative_percent": 13.4935463722204,
+            "relative_at": [
+              "shift",
+              2.5
+            ],
+            "max_absolute": 0.013786811197361873,
+            "absolute_at": [
+              "shift",
+              1.0
+            ]
+          },
+          "D_midpoint": {
+            "max_relative_percent": 10.373901463784563,
+            "relative_at": [
+              "shift",
+              2.5
+            ],
+            "max_absolute": 0.004453488032583566,
+            "absolute_at": [
+              "shift",
+              1.8
+            ]
+          },
+          "P_hat": {
+            "max_relative_percent": 3.077060927795805,
+            "relative_at": [
+              "shift",
+              2.5
+            ],
+            "max_absolute": 0.006928539882110757,
+            "absolute_at": [
+              "shift",
+              2.5
+            ]
+          },
+          "P_hat_midpoint": {
+            "max_relative_percent": 8.500404797285688,
+            "relative_at": [
+              "shift",
+              2.5
+            ],
+            "max_absolute": 0.023977349555371452,
+            "absolute_at": [
+              "shift",
+              2.0
+            ]
+          },
+          "Q": {
+            "max_relative_percent": 2.659644899622926,
+            "relative_at": [
+              "shift",
+              2.5
+            ],
+            "max_absolute": 0.003764955308868778,
+            "absolute_at": [
+              "shift",
+              1.4
+            ]
+          },
+          "Q_midpoint": {
+            "max_relative_percent": 9.605529672159797,
+            "relative_at": [
+              "shift",
+              2.5
+            ],
+            "max_absolute": 0.01095978144705323,
+            "absolute_at": [
+              "shift",
+              1.6
+            ]
+          }
+        },
+        "physical_2": {
+          "D": {
+            "max_relative_percent": 11.103911457148508,
+            "relative_at": [
+              "physical_2",
+              0.2
+            ],
+            "max_absolute": 0.019459061876581918,
+            "absolute_at": [
+              "physical_2",
+              1.6
+            ]
+          },
+          "D_midpoint": {
+            "max_relative_percent": 6.415471086888802,
+            "relative_at": [
+              "physical_2",
+              2.5
+            ],
+            "max_absolute": 0.01351031018102447,
+            "absolute_at": [
+              "physical_2",
+              2.5
+            ]
+          },
+          "P_hat": {
+            "max_relative_percent": 3.124315744039863,
+            "relative_at": [
+              "physical_2",
+              2.5
+            ],
+            "max_absolute": 0.03926525921247159,
+            "absolute_at": [
+              "physical_2",
+              2.5
+            ]
+          },
+          "P_hat_midpoint": {
+            "max_relative_percent": 4.733451727445148,
+            "relative_at": [
+              "physical_2",
+              2.5
+            ],
+            "max_absolute": 0.059694202757374804,
+            "absolute_at": [
+              "physical_2",
+              2.5
+            ]
+          },
+          "Q": {
+            "max_relative_percent": 3.9120816349741405,
+            "relative_at": [
+              "physical_2",
+              2.5
+            ],
+            "max_absolute": 0.017794205527197238,
+            "absolute_at": [
+              "physical_2",
+              2.2
+            ]
+          },
+          "Q_midpoint": {
+            "max_relative_percent": 5.67465604736197,
+            "relative_at": [
+              "physical_2",
+              2.5
+            ],
+            "max_absolute": 0.024736639938719496,
+            "absolute_at": [
+              "physical_2",
+              2.5
+            ]
+          }
+        },
+        "physical_5": {
+          "D": {
+            "max_relative_percent": 11.064690622973961,
+            "relative_at": [
+              "physical_5",
+              0.2
+            ],
+            "max_absolute": 0.012321021987138275,
+            "absolute_at": [
+              "physical_5",
+              1.0
+            ]
+          },
+          "D_midpoint": {
+            "max_relative_percent": 7.3248346466895375,
+            "relative_at": [
+              "physical_5",
+              2.5
+            ],
+            "max_absolute": 0.009072692017521505,
+            "absolute_at": [
+              "physical_5",
+              1.8
+            ]
+          },
+          "P_hat": {
+            "max_relative_percent": 3.5500493376406705,
+            "relative_at": [
+              "physical_5",
+              2.5
+            ],
+            "max_absolute": 0.021431846521523523,
+            "absolute_at": [
+              "physical_5",
+              2.5
+            ]
+          },
+          "P_hat_midpoint": {
+            "max_relative_percent": 4.0904088512421,
+            "relative_at": [
+              "physical_5",
+              2.5
+            ],
+            "max_absolute": 0.03629003664517416,
+            "absolute_at": [
+              "physical_5",
+              1.8
+            ]
+          },
+          "Q": {
+            "max_relative_percent": 5.581993293047716,
+            "relative_at": [
+              "physical_5",
+              2.5
+            ],
+            "max_absolute": 0.017802942173843372,
+            "absolute_at": [
+              "physical_5",
+              1.4
+            ]
+          },
+          "Q_midpoint": {
+            "max_relative_percent": 6.5776890408021815,
+            "relative_at": [
+              "physical_5",
+              2.5
+            ],
+            "max_absolute": 0.024717688304152274,
+            "absolute_at": [
+              "physical_5",
+              1.6
+            ]
+          }
+        }
+      }
+    },
+    {
+      "nmu": 361,
+      "a_trapezoid": 0.17837049247813955,
+      "a_full_cell": 0.19385026114142817,
+      "max_outgoing_Courant": 0.13458602179730947,
+      "controlled_P_hat": {
+        "max_relative_percent": 0.022208847843430135,
+        "relative_at": [
+          "latitude",
+          2.5
+        ],
+        "max_absolute": 0.00021769276443395214,
+        "absolute_at": [
+          "latitude",
+          2.5
+        ]
+      },
+      "physical_P_hat": {
+        "max_relative_percent": 2.1981631818349445,
+        "relative_at": [
+          "shift",
+          2.5
+        ],
+        "max_absolute": 0.01533833636628823,
+        "absolute_at": [
+          "physical_2",
+          2.5
+        ]
+      },
+      "controlled_P_hat_full_cell": {
+        "max_relative_percent": 0.03257235911132694,
+        "relative_at": [
+          "latitude",
+          2.5
+        ],
+        "max_absolute": 0.0003192632771966686,
+        "absolute_at": [
+          "latitude",
+          2.5
+        ]
+      },
+      "physical_P_hat_full_cell": {
+        "max_relative_percent": 3.6569500460606807,
+        "relative_at": [
+          "shift",
+          2.5
+        ],
+        "max_absolute": 0.02597059924234113,
+        "absolute_at": [
+          "physical_2",
+          2.5
+        ]
+      },
+      "by_case": {
+        "linear": {
+          "D": {
+            "max_relative_percent": 5.550018187338502,
+            "relative_at": [
+              "linear",
+              0.2
+            ],
+            "max_absolute": 0.026203273371236624,
+            "absolute_at": [
+              "linear",
+              2.5
+            ]
+          },
+          "D_midpoint": {
+            "max_relative_percent": 0.316135991894706,
+            "relative_at": [
+              "linear",
+              0.2
+            ],
+            "max_absolute": 0.0015272479342192113,
+            "absolute_at": [
+              "linear",
+              2.5
+            ]
+          },
+          "P_hat": {
+            "max_relative_percent": 1.1102230246251565e-14,
+            "relative_at": [
+              "linear",
+              0.2
+            ],
+            "max_absolute": 2.220446049250313e-16,
+            "absolute_at": [
+              "linear",
+              1.6
+            ]
+          },
+          "P_hat_midpoint": {
+            "max_relative_percent": 3.3306690738754696e-14,
+            "relative_at": [
+              "linear",
+              0.35
+            ],
+            "max_absolute": 4.440892098500626e-16,
+            "absolute_at": [
+              "linear",
+              1.4
+            ]
+          },
+          "Q": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "linear",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "linear",
+              0.2
+            ]
+          },
+          "Q_midpoint": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "linear",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "linear",
+              0.2
+            ]
+          }
+        },
+        "tilt": {
+          "D": {
+            "max_relative_percent": 5.549832392175624,
+            "relative_at": [
+              "tilt",
+              0.2
+            ],
+            "max_absolute": 0.013334883157401473,
+            "absolute_at": [
+              "tilt",
+              2.5
+            ]
+          },
+          "D_midpoint": {
+            "max_relative_percent": 0.3394337412026882,
+            "relative_at": [
+              "tilt",
+              2.5
+            ],
+            "max_absolute": 0.0008363018901768604,
+            "absolute_at": [
+              "tilt",
+              2.5
+            ]
+          },
+          "P_hat": {
+            "max_relative_percent": 0.008365175169999794,
+            "relative_at": [
+              "tilt",
+              2.5
+            ],
+            "max_absolute": 0.00012313582975131965,
+            "absolute_at": [
+              "tilt",
+              2.5
+            ]
+          },
+          "P_hat_midpoint": {
+            "max_relative_percent": 0.015612565347189467,
+            "relative_at": [
+              "tilt",
+              2.5
+            ],
+            "max_absolute": 0.00022982460078058153,
+            "absolute_at": [
+              "tilt",
+              2.5
+            ]
+          },
+          "Q": {
+            "max_relative_percent": 0.012430282941822135,
+            "relative_at": [
+              "tilt",
+              2.5
+            ],
+            "max_absolute": 6.436323341318939e-05,
+            "absolute_at": [
+              "tilt",
+              2.2
+            ]
+          },
+          "Q_midpoint": {
+            "max_relative_percent": 0.023224328845650177,
+            "relative_at": [
+              "tilt",
+              2.5
+            ],
+            "max_absolute": 0.00012029487698217434,
+            "absolute_at": [
+              "tilt",
+              2.2
+            ]
+          }
+        },
+        "latitude": {
+          "D": {
+            "max_relative_percent": 5.575390887844356,
+            "relative_at": [
+              "latitude",
+              2.5
+            ],
+            "max_absolute": 0.011639325997474026,
+            "absolute_at": [
+              "latitude",
+              1.8
+            ]
+          },
+          "D_midpoint": {
+            "max_relative_percent": 0.3158855188183596,
+            "relative_at": [
+              "latitude",
+              0.2
+            ],
+            "max_absolute": 0.0006401985757606421,
+            "absolute_at": [
+              "latitude",
+              1.6
+            ]
+          },
+          "P_hat": {
+            "max_relative_percent": 0.022208847843430135,
+            "relative_at": [
+              "latitude",
+              2.5
+            ],
+            "max_absolute": 0.00021769276443395214,
+            "absolute_at": [
+              "latitude",
+              2.5
+            ]
+          },
+          "P_hat_midpoint": {
+            "max_relative_percent": 0.03257235911132694,
+            "relative_at": [
+              "latitude",
+              2.5
+            ],
+            "max_absolute": 0.0003192632771966686,
+            "absolute_at": [
+              "latitude",
+              2.5
+            ]
+          },
+          "Q": {
+            "max_relative_percent": 0.026863637259533224,
+            "relative_at": [
+              "latitude",
+              2.5
+            ],
+            "max_absolute": 9.753194290396117e-05,
+            "absolute_at": [
+              "latitude",
+              2.2
+            ]
+          },
+          "Q_midpoint": {
+            "max_relative_percent": 0.03880772669913046,
+            "relative_at": [
+              "latitude",
+              2.5
+            ],
+            "max_absolute": 0.00013790033691873926,
+            "absolute_at": [
+              "latitude",
+              2.2
+            ]
+          }
+        },
+        "inflow": {
+          "D": {
+            "max_relative_percent": 5.550018187338512,
+            "relative_at": [
+              "inflow",
+              0.2
+            ],
+            "max_absolute": 0.011716910857057034,
+            "absolute_at": [
+              "inflow",
+              2.2
+            ]
+          },
+          "D_midpoint": {
+            "max_relative_percent": 0.316135991894706,
+            "relative_at": [
+              "inflow",
+              0.2
+            ],
+            "max_absolute": 0.0006829157429435739,
+            "absolute_at": [
+              "inflow",
+              2.2
+            ]
+          },
+          "P_hat": {
+            "max_relative_percent": 4.440892098500626e-14,
+            "relative_at": [
+              "inflow",
+              0.5
+            ],
+            "max_absolute": 2.220446049250313e-16,
+            "absolute_at": [
+              "inflow",
+              0.5
+            ]
+          },
+          "P_hat_midpoint": {
+            "max_relative_percent": 4.440892098500626e-14,
+            "relative_at": [
+              "inflow",
+              0.35
+            ],
+            "max_absolute": 2.220446049250313e-16,
+            "absolute_at": [
+              "inflow",
+              1.2
+            ]
+          },
+          "Q": {
+            "max_relative_percent": 2.220446049250313e-14,
+            "relative_at": [
+              "inflow",
+              0.5
+            ],
+            "max_absolute": 2.220446049250313e-16,
+            "absolute_at": [
+              "inflow",
+              1.0
+            ]
+          },
+          "Q_midpoint": {
+            "max_relative_percent": 2.220446049250313e-14,
+            "relative_at": [
+              "inflow",
+              0.65
+            ],
+            "max_absolute": 1.1102230246251565e-16,
+            "absolute_at": [
+              "inflow",
+              0.35
+            ]
+          }
+        },
+        "combined": {
+          "D": {
+            "max_relative_percent": 5.56557534084191,
+            "relative_at": [
+              "combined",
+              2.5
+            ],
+            "max_absolute": 0.006617887492804828,
+            "absolute_at": [
+              "combined",
+              1.0
+            ]
+          },
+          "D_midpoint": {
+            "max_relative_percent": 0.31743933868930707,
+            "relative_at": [
+              "combined",
+              1.0
+            ],
+            "max_absolute": 0.00038726840417409314,
+            "absolute_at": [
+              "combined",
+              1.0
+            ]
+          },
+          "P_hat": {
+            "max_relative_percent": 0.01577226493023609,
+            "relative_at": [
+              "combined",
+              2.5
+            ],
+            "max_absolute": 5.016392290307925e-05,
+            "absolute_at": [
+              "combined",
+              2.2
+            ]
+          },
+          "P_hat_midpoint": {
+            "max_relative_percent": 0.018286107918052963,
+            "relative_at": [
+              "combined",
+              2.5
+            ],
+            "max_absolute": 5.6305951249779884e-05,
+            "absolute_at": [
+              "combined",
+              2.5
+            ]
+          },
+          "Q": {
+            "max_relative_percent": 0.016471314451149688,
+            "relative_at": [
+              "combined",
+              2.5
+            ],
+            "max_absolute": 1.5933986138388923e-05,
+            "absolute_at": [
+              "combined",
+              2.0
+            ]
+          },
+          "Q_midpoint": {
+            "max_relative_percent": 0.016987106067234414,
+            "relative_at": [
+              "combined",
+              2.5
+            ],
+            "max_absolute": 1.3465462437994846e-05,
+            "absolute_at": [
+              "combined",
+              2.2
+            ]
+          }
+        },
+        "shift": {
+          "D": {
+            "max_relative_percent": 7.489665762711228,
+            "relative_at": [
+              "shift",
+              2.5
+            ],
+            "max_absolute": 0.006940666754812766,
+            "absolute_at": [
+              "shift",
+              1.0
+            ]
+          },
+          "D_midpoint": {
+            "max_relative_percent": 4.449838967602848,
+            "relative_at": [
+              "shift",
+              2.5
+            ],
+            "max_absolute": 0.0019453417363298614,
+            "absolute_at": [
+              "shift",
+              1.8
+            ]
+          },
+          "P_hat": {
+            "max_relative_percent": 2.1981631818349445,
+            "relative_at": [
+              "shift",
+              2.5
+            ],
+            "max_absolute": 0.00494954816628887,
+            "absolute_at": [
+              "shift",
+              2.5
+            ]
+          },
+          "P_hat_midpoint": {
+            "max_relative_percent": 3.6569500460606807,
+            "relative_at": [
+              "shift",
+              2.5
+            ],
+            "max_absolute": 0.01045693307283424,
+            "absolute_at": [
+              "shift",
+              2.0
+            ]
+          },
+          "Q": {
+            "max_relative_percent": 2.0536240856244614,
+            "relative_at": [
+              "shift",
+              2.5
+            ],
+            "max_absolute": 0.0012564193762317696,
+            "absolute_at": [
+              "shift",
+              2.5
+            ]
+          },
+          "Q_midpoint": {
+            "max_relative_percent": 4.120676035650095,
+            "relative_at": [
+              "shift",
+              2.5
+            ],
+            "max_absolute": 0.004792313118052172,
+            "absolute_at": [
+              "shift",
+              1.6
+            ]
+          }
+        },
+        "physical_2": {
+          "D": {
+            "max_relative_percent": 5.538277132341007,
+            "relative_at": [
+              "physical_2",
+              0.2
+            ],
+            "max_absolute": 0.00990393108049964,
+            "absolute_at": [
+              "physical_2",
+              1.6
+            ]
+          },
+          "D_midpoint": {
+            "max_relative_percent": 2.786142974166639,
+            "relative_at": [
+              "physical_2",
+              2.5
+            ],
+            "max_absolute": 0.005867325295347503,
+            "absolute_at": [
+              "physical_2",
+              2.5
+            ]
+          },
+          "P_hat": {
+            "max_relative_percent": 1.2204632481160882,
+            "relative_at": [
+              "physical_2",
+              2.5
+            ],
+            "max_absolute": 0.01533833636628823,
+            "absolute_at": [
+              "physical_2",
+              2.5
+            ]
+          },
+          "P_hat_midpoint": {
+            "max_relative_percent": 2.059338632029184,
+            "relative_at": [
+              "physical_2",
+              2.5
+            ],
+            "max_absolute": 0.02597059924234113,
+            "absolute_at": [
+              "physical_2",
+              2.5
+            ]
+          },
+          "Q": {
+            "max_relative_percent": 1.5475463659946787,
+            "relative_at": [
+              "physical_2",
+              2.5
+            ],
+            "max_absolute": 0.007238799674055829,
+            "absolute_at": [
+              "physical_2",
+              2.2
+            ]
+          },
+          "Q_midpoint": {
+            "max_relative_percent": 2.4622230091393416,
+            "relative_at": [
+              "physical_2",
+              2.5
+            ],
+            "max_absolute": 0.010733183389013523,
+            "absolute_at": [
+              "physical_2",
+              2.5
+            ]
+          }
+        },
+        "physical_5": {
+          "D": {
+            "max_relative_percent": 5.520576491439389,
+            "relative_at": [
+              "physical_5",
+              0.2
+            ],
+            "max_absolute": 0.006266883184872618,
+            "absolute_at": [
+              "physical_5",
+              1.0
+            ]
+          },
+          "D_midpoint": {
+            "max_relative_percent": 3.134805822865361,
+            "relative_at": [
+              "physical_5",
+              2.5
+            ],
+            "max_absolute": 0.003916166754803857,
+            "absolute_at": [
+              "physical_5",
+              1.8
+            ]
+          },
+          "P_hat": {
+            "max_relative_percent": 1.4563719320138002,
+            "relative_at": [
+              "physical_5",
+              2.5
+            ],
+            "max_absolute": 0.00879219885600746,
+            "absolute_at": [
+              "physical_5",
+              2.5
+            ]
+          },
+          "P_hat_midpoint": {
+            "max_relative_percent": 1.7441182795602028,
+            "relative_at": [
+              "physical_5",
+              2.5
+            ],
+            "max_absolute": 0.015689031695900635,
+            "absolute_at": [
+              "physical_5",
+              1.8
+            ]
+          },
+          "Q": {
+            "max_relative_percent": 2.289900688379065,
+            "relative_at": [
+              "physical_5",
+              2.5
+            ],
+            "max_absolute": 0.007235084199594066,
+            "absolute_at": [
+              "physical_5",
+              1.4
+            ]
+          },
+          "Q_midpoint": {
+            "max_relative_percent": 2.8097870827066274,
+            "relative_at": [
+              "physical_5",
+              2.5
+            ],
+            "max_absolute": 0.01071945851402073,
+            "absolute_at": [
+              "physical_5",
+              1.6
+            ]
+          }
+        }
+      }
+    },
+    {
+      "nmu": 721,
+      "a_trapezoid": 0.1850479615375769,
+      "a_full_cell": 0.19344825103009516,
+      "max_outgoing_Courant": 0.26881808363588416,
+      "controlled_P_hat": {
+        "max_relative_percent": 0.007221817308211698,
+        "relative_at": [
+          "latitude",
+          2.5
+        ],
+        "max_absolute": 7.078878585442538e-05,
+        "absolute_at": [
+          "latitude",
+          2.5
+        ]
+      },
+      "physical_P_hat": {
+        "max_relative_percent": 0.910307568667279,
+        "relative_at": [
+          "shift",
+          2.5
+        ],
+        "max_absolute": 0.004801529519647518,
+        "absolute_at": [
+          "physical_2",
+          2.5
+        ]
+      },
+      "controlled_P_hat_full_cell": {
+        "max_relative_percent": 0.011014080073645793,
+        "relative_at": [
+          "latitude",
+          2.5
+        ],
+        "max_absolute": 0.00010795629777993199,
+        "absolute_at": [
+          "latitude",
+          2.5
+        ]
+      },
+      "physical_P_hat_full_cell": {
+        "max_relative_percent": 1.2210071241252285,
+        "relative_at": [
+          "shift",
+          2.5
+        ],
+        "max_absolute": 0.008722114695773886,
+        "absolute_at": [
+          "physical_2",
+          2.5
+        ]
+      },
+      "by_case": {
+        "linear": {
+          "D": {
+            "max_relative_percent": 2.0141932733843904,
+            "relative_at": [
+              "linear",
+              0.2
+            ],
+            "max_absolute": 0.00950960072264323,
+            "absolute_at": [
+              "linear",
+              2.5
+            ]
+          },
+          "D_midpoint": {
+            "max_relative_percent": 0.10809860901404011,
+            "relative_at": [
+              "linear",
+              1.8
+            ],
+            "max_absolute": 0.0005222226558867504,
+            "absolute_at": [
+              "linear",
+              2.5
+            ]
+          },
+          "P_hat": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "linear",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "linear",
+              0.2
+            ]
+          },
+          "P_hat_midpoint": {
+            "max_relative_percent": 2.220446049250313e-14,
+            "relative_at": [
+              "linear",
+              1.8
+            ],
+            "max_absolute": 4.440892098500626e-16,
+            "absolute_at": [
+              "linear",
+              1.8
+            ]
+          },
+          "Q": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "linear",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "linear",
+              0.2
+            ]
+          },
+          "Q_midpoint": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "linear",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "linear",
+              0.2
+            ]
+          }
+        },
+        "tilt": {
+          "D": {
+            "max_relative_percent": 2.01413272305222,
+            "relative_at": [
+              "tilt",
+              0.2
+            ],
+            "max_absolute": 0.004840490861452135,
+            "absolute_at": [
+              "tilt",
+              2.5
+            ]
+          },
+          "D_midpoint": {
+            "max_relative_percent": 0.11598556549035077,
+            "relative_at": [
+              "tilt",
+              2.5
+            ],
+            "max_absolute": 0.00028576695796098117,
+            "absolute_at": [
+              "tilt",
+              2.5
+            ]
+          },
+          "P_hat": {
+            "max_relative_percent": 0.002629765234862802,
+            "relative_at": [
+              "tilt",
+              2.5
+            ],
+            "max_absolute": 3.8710286116572235e-05,
+            "absolute_at": [
+              "tilt",
+              2.5
+            ]
+          },
+          "P_hat_midpoint": {
+            "max_relative_percent": 0.005296592945480683,
+            "relative_at": [
+              "tilt",
+              2.5
+            ],
+            "max_absolute": 7.796843965879319e-05,
+            "absolute_at": [
+              "tilt",
+              2.5
+            ]
+          },
+          "Q": {
+            "max_relative_percent": 0.0039069183383366735,
+            "relative_at": [
+              "tilt",
+              2.5
+            ],
+            "max_absolute": 2.0228745661099445e-05,
+            "absolute_at": [
+              "tilt",
+              2.2
+            ]
+          },
+          "Q_midpoint": {
+            "max_relative_percent": 0.00787843999228155,
+            "relative_at": [
+              "tilt",
+              2.5
+            ],
+            "max_absolute": 4.080780070736534e-05,
+            "absolute_at": [
+              "tilt",
+              2.2
+            ]
+          }
+        },
+        "latitude": {
+          "D": {
+            "max_relative_percent": 2.0227686607360074,
+            "relative_at": [
+              "latitude",
+              2.5
+            ],
+            "max_absolute": 0.004223435030039302,
+            "absolute_at": [
+              "latitude",
+              1.8
+            ]
+          },
+          "D_midpoint": {
+            "max_relative_percent": 0.10801409462481981,
+            "relative_at": [
+              "latitude",
+              0.2
+            ],
+            "max_absolute": 0.0002190613617587267,
+            "absolute_at": [
+              "latitude",
+              1.6
+            ]
+          },
+          "P_hat": {
+            "max_relative_percent": 0.007221817308211698,
+            "relative_at": [
+              "latitude",
+              2.5
+            ],
+            "max_absolute": 7.078878585442538e-05,
+            "absolute_at": [
+              "latitude",
+              2.5
+            ]
+          },
+          "P_hat_midpoint": {
+            "max_relative_percent": 0.011014080073645793,
+            "relative_at": [
+              "latitude",
+              2.5
+            ],
+            "max_absolute": 0.00010795629777993199,
+            "absolute_at": [
+              "latitude",
+              2.5
+            ]
+          },
+          "Q": {
+            "max_relative_percent": 0.008751662754113987,
+            "relative_at": [
+              "latitude",
+              2.5
+            ],
+            "max_absolute": 3.185451984699661e-05,
+            "absolute_at": [
+              "latitude",
+              2.2
+            ]
+          },
+          "Q_midpoint": {
+            "max_relative_percent": 0.013122868236525864,
+            "relative_at": [
+              "latitude",
+              2.5
+            ],
+            "max_absolute": 4.6630160983773816e-05,
+            "absolute_at": [
+              "latitude",
+              2.2
+            ]
+          }
+        },
+        "inflow": {
+          "D": {
+            "max_relative_percent": 2.0141932733844015,
+            "relative_at": [
+              "inflow",
+              0.2
+            ],
+            "max_absolute": 0.004252260485734766,
+            "absolute_at": [
+              "inflow",
+              2.2
+            ]
+          },
+          "D_midpoint": {
+            "max_relative_percent": 0.10809860901404011,
+            "relative_at": [
+              "inflow",
+              1.8
+            ],
+            "max_absolute": 0.00023351419572170684,
+            "absolute_at": [
+              "inflow",
+              2.2
+            ]
+          },
+          "P_hat": {
+            "max_relative_percent": 2.220446049250313e-14,
+            "relative_at": [
+              "inflow",
+              0.35
+            ],
+            "max_absolute": 2.220446049250313e-16,
+            "absolute_at": [
+              "inflow",
+              1.4
+            ]
+          },
+          "P_hat_midpoint": {
+            "max_relative_percent": 2.220446049250313e-14,
+            "relative_at": [
+              "inflow",
+              0.35
+            ],
+            "max_absolute": 2.220446049250313e-16,
+            "absolute_at": [
+              "inflow",
+              1.6
+            ]
+          },
+          "Q": {
+            "max_relative_percent": 2.220446049250313e-14,
+            "relative_at": [
+              "inflow",
+              0.65
+            ],
+            "max_absolute": 1.1102230246251565e-16,
+            "absolute_at": [
+              "inflow",
+              0.65
+            ]
+          },
+          "Q_midpoint": {
+            "max_relative_percent": 1.1102230246251565e-14,
+            "relative_at": [
+              "inflow",
+              0.35
+            ],
+            "max_absolute": 1.1102230246251565e-16,
+            "absolute_at": [
+              "inflow",
+              0.35
+            ]
+          }
+        },
+        "combined": {
+          "D": {
+            "max_relative_percent": 2.0196296488425913,
+            "relative_at": [
+              "combined",
+              2.5
+            ],
+            "max_absolute": 0.0024017939502236213,
+            "absolute_at": [
+              "combined",
+              1.0
+            ]
+          },
+          "D_midpoint": {
+            "max_relative_percent": 0.10854673850020369,
+            "relative_at": [
+              "combined",
+              1.0
+            ],
+            "max_absolute": 0.00013242442594181558,
+            "absolute_at": [
+              "combined",
+              1.0
+            ]
+          },
+          "P_hat": {
+            "max_relative_percent": 0.0052579644991501695,
+            "relative_at": [
+              "combined",
+              2.5
+            ],
+            "max_absolute": 1.686339526990599e-05,
+            "absolute_at": [
+              "combined",
+              2.2
+            ]
+          },
+          "P_hat_midpoint": {
+            "max_relative_percent": 0.006167567912429561,
+            "relative_at": [
+              "combined",
+              2.5
+            ],
+            "max_absolute": 1.8990961869136402e-05,
+            "absolute_at": [
+              "combined",
+              2.5
+            ]
+          },
+          "Q": {
+            "max_relative_percent": 0.0055481254273570535,
+            "relative_at": [
+              "combined",
+              2.5
+            ],
+            "max_absolute": 5.491171924359994e-06,
+            "absolute_at": [
+              "combined",
+              2.0
+            ]
+          },
+          "Q_midpoint": {
+            "max_relative_percent": 0.005719949933746804,
+            "relative_at": [
+              "combined",
+              2.5
+            ],
+            "max_absolute": 4.523592906702234e-06,
+            "absolute_at": [
+              "combined",
+              2.2
+            ]
+          }
+        },
+        "shift": {
+          "D": {
+            "max_relative_percent": 2.8658799088980835,
+            "relative_at": [
+              "shift",
+              2.5
+            ],
+            "max_absolute": 0.0025317137339762874,
+            "absolute_at": [
+              "shift",
+              1.0
+            ]
+          },
+          "D_midpoint": {
+            "max_relative_percent": 1.483441380902617,
+            "relative_at": [
+              "shift",
+              2.5
+            ],
+            "max_absolute": 0.0006546765727709486,
+            "absolute_at": [
+              "shift",
+              1.8
+            ]
+          },
+          "P_hat": {
+            "max_relative_percent": 0.910307568667279,
+            "relative_at": [
+              "shift",
+              2.5
+            ],
+            "max_absolute": 0.0020497164152731007,
+            "absolute_at": [
+              "shift",
+              2.5
+            ]
+          },
+          "P_hat_midpoint": {
+            "max_relative_percent": 1.2210071241252285,
+            "relative_at": [
+              "shift",
+              2.5
+            ],
+            "max_absolute": 0.0035165340786889043,
+            "absolute_at": [
+              "shift",
+              2.0
+            ]
+          },
+          "Q": {
+            "max_relative_percent": 0.8691938801809518,
+            "relative_at": [
+              "shift",
+              2.5
+            ],
+            "max_absolute": 0.0005317779628735489,
+            "absolute_at": [
+              "shift",
+              2.5
+            ]
+          },
+          "Q_midpoint": {
+            "max_relative_percent": 1.3738576508781852,
+            "relative_at": [
+              "shift",
+              2.5
+            ],
+            "max_absolute": 0.001613852866740484,
+            "absolute_at": [
+              "shift",
+              1.6
+            ]
+          }
+        },
+        "physical_2": {
+          "D": {
+            "max_relative_percent": 2.0101664333446734,
+            "relative_at": [
+              "physical_2",
+              0.2
+            ],
+            "max_absolute": 0.0036325003136014056,
+            "absolute_at": [
+              "physical_2",
+              1.6
+            ]
+          },
+          "D_midpoint": {
+            "max_relative_percent": 0.9347981185971133,
+            "relative_at": [
+              "physical_2",
+              2.5
+            ],
+            "max_absolute": 0.0019685869311601434,
+            "absolute_at": [
+              "physical_2",
+              2.5
+            ]
+          },
+          "P_hat": {
+            "max_relative_percent": 0.3820551442824005,
+            "relative_at": [
+              "physical_2",
+              2.5
+            ],
+            "max_absolute": 0.004801529519647518,
+            "absolute_at": [
+              "physical_2",
+              2.5
+            ]
+          },
+          "P_hat_midpoint": {
+            "max_relative_percent": 0.6916200730829658,
+            "relative_at": [
+              "physical_2",
+              2.5
+            ],
+            "max_absolute": 0.008722114695773886,
+            "absolute_at": [
+              "physical_2",
+              2.5
+            ]
+          },
+          "Q": {
+            "max_relative_percent": 0.48901484323649047,
+            "relative_at": [
+              "physical_2",
+              2.5
+            ],
+            "max_absolute": 0.0023294305699681495,
+            "absolute_at": [
+              "physical_2",
+              2.2
+            ]
+          },
+          "Q_midpoint": {
+            "max_relative_percent": 0.8258068238933269,
+            "relative_at": [
+              "physical_2",
+              2.5
+            ],
+            "max_absolute": 0.003599810436278883,
+            "absolute_at": [
+              "physical_2",
+              2.5
+            ]
+          }
+        },
+        "physical_5": {
+          "D": {
+            "max_relative_percent": 2.0040969725111935,
+            "relative_at": [
+              "physical_5",
+              0.2
+            ],
+            "max_absolute": 0.0022977725346391975,
+            "absolute_at": [
+              "physical_5",
+              1.0
+            ]
+          },
+          "D_midpoint": {
+            "max_relative_percent": 1.0443340077375352,
+            "relative_at": [
+              "physical_5",
+              2.5
+            ],
+            "max_absolute": 0.0013097070868691996,
+            "absolute_at": [
+              "physical_5",
+              1.8
+            ]
+          },
+          "P_hat": {
+            "max_relative_percent": 0.4750689088735882,
+            "relative_at": [
+              "physical_5",
+              2.5
+            ],
+            "max_absolute": 0.0028680175889873594,
+            "absolute_at": [
+              "physical_5",
+              2.5
+            ]
+          },
+          "P_hat_midpoint": {
+            "max_relative_percent": 0.5799861653384752,
+            "relative_at": [
+              "physical_5",
+              2.5
+            ],
+            "max_absolute": 0.005250461372277804,
+            "absolute_at": [
+              "physical_5",
+              1.8
+            ]
+          },
+          "Q": {
+            "max_relative_percent": 0.7455420975368776,
+            "relative_at": [
+              "physical_5",
+              2.5
+            ],
+            "max_absolute": 0.0023267406705592686,
+            "absolute_at": [
+              "physical_5",
+              1.4
+            ]
+          },
+          "Q_midpoint": {
+            "max_relative_percent": 0.9352244341190863,
+            "relative_at": [
+              "physical_5",
+              2.5
+            ],
+            "max_absolute": 0.0035942253039054073,
+            "absolute_at": [
+              "physical_5",
+              1.6
+            ]
+          }
+        }
+      }
+    },
+    {
+      "nmu": 1441,
+      "a_trapezoid": 0.1888518018266342,
+      "a_full_cell": 0.19323936196774047,
+      "max_outgoing_Courant": 0.5372601612026561,
+      "controlled_P_hat": {
+        "max_relative_percent": 0.0,
+        "relative_at": [
+          "linear",
+          0.2
+        ],
+        "max_absolute": 0.0,
+        "absolute_at": [
+          "linear",
+          0.2
+        ]
+      },
+      "physical_P_hat": {
+        "max_relative_percent": 0.0,
+        "relative_at": [
+          "shift",
+          0.2
+        ],
+        "max_absolute": 0.0,
+        "absolute_at": [
+          "shift",
+          0.2
+        ]
+      },
+      "controlled_P_hat_full_cell": {
+        "max_relative_percent": 0.0,
+        "relative_at": [
+          "linear",
+          0.2
+        ],
+        "max_absolute": 0.0,
+        "absolute_at": [
+          "linear",
+          0.2
+        ]
+      },
+      "physical_P_hat_full_cell": {
+        "max_relative_percent": 0.0,
+        "relative_at": [
+          "shift",
+          0.2
+        ],
+        "max_absolute": 0.0,
+        "absolute_at": [
+          "shift",
+          0.2
+        ]
+      },
+      "by_case": {
+        "linear": {
+          "D": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "linear",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "linear",
+              0.2
+            ]
+          },
+          "D_midpoint": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "linear",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "linear",
+              0.2
+            ]
+          },
+          "P_hat": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "linear",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "linear",
+              0.2
+            ]
+          },
+          "P_hat_midpoint": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "linear",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "linear",
+              0.2
+            ]
+          },
+          "Q": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "linear",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "linear",
+              0.2
+            ]
+          },
+          "Q_midpoint": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "linear",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "linear",
+              0.2
+            ]
+          }
+        },
+        "tilt": {
+          "D": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "tilt",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "tilt",
+              0.2
+            ]
+          },
+          "D_midpoint": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "tilt",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "tilt",
+              0.2
+            ]
+          },
+          "P_hat": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "tilt",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "tilt",
+              0.2
+            ]
+          },
+          "P_hat_midpoint": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "tilt",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "tilt",
+              0.2
+            ]
+          },
+          "Q": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "tilt",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "tilt",
+              0.2
+            ]
+          },
+          "Q_midpoint": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "tilt",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "tilt",
+              0.2
+            ]
+          }
+        },
+        "latitude": {
+          "D": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "latitude",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "latitude",
+              0.2
+            ]
+          },
+          "D_midpoint": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "latitude",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "latitude",
+              0.2
+            ]
+          },
+          "P_hat": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "latitude",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "latitude",
+              0.2
+            ]
+          },
+          "P_hat_midpoint": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "latitude",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "latitude",
+              0.2
+            ]
+          },
+          "Q": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "latitude",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "latitude",
+              0.2
+            ]
+          },
+          "Q_midpoint": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "latitude",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "latitude",
+              0.2
+            ]
+          }
+        },
+        "inflow": {
+          "D": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "inflow",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "inflow",
+              0.2
+            ]
+          },
+          "D_midpoint": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "inflow",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "inflow",
+              0.2
+            ]
+          },
+          "P_hat": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "inflow",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "inflow",
+              0.2
+            ]
+          },
+          "P_hat_midpoint": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "inflow",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "inflow",
+              0.2
+            ]
+          },
+          "Q": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "inflow",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "inflow",
+              0.2
+            ]
+          },
+          "Q_midpoint": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "inflow",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "inflow",
+              0.2
+            ]
+          }
+        },
+        "combined": {
+          "D": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "combined",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "combined",
+              0.2
+            ]
+          },
+          "D_midpoint": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "combined",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "combined",
+              0.2
+            ]
+          },
+          "P_hat": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "combined",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "combined",
+              0.2
+            ]
+          },
+          "P_hat_midpoint": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "combined",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "combined",
+              0.2
+            ]
+          },
+          "Q": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "combined",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "combined",
+              0.2
+            ]
+          },
+          "Q_midpoint": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "combined",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "combined",
+              0.2
+            ]
+          }
+        },
+        "shift": {
+          "D": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "shift",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "shift",
+              0.2
+            ]
+          },
+          "D_midpoint": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "shift",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "shift",
+              0.2
+            ]
+          },
+          "P_hat": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "shift",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "shift",
+              0.2
+            ]
+          },
+          "P_hat_midpoint": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "shift",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "shift",
+              0.2
+            ]
+          },
+          "Q": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "shift",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "shift",
+              0.2
+            ]
+          },
+          "Q_midpoint": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "shift",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "shift",
+              0.2
+            ]
+          }
+        },
+        "physical_2": {
+          "D": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "physical_2",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "physical_2",
+              0.2
+            ]
+          },
+          "D_midpoint": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "physical_2",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "physical_2",
+              0.2
+            ]
+          },
+          "P_hat": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "physical_2",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "physical_2",
+              0.2
+            ]
+          },
+          "P_hat_midpoint": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "physical_2",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "physical_2",
+              0.2
+            ]
+          },
+          "Q": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "physical_2",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "physical_2",
+              0.2
+            ]
+          },
+          "Q_midpoint": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "physical_2",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "physical_2",
+              0.2
+            ]
+          }
+        },
+        "physical_5": {
+          "D": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "physical_5",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "physical_5",
+              0.2
+            ]
+          },
+          "D_midpoint": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "physical_5",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "physical_5",
+              0.2
+            ]
+          },
+          "P_hat": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "physical_5",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "physical_5",
+              0.2
+            ]
+          },
+          "P_hat_midpoint": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "physical_5",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "physical_5",
+              0.2
+            ]
+          },
+          "Q": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "physical_5",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "physical_5",
+              0.2
+            ]
+          },
+          "Q_midpoint": {
+            "max_relative_percent": 0.0,
+            "relative_at": [
+              "physical_5",
+              0.2
+            ],
+            "max_absolute": 0.0,
+            "absolute_at": [
+              "physical_5",
+              0.2
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "temporal": [
+    {
+      "nmu": 181,
+      "dt_days": 1.0,
+      "D": {
+        "max_relative_percent": 0.03555283434832912,
+        "relative_at": [
+          "physical_5",
+          2.0
+        ],
+        "max_absolute": 4.075565160388539e-05,
+        "absolute_at": [
+          "physical_5",
+          2.0
+        ]
+      },
+      "D_midpoint": {
+        "max_relative_percent": 0.03903535827949334,
+        "relative_at": [
+          "physical_5",
+          2.0
+        ],
+        "max_absolute": 6.060970155918888e-05,
+        "absolute_at": [
+          "physical_2",
+          2.5
+        ]
+      },
+      "P_hat": {
+        "max_relative_percent": 0.030459010196837166,
+        "relative_at": [
+          "shift",
+          2.5
+        ],
+        "max_absolute": 0.0002658206067962521,
+        "absolute_at": [
+          "physical_5",
+          2.0
+        ]
+      },
+      "P_hat_midpoint": {
+        "max_relative_percent": 0.02768668203412261,
+        "relative_at": [
+          "physical_5",
+          2.0
+        ],
+        "max_absolute": 0.0002742025126145631,
+        "absolute_at": [
+          "physical_5",
+          2.0
+        ]
+      }
+    },
+    {
+      "nmu": 181,
+      "dt_days": 0.5,
+      "D": {
+        "max_relative_percent": 0.011850358122988958,
+        "relative_at": [
+          "physical_5",
+          2.0
+        ],
+        "max_absolute": 1.3584544689457245e-05,
+        "absolute_at": [
+          "physical_5",
+          2.0
+        ]
+      },
+      "D_midpoint": {
+        "max_relative_percent": 0.013010937165369718,
+        "relative_at": [
+          "physical_5",
+          2.0
+        ],
+        "max_absolute": 2.0200877370840642e-05,
+        "absolute_at": [
+          "physical_2",
+          2.5
+        ]
+      },
+      "P_hat": {
+        "max_relative_percent": 0.010143645404570023,
+        "relative_at": [
+          "shift",
+          2.5
+        ],
+        "max_absolute": 8.859659315207935e-05,
+        "absolute_at": [
+          "physical_5",
+          2.0
+        ]
+      },
+      "P_hat_midpoint": {
+        "max_relative_percent": 0.009228705155961414,
+        "relative_at": [
+          "physical_5",
+          2.0
+        ],
+        "max_absolute": 9.139896715770757e-05,
+        "absolute_at": [
+          "physical_5",
+          2.0
+        ]
+      }
+    }
+  ],
+  "endpoint": [
+    {
+      "nmu": 181,
+      "dt_days": 1.0,
+      "D": {
+        "max_relative_percent": 0.04013661490261944,
+        "relative_at": [
+          "shift",
+          2.5
+        ],
+        "max_absolute": 1.4617070017902689e-05,
+        "absolute_at": [
+          "physical_2",
+          2.5
+        ]
+      },
+      "P_hat": {
+        "max_relative_percent": 0.03710018452024455,
+        "relative_at": [
+          "shift",
+          2.5
+        ],
+        "max_absolute": 8.469886120998638e-05,
+        "absolute_at": [
+          "physical_2",
+          2.5
+        ]
+      }
+    },
+    {
+      "nmu": 181,
+      "dt_days": 0.5,
+      "D": {
+        "max_relative_percent": 0.024096252385108485,
+        "relative_at": [
+          "shift",
+          2.5
+        ],
+        "max_absolute": 8.752436772341277e-06,
+        "absolute_at": [
+          "physical_2",
+          2.5
+        ]
+      },
+      "P_hat": {
+        "max_relative_percent": 0.02227738756813702,
+        "relative_at": [
+          "shift",
+          2.5
+        ],
+        "max_absolute": 5.074510417268918e-05,
+        "absolute_at": [
+          "physical_2",
+          2.5
+        ]
+      }
+    },
+    {
+      "nmu": 181,
+      "dt_days": 0.25,
+      "D": {
+        "max_relative_percent": 0.0160629939806034,
+        "relative_at": [
+          "shift",
+          2.5
+        ],
+        "max_absolute": 5.827988462214773e-06,
+        "absolute_at": [
+          "physical_2",
+          2.5
+        ]
+      },
+      "P_hat": {
+        "max_relative_percent": 0.014851748141209153,
+        "relative_at": [
+          "shift",
+          2.5
+        ],
+        "max_absolute": 3.379987761897851e-05,
+        "absolute_at": [
+          "physical_2",
+          2.5
+        ]
+      }
+    }
+  ],
+  "all_positive_dipoles": true,
+  "sampled_controlled_peak_amplitudes": {
+    "91": {
+      "linear": 2.5,
+      "tilt": 2.5,
+      "latitude": 1.8,
+      "inflow": 2.2,
+      "combined": 1.0
+    },
+    "181": {
+      "linear": 2.5,
+      "tilt": 2.5,
+      "latitude": 1.8,
+      "inflow": 2.2,
+      "combined": 1.0
+    },
+    "361": {
+      "linear": 2.5,
+      "tilt": 2.5,
+      "latitude": 1.8,
+      "inflow": 2.2,
+      "combined": 1.0
+    },
+    "721": {
+      "linear": 2.5,
+      "tilt": 2.5,
+      "latitude": 1.8,
+      "inflow": 2.2,
+      "combined": 1.0
+    },
+    "1441": {
+      "linear": 2.5,
+      "tilt": 2.5,
+      "latitude": 1.8,
+      "inflow": 2.2,
+      "combined": 1.0
+    }
+  },
+  "finest_grid_time_check": {
+    "nmu": 1441,
+    "dt_days": 0.25,
+    "reference_dt_days": 0.125,
+    "D": {
+      "max_relative_percent": 0.0066690839006122715,
+      "at": [
+        "physical_5",
+        2.0
+      ]
+    },
+    "D_midpoint": {
+      "max_relative_percent": 0.006769715518517572,
+      "at": [
+        "physical_5",
+        2.0
+      ]
+    },
+    "P_hat": {
+      "max_relative_percent": 0.004800981471864141,
+      "at": [
+        "physical_5",
+        2.0
+      ]
+    },
+    "P_hat_midpoint": {
+      "max_relative_percent": 0.004796796938655312,
+      "at": [
+        "physical_5",
+        2.0
+      ]
+    }
+  }
+}

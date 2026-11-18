@@ -323,8 +323,8 @@ cycles at D₀ = 3.20). The complete field also has no gain at which
 perturbations vanish in one step: because part of each cycle's flux is
 unsettled, its leading multiplier never falls below 0.082 in modulus.
 (The table value, 0.0827, is the smallest over the sampled amplitudes; a
-direct minimisation, in the manuscript repository's
-`revisions/settled_dipole/` record, gives 0.0819 at D₀ = 2.564.)
+direct minimisation, in the `revisions/settled_dipole/` record (moved
+here from the manuscript repository), gives 0.0819 at D₀ = 2.564.)
 
 ## 5. Scalar remnant subtraction along a prescribed sequence
 

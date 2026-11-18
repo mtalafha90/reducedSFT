@@ -1,0 +1,24 @@
+{
+  "code_commit": "41640e936c5d777a168ff5c0753491b840263c49",
+  "solver_sha256": "2962d1281854b237e06bb38e9f07b69f4b7cdf683d0a46a65eb7a001908281b0",
+  "study_sha256": "4fd7096e778314dcbcf5398d3913b349d4bfdbe98c102bac344e06fa6a99550d",
+  "check_script_sha256": "cf0ca5e8b15fb710774efe949358abe2a7dcadbd6c18c00e64322cd66f548d34",
+  "forward_comparisons": [
+    {
+      "nmu": 1441,
+      "dt_days": 0.125,
+      "case": "linear",
+      "T": 1.0,
+      "field_max_relative_difference": 4.4221962863325366e-15,
+      "original_solver_seconds": 53.24136002499995
+    },
+    {
+      "nmu": 1441,
+      "dt_days": 0.125,
+      "case": "physical_5",
+      "T": 2.5,
+      "field_max_relative_difference": 8.042571819218474e-16,
+      "original_solver_seconds": 53.506277282000156
+    }
+  ]
+}

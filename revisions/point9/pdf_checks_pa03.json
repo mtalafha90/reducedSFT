@@ -1,0 +1,235 @@
+{
+  "entry": "PA03",
+  "style": "Solar Physics (Springer) artwork rules",
+  "figures": [
+    {
+      "file": "figures/fig1_main_signed_axial_dipole_response_raw.pdf",
+      "weight": "bold",
+      "sha256": "70e91e8ac6749d75db7804e4a722848ad14ae822467c52ee9559af1206dfeb0f",
+      "page_size_bp": "345.704 x 295.2 pts",
+      "raster_images": 0,
+      "fonts": [
+        "FreeSansBold (CID TrueType, embedded yes)",
+        "FreeSansBoldOblique (CID TrueType, embedded yes)"
+      ],
+      "key_location": "upper left",
+      "key_min_clearance_pt": 52.5
+    },
+    {
+      "file": "figures/fig2_normalized_response_vs_theory.pdf",
+      "weight": "bold",
+      "sha256": "910624cf7859ba025aee83e53ae208989d3204853b1ee614be32393d3eee8f7d",
+      "page_size_bp": "345.704 x 309.6 pts",
+      "raster_images": 0,
+      "fonts": [
+        "FreeSansBold (CID TrueType, embedded yes)",
+        "FreeSansBoldOblique (CID TrueType, embedded yes)"
+      ],
+      "key_location": "upper left",
+      "key_min_clearance_pt": 19.4
+    },
+    {
+      "file": "figures/fig3_normalized_nonlinear_response.pdf",
+      "weight": "bold",
+      "sha256": "9cf34e74cd10f8c6b72e7c7a1569d86cd6c87fc292109970b17b3ba46d625456",
+      "page_size_bp": "345.704 x 295.2 pts",
+      "raster_images": 0,
+      "fonts": [
+        "FreeSansBold (CID TrueType, embedded yes)",
+        "FreeSansBoldOblique (CID TrueType, embedded yes)"
+      ],
+      "key_location": "upper right",
+      "key_min_clearance_pt": 17.3
+    },
+    {
+      "file": "figures/figF4_closure_ladder.pdf",
+      "weight": "bold",
+      "sha256": "ac41de84c767c345a653e38a2814e51bfc773a4cfb83a5200180f379505ba41d",
+      "page_size_bp": "345.704 x 313.2 pts",
+      "raster_images": 0,
+      "fonts": [
+        "FreeSansBold (CID TrueType, embedded yes)",
+        "FreeSansBoldOblique (CID TrueType, embedded yes)"
+      ],
+      "key_location": "lower right",
+      "key_min_clearance_pt": 82.6
+    },
+    {
+      "file": "figures/figV2_shift_validation.pdf",
+      "weight": "bold",
+      "sha256": "48d83f85052e8d87680593c07d111a938cfb8d6e9d1ae089f79ec5132b04c46c",
+      "page_size_bp": "345.704 x 313.2 pts",
+      "raster_images": 0,
+      "fonts": [
+        "FreeSansBold (CID TrueType, embedded yes)",
+        "FreeSansBoldOblique (CID TrueType, embedded yes)"
+      ],
+      "key_location": "lower left",
+      "key_min_clearance_pt": 10.9
+    },
+    {
+      "file": "figures/figV4_inflow_validation.pdf",
+      "weight": "bold",
+      "sha256": "96e86f1f786bde2d79e19296932be1724dd11001f486c519fcbc8d93aefec6c4",
+      "page_size_bp": "345.704 x 313.2 pts",
+      "raster_images": 0,
+      "fonts": [
+        "FreeSansBold (CID TrueType, embedded yes)",
+        "FreeSansBoldOblique (CID TrueType, embedded yes)"
+      ],
+      "key_location": "lower right",
+      "key_min_clearance_pt": 34.5
+    },
+    {
+      "file": "figures/figM3_bifurcation_comparison.pdf",
+      "weight": "bold",
+      "sha256": "a5575354d4dd927489b9793168eeccdad5b7b24febd89434a1492d2f01afe96c",
+      "page_size_bp": "345.704 x 313.2 pts",
+      "raster_images": 0,
+      "fonts": [
+        "FreeSansBold (CID TrueType, embedded yes)",
+        "FreeSansBoldOblique (CID TrueType, embedded yes)"
+      ],
+      "key_location": "upper left",
+      "key_min_clearance_pt": 12.3
+    },
+    {
+      "file": "figures/figP2_lambdaR_scaling.pdf",
+      "weight": "bold",
+      "sha256": "287cd671b734ce12c7dec0e9801fe39326f40520aeba5c07ae7a21f562516710",
+      "page_size_bp": "345.704 x 295.2 pts",
+      "raster_images": 0,
+      "fonts": [
+        "FreeSansBold (CID TrueType, embedded yes)",
+        "FreeSansBoldOblique (CID TrueType, embedded yes)"
+      ],
+      "key_location": "upper left",
+      "key_min_clearance_pt": 51.4
+    },
+    {
+      "file": "(--final) fig1_main_signed_axial_dipole_response_raw.pdf",
+      "weight": "regular",
+      "sha256": "0a74262f0847a8c67a97f3f812ab234dde77914ebccf857fb86f65f12a9948b8",
+      "page_size_bp": "345.704 x 295.2 pts",
+      "raster_images": 0,
+      "fonts": [
+        "FreeSans (CID TrueType, embedded yes)",
+        "FreeSansOblique (CID TrueType, embedded yes)"
+      ],
+      "key_location": "upper left",
+      "key_min_clearance_pt": 58.1
+    },
+    {
+      "file": "(--final) fig2_normalized_response_vs_theory.pdf",
+      "weight": "regular",
+      "sha256": "283ef5f87a6a38d9ceeb1fc9b3b3f451530b18eb084393884195138016f023ce",
+      "page_size_bp": "345.704 x 309.6 pts",
+      "raster_images": 0,
+      "fonts": [
+        "FreeSans (CID TrueType, embedded yes)",
+        "FreeSansOblique (CID TrueType, embedded yes)"
+      ],
+      "key_location": "upper left",
+      "key_min_clearance_pt": 27.8
+    },
+    {
+      "file": "(--final) fig3_normalized_nonlinear_response.pdf",
+      "weight": "regular",
+      "sha256": "19034e325c872985c9d75b3bcd22b4a6c143717c810b380dcc8b5ec0339d32e0",
+      "page_size_bp": "345.704 x 295.2 pts",
+      "raster_images": 0,
+      "fonts": [
+        "FreeSans (CID TrueType, embedded yes)",
+        "FreeSansOblique (CID TrueType, embedded yes)"
+      ],
+      "key_location": "upper right",
+      "key_min_clearance_pt": 17.3
+    },
+    {
+      "file": "(--final) figF4_closure_ladder.pdf",
+      "weight": "regular",
+      "sha256": "dc1c7f8b8912667e3f0d084365d6011e4bb81f2adce78adabeebf413ae46e6d7",
+      "page_size_bp": "345.704 x 313.2 pts",
+      "raster_images": 0,
+      "fonts": [
+        "FreeSans (CID TrueType, embedded yes)",
+        "FreeSansOblique (CID TrueType, embedded yes)"
+      ],
+      "key_location": "lower right",
+      "key_min_clearance_pt": 93.0
+    },
+    {
+      "file": "(--final) figV2_shift_validation.pdf",
+      "weight": "regular",
+      "sha256": "4832d03001908c3e72efada324b6933986844ea6ab1c5164d2f6f00070fd2322",
+      "page_size_bp": "345.704 x 313.2 pts",
+      "raster_images": 0,
+      "fonts": [
+        "FreeSans (CID TrueType, embedded yes)",
+        "FreeSansOblique (CID TrueType, embedded yes)"
+      ],
+      "key_location": "lower left",
+      "key_min_clearance_pt": 19.6
+    },
+    {
+      "file": "(--final) figV4_inflow_validation.pdf",
+      "weight": "regular",
+      "sha256": "f83fcb8a14ddf5f3a72e1b58b1b11d1dca33d0d712f252349881bb925a1446e7",
+      "page_size_bp": "345.704 x 313.2 pts",
+      "raster_images": 0,
+      "fonts": [
+        "FreeSans (CID TrueType, embedded yes)",
+        "FreeSansOblique (CID TrueType, embedded yes)"
+      ],
+      "key_location": "lower right",
+      "key_min_clearance_pt": 34.5
+    },
+    {
+      "file": "(--final) figM3_bifurcation_comparison.pdf",
+      "weight": "regular",
+      "sha256": "ffd164aca57e6840b5ace1a73675a985c94228168790f956940ab719d6bb66f5",
+      "page_size_bp": "345.704 x 313.2 pts",
+      "raster_images": 0,
+      "fonts": [
+        "FreeSans (CID TrueType, embedded yes)",
+        "FreeSansOblique (CID TrueType, embedded yes)"
+      ],
+      "key_location": "upper left",
+      "key_min_clearance_pt": 29.4
+    },
+    {
+      "file": "(--final) figP2_lambdaR_scaling.pdf",
+      "weight": "regular",
+      "sha256": "ebdb4d312358ba697810c2379b2ae7b9f8053c3f432b753b55396397ca89b90b",
+      "page_size_bp": "345.704 x 295.2 pts",
+      "raster_images": 0,
+      "fonts": [
+        "FreeSans (CID TrueType, embedded yes)",
+        "FreeSansOblique (CID TrueType, embedded yes)"
+      ],
+      "key_location": "upper left",
+      "key_min_clearance_pt": 53.6
+    }
+  ],
+  "manuscript": {
+    "pages_before": 34,
+    "pages_after": 34,
+    "pages_whose_text_changed": [
+      15,
+      16,
+      17,
+      19,
+      20,
+      21,
+      24,
+      26
+    ],
+    "change_on_those_pages": "figure lettering only; body text, captions and equations identical",
+    "pdflatex_passes": 4,
+    "undefined_references_or_citations": false,
+    "rerun_request_after_final_pass": false,
+    "overfull_boxes": [
+      "Overfull \\hbox (2.03934pt too wide) in paragraph at lines 1391--1396"
+    ]
+  }
+}

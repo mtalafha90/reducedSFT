@@ -1,0 +1,52 @@
+{
+  "solver_commit": "41640e936c5d777a168ff5c0753491b840263c49",
+  "grid_results_sha256": "f357e98d8795a4fa5f15ce5b3bee956cb556073a4cc481aa5385a9d9f3c678bd",
+  "a": 0.1678355566299387,
+  "omega_min": 1.8281367846117858e-06,
+  "normalised_weight_sum": 1.0,
+  "t_mean_yr": 5.3595637313784525,
+  "t_std_yr": 2.089579118274787,
+  "weighted_latitude_deg": 21.153203202132598,
+  "lambda_pair_11yr_deg": 12.06636480895413,
+  "lambda_pair_extended_deg": 12.066367802557538,
+  "extended_vs_11yr_relative": 2.4809488641253097e-07,
+  "pair_yield_dynamic_range": 10355.345647106547,
+  "pair_yield_min": 0.00031483926253540463,
+  "r": 0.9939622568719229,
+  "same_profile_r_tau5": 0.10998770799395409,
+  "continuous_prediction_same_profile": 0.1100588004244575,
+  "same_profile_relative_difference": 0.0006459495308801522,
+  "regenerated_profile_r_tau5": 0.10925438547533978,
+  "regenerated_profile_relative_difference": 0.007308956176292791,
+  "discrete_decay_factorisation_relative_matrix_residual": 4.2567141204386475e-05,
+  "tau5_a": 0.05921832417577276,
+  "tau5_lambda_pair": 12.063531423687325,
+  "tauinf_lambda_pair": 12.066364808953784,
+  "combined_endpoint_efficiencies": {
+    "0.2": 0.9809209402720238,
+    "2.5": 0.07593042721270674
+  },
+  "inflow_coefficients": {
+    "physical_2": {
+      "b_at_1": 0.14876463800975648,
+      "b_at_2_5": 0.19451407794407266,
+      "fit_weak": 0.15044195586493103,
+      "fit_full": 0.18310769383772105,
+      "monotone_b": true
+    },
+    "physical_5": {
+      "b_at_1": 0.4109119007665918,
+      "b_at_2_5": 0.7428600325176071,
+      "fit_weak": 0.420718104779429,
+      "fit_full": 0.5841208520110048,
+      "monotone_b": false
+    }
+  },
+  "source_hashes": {
+    "nonlinear_response_sft_experiment.py": "2962d1281854b237e06bb38e9f07b69f4b7cdf683d0a46a65eb7a001908281b0",
+    "mathematical_framework_analysis.py": "08368af1c11a37d5b33d1bf7550b431f65a9ff2a0578ef2c908bdfa7e0e386c1",
+    "multicycle_feedback_analysis.py": "fe113277dacf8da0b102b026fadec1d017f4734badceb13d38110a69e638c0e6",
+    "physical_validation_analysis.py": "4583faea2045454695ed1ae7991fb85f4f8116d17f7c9d8e33dc45101d3395a3",
+    "parameter_space_analysis.py": "46ea3d8ac41813152223df563000c2b40de67e027c8b935c7d58a1e16c415c13"
+  }
+}

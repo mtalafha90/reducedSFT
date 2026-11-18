@@ -1,0 +1,166 @@
+{
+  "matplotlib_version": "3.11.2",
+  "style": "Solar Physics (Springer) artwork rules",
+  "font": "FreeSans",
+  "font_file": "FreeSansBold.ttf",
+  "lettering_pt": 9.0,
+  "text_weight": "bold",
+  "pdf_fonttype": 42,
+  "figures": [
+    {
+      "file": "figures/fig1_main_signed_axial_dipole_response_raw.pdf",
+      "width_inches": 4.801439048014391,
+      "height_inches": 4.1,
+      "width_mm": 122.0,
+      "height_mm": 104.1,
+      "key_location": "upper left",
+      "key_columns": 1,
+      "key_headroom": 0.0,
+      "key_covers_data_samples": 0,
+      "x_label": "Normalised cycle amplitude $T$",
+      "y_label": "Final signed axial dipole\n$P(T)$ (arb. units)",
+      "legend": [
+        "Linear",
+        "Tilt quenching",
+        "Latitude quenching",
+        "Inflow quenching",
+        "Combined"
+      ]
+    },
+    {
+      "file": "figures/fig2_normalized_response_vs_theory.pdf",
+      "width_inches": 4.801439048014391,
+      "height_inches": 4.3,
+      "width_mm": 122.0,
+      "height_mm": 109.2,
+      "key_location": "upper left",
+      "key_columns": 1,
+      "key_headroom": 0.0,
+      "key_covers_data_samples": 0,
+      "x_label": "Normalised cycle amplitude $T$",
+      "y_label": "Normalised response\n$\\hat{P}(T)=P(T)/P(1)$",
+      "legend": [
+        "Linear",
+        "Tilt quenching",
+        "Latitude quenching",
+        "Inflow quenching",
+        "Combined"
+      ]
+    },
+    {
+      "file": "figures/fig3_normalized_nonlinear_response.pdf",
+      "width_inches": 4.801439048014391,
+      "height_inches": 4.1,
+      "width_mm": 122.0,
+      "height_mm": 104.1,
+      "key_location": "upper right",
+      "key_columns": 2,
+      "key_headroom": 0.0,
+      "key_covers_data_samples": 0,
+      "x_label": "Normalised cycle amplitude $T$",
+      "y_label": "$\\mathrm{d}\\hat{P}/\\mathrm{d}T$",
+      "legend": [
+        "Linear",
+        "Tilt quenching",
+        "Latitude quenching",
+        "Inflow quenching",
+        "Combined"
+      ]
+    },
+    {
+      "file": "figures/figF4_closure_ladder.pdf",
+      "width_inches": 4.801439048014391,
+      "height_inches": 4.35,
+      "width_mm": 122.0,
+      "height_mm": 110.5,
+      "key_location": "lower right",
+      "key_columns": 1,
+      "key_headroom": 0.0,
+      "key_covers_data_samples": 0,
+      "x_label": "Normalised cycle amplitude $T$",
+      "y_label": "Normalised response $\\hat{P}(T)$",
+      "legend": [
+        "SFT latitude case",
+        "exact kernel average",
+        "yield-weighted Gaussian form",
+        "Gaussian-envelope form",
+        "static form"
+      ]
+    },
+    {
+      "file": "figures/figV2_shift_validation.pdf",
+      "width_inches": 4.801439048014391,
+      "height_inches": 4.35,
+      "width_mm": 122.0,
+      "height_mm": 110.5,
+      "key_location": "lower left",
+      "key_columns": 1,
+      "key_headroom": 0.0,
+      "key_covers_data_samples": 0,
+      "x_label": "Normalised cycle amplitude $T$",
+      "y_label": "Latitude-quenching efficiency\n$Q(T)=D/(aT)$",
+      "legend": [
+        "SFT, physical shift mode",
+        "exact kernel prediction",
+        "derived Gaussian form ($\\lambda_R^{\\mathrm{pair}}=12.1\\hspace{-0.1}\u00b0\\hspace{-0.1}$)",
+        "prescribed form ($\\lambda_R^{\\mathrm{cl}}=20\\hspace{-0.1}\u00b0\\hspace{-0.1}$)"
+      ]
+    },
+    {
+      "file": "figures/figV4_inflow_validation.pdf",
+      "width_inches": 4.801439048014391,
+      "height_inches": 4.35,
+      "width_mm": 122.0,
+      "height_mm": 110.5,
+      "key_location": "lower right",
+      "key_columns": 1,
+      "key_headroom": 0.0,
+      "key_covers_data_samples": 0,
+      "x_label": "Normalised cycle amplitude $T$",
+      "y_label": "$T\\,Q_{\\mathrm{IQ}}(T)$ (dipole in units of $a$)",
+      "legend": [
+        "physical inflow 2 m s$^{-1}$: $D/a$",
+        "physical inflow 5 m s$^{-1}$: $D/a$",
+        "rational form, leading-order fit $b_{\\mathrm{IQ}}=0.15$",
+        "rational form, leading-order fit $b_{\\mathrm{IQ}}=0.42$"
+      ]
+    },
+    {
+      "file": "figures/figM3_bifurcation_comparison.pdf",
+      "width_inches": 4.801439048014391,
+      "height_inches": 4.35,
+      "width_mm": 122.0,
+      "height_mm": 110.5,
+      "key_location": "upper left",
+      "key_columns": 1,
+      "key_headroom": 0.0,
+      "key_covers_data_samples": 0,
+      "x_label": "Linear gain $D_0=k\\,a$",
+      "y_label": "Attractor of $T_n$",
+      "legend": [
+        "memory-corrected map attractor",
+        "multi-cycle SFT attractor",
+        "analytic period doubling (memory), $D_0=3.35$",
+        "analytic period doubling (memoryless), $D_0=2.81$"
+      ]
+    },
+    {
+      "file": "figures/figP2_lambdaR_scaling.pdf",
+      "width_inches": 4.801439048014391,
+      "height_inches": 4.1,
+      "width_mm": 122.0,
+      "height_mm": 104.1,
+      "key_location": "upper left",
+      "key_columns": 1,
+      "key_headroom": 0.0,
+      "key_covers_data_samples": 0,
+      "x_label": "Transport scale $\\lambda_{\\mathrm{tr}}$ (deg)",
+      "y_label": "Measured $\\lambda_R^{\\mathrm{pair}}$ (deg)",
+      "legend": [
+        "measured (adjoint kernel)",
+        "empirical fit:\n$(\\lambda_R^{\\mathrm{pair}})^2\\simeq(1.19)^2\\lambda_{\\mathrm{tr}}^2+(3.5\\hspace{-0.1}\u00b0\\hspace{-0.1})^2$",
+        "one-to-one reference"
+      ]
+    }
+  ]
+}

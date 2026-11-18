@@ -1,0 +1,123 @@
+{
+  "solver_commit": "41640e936c5d777a168ff5c0753491b840263c49",
+  "input_sha256": {
+    "nonlinear_response_sft_experiment.py": "2962d1281854b237e06bb38e9f07b69f4b7cdf683d0a46a65eb7a001908281b0",
+    "mathematical_framework_analysis.py": "08368af1c11a37d5b33d1bf7550b431f65a9ff2a0578ef2c908bdfa7e0e386c1",
+    "physical_validation_analysis.py": "4583faea2045454695ed1ae7991fb85f4f8116d17f7c9d8e33dc45101d3395a3",
+    "revisions/point5/grid_sensitivity_results.csv": "d5e97a735056e6101f1ceac37d3c757337cd798c2854872704fb8f88c6702e6f"
+  },
+  "discretisation": {
+    "nmu": 181,
+    "dt_days": 1.0,
+    "source_steps": 4019,
+    "protocol": "original legacy loop and trapezoidal dipole"
+  },
+  "parameters": {
+    "b_LQ_deg": 2.4,
+    "b_TQ": 0.15,
+    "b_IQ": 0.2,
+    "lambda_R_cl_deg": 20.0
+  },
+  "a": 0.1678355566299387,
+  "baseline_max_relative_D_error": {
+    "latitude": 1.7763568394002505e-15,
+    "tilt": 4.551914400963142e-15,
+    "inflow": 6.661338147750939e-16
+  },
+  "amplitudes": [
+    0.2,
+    0.35,
+    0.5,
+    0.65,
+    0.8,
+    1.0,
+    1.2,
+    1.4,
+    1.6,
+    1.8,
+    2.0,
+    2.2,
+    2.5
+  ],
+  "efficiencies": {
+    "latitude": [
+      0.9949247835371526,
+      0.9844676450923612,
+      0.9683381165282057,
+      0.9465874516665661,
+      0.9193033670193289,
+      0.874567611795608,
+      0.8207804636473444,
+      0.7587660547954449,
+      0.6897087057838193,
+      0.6151933241039761,
+      0.5372027933282485,
+      0.4580572834248383,
+      0.3427208513742592
+    ],
+    "tilt": [
+      0.9938495733344717,
+      0.9814033455016585,
+      0.9627773931740743,
+      0.9386880130177833,
+      0.909999211653494,
+      0.8662207287748406,
+      0.8181677974827478,
+      0.7678836496164461,
+      0.7170895272265793,
+      0.6671301779911941,
+      0.6189804903283884,
+      0.5732891142562241,
+      0.5101404107807572
+    ],
+    "inflow": [
+      0.9920634920634921,
+      0.9760858955588092,
+      0.9523809523809523,
+      0.9220839096357768,
+      0.8865248226950354,
+      0.8333333333333334,
+      0.7763975155279503,
+      0.7183908045977012,
+      0.6613756613756614,
+      0.6067961165048543,
+      0.5555555555555556,
+      0.5081300813008129,
+      0.4444444444444444
+    ]
+  },
+  "cycle_integrated_crossovers": {
+    "LQ_equals_exact_TQ": {
+      "T": 1.2554080488962698,
+      "Q": 0.804380484388342,
+      "residual_Q": -3.219646771412954e-15,
+      "bracket_T": [
+        1.2,
+        1.4
+      ],
+      "difference_below": 0.0005067036776406075,
+      "difference_above": -0.0005224039954435655
+    },
+    "LQ_equals_IQ": {
+      "T": 1.8679081958932349,
+      "Q": 0.5889919042285372,
+      "residual_Q": 1.1102230246251565e-16,
+      "bracket_T": [
+        1.8,
+        2.0
+      ],
+      "difference_below": 0.0012839082125191137,
+      "difference_above": -0.0012997100591251032
+    }
+  },
+  "local_latitude_threshold_deg": {
+    "0.2": 24.877298656447767,
+    "1.0": 22.093657062526447,
+    "2.0": 14.783484551905648,
+    "2.5": 10.137292859876403
+  },
+  "local_weak_amplitude_threshold_deg": 25.0,
+  "kernel_weighted_mean_unshifted_latitude_deg": 21.15320321026583,
+  "LQ_weak_amplitude_quadratic_coefficient": 0.12691921926159497,
+  "scope": "Conditional reference-model comparison; no global solar hierarchy or calibrated transport transition."
+}

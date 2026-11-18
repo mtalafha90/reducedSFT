@@ -1,0 +1,178 @@
+{
+  "tex_change_count": 8,
+  "tex_changes_only_pdf_paths_and_width": true,
+  "unchanged_files": [
+    "main.tex",
+    "references.bib",
+    "references_revisions.bib",
+    "figures/figV4_inflow_validation.png",
+    "figures/fig3_normalized_nonlinear_response.png",
+    "figures/figP2_lambdaR_scaling.png",
+    "figures/figM3_bifurcation_comparison.png",
+    "figures/fig1_main_signed_axial_dipole_response_raw.png",
+    "figures/figV2_shift_validation.png",
+    "figures/figF4_closure_ladder.png",
+    "figures/fig2_normalized_response_vs_theory.png"
+  ],
+  "figures": [
+    {
+      "path": "figures/fig1_main_signed_axial_dipole_response_raw.pdf",
+      "sha256": "bbf076238729b3fc87663ed5efceaf2073bf4e3bb2fffb79bed75e291746086f",
+      "image_count": 0,
+      "fonts": [
+        {
+          "name": "EVICAO+DejaVuSans-Bold",
+          "type": "Type0",
+          "embedded": true
+        },
+        {
+          "name": "GGASAK+DejaVuSans-BoldOblique",
+          "type": "Type0",
+          "embedded": true
+        }
+      ]
+    },
+    {
+      "path": "figures/fig2_normalized_response_vs_theory.pdf",
+      "sha256": "00effc630a2bc1202057a8d4efc1fbb471b5e40db99b3e4d12acbe83472d5d9a",
+      "image_count": 0,
+      "fonts": [
+        {
+          "name": "EVICAO+DejaVuSans-Bold",
+          "type": "Type0",
+          "embedded": true
+        },
+        {
+          "name": "GGASAK+DejaVuSans-BoldOblique",
+          "type": "Type0",
+          "embedded": true
+        }
+      ]
+    },
+    {
+      "path": "figures/fig3_normalized_nonlinear_response.pdf",
+      "sha256": "008f411804805ff108bff225875bfca09906c356546f8b8423a96f46d2e7e8c2",
+      "image_count": 0,
+      "fonts": [
+        {
+          "name": "EVICAO+DejaVuSans-Bold",
+          "type": "Type0",
+          "embedded": true
+        },
+        {
+          "name": "GGASAK+DejaVuSans-BoldOblique",
+          "type": "Type0",
+          "embedded": true
+        }
+      ]
+    },
+    {
+      "path": "figures/figF4_closure_ladder.pdf",
+      "sha256": "1d870265a0c73de5507387f8f877b53431b95a61dc3351ced3feee8ad35c110f",
+      "image_count": 0,
+      "fonts": [
+        {
+          "name": "EVICAO+DejaVuSans-Bold",
+          "type": "Type0",
+          "embedded": true
+        },
+        {
+          "name": "GGASAK+DejaVuSans-BoldOblique",
+          "type": "Type0",
+          "embedded": true
+        }
+      ]
+    },
+    {
+      "path": "figures/figV2_shift_validation.pdf",
+      "sha256": "97756e65e3f74cd63e66f03432830fda7e9262677af48ecbb914ca446da202ec",
+      "image_count": 0,
+      "fonts": [
+        {
+          "name": "EVICAO+DejaVuSans-Bold",
+          "type": "Type0",
+          "embedded": true
+        },
+        {
+          "name": "GGASAK+DejaVuSans-BoldOblique",
+          "type": "Type0",
+          "embedded": true
+        }
+      ]
+    },
+    {
+      "path": "figures/figV4_inflow_validation.pdf",
+      "sha256": "68f35ee774e4f9ec4bd1931936632acd8774814f97b23b09741fcdb1b1a12e16",
+      "image_count": 0,
+      "fonts": [
+        {
+          "name": "EVICAO+DejaVuSans-Bold",
+          "type": "Type0",
+          "embedded": true
+        },
+        {
+          "name": "GGASAK+DejaVuSans-BoldOblique",
+          "type": "Type0",
+          "embedded": true
+        }
+      ]
+    },
+    {
+      "path": "figures/figM3_bifurcation_comparison.pdf",
+      "sha256": "c8b4e3a3ca6a65cb8be531da723ee98ca549e0976f33f4e99d544f1be9cc8aa1",
+      "image_count": 0,
+      "fonts": [
+        {
+          "name": "EVICAO+DejaVuSans-Bold",
+          "type": "Type0",
+          "embedded": true
+        },
+        {
+          "name": "GGASAK+DejaVuSans-BoldOblique",
+          "type": "Type0",
+          "embedded": true
+        }
+      ]
+    },
+    {
+      "path": "figures/figP2_lambdaR_scaling.pdf",
+      "sha256": "e475d35ba831493f7beea2e6da7a54aae416025095ac830653302c0833de82b3",
+      "image_count": 0,
+      "fonts": [
+        {
+          "name": "EVICAO+DejaVuSans-Bold",
+          "type": "Type0",
+          "embedded": true
+        },
+        {
+          "name": "GGASAK+DejaVuSans-BoldOblique",
+          "type": "Type0",
+          "embedded": true
+        },
+        {
+          "name": "CGMMQU+Cmex10",
+          "type": "Type0",
+          "embedded": true
+        }
+      ]
+    }
+  ],
+  "manuscript_pages": 30,
+  "figure_pages": [
+    14,
+    15,
+    16,
+    17,
+    19,
+    20,
+    22,
+    23
+  ],
+  "compile_passes": 3,
+  "unresolved_references_or_citations": false,
+  "latex_notes": [
+    "One underfull vbox on page 16; visually inspected, no overlap or clipping.",
+    "Existing 0.27837 pt overfull hbox in the unchanged scaling-law introduction."
+  ],
+  "visual_review": "Eight stand-alone figures, all 30 page thumbnails, and full-size figure pages checked."
+}
